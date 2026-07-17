@@ -32,9 +32,9 @@ def create_app():
     app.register_blueprint(admin_bp, url_prefix='/admin')
 
     # Add this inside your create_app() function, near the bottom
-@app.route('/')
-def home():
+    @app.route('/')
+    def home():
     # You can return a simple message or render a template
-    return "Welcome to COLRS! Go to /auth/login or /auth/register to get started."
+        return "Welcome to COLRS! Go to /auth/login or /auth/register to get started."
 
     return app
