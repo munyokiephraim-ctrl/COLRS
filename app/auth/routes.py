@@ -13,11 +13,12 @@ def register():
 
     if request.method == 'POST':
         full_name = request.form.get('full_name')
-        email = request.form.get('email')
+        email = request.form.get('email', '').strip().lower() # Ensure consistency
         password = request.form.get('password')
         confirm_password = request.form.get('confirm_password')
         role = request.form.get('role', 'Student')
 
+        # Basic Validation
         if not full_name or not email or not password:
             flash("All fields are required.", "danger")
             return redirect(url_for('auth.register'))
@@ -26,17 +27,29 @@ def register():
             flash("Passwords do not match.", "danger")
             return redirect(url_for('auth.register'))
 
-        if User.query.filter_by(email=email).first():
+        # Check existing user
+        existing_user = User.query.filter_by(email=email).first()
+        if existing_user:
             flash("Email already registered.", "danger")
             return redirect(url_for('auth.register'))
 
-        hashed_password = generate_password_hash(password, method='scrypt')
-        new_user = User(full_name=full_name, email=email, password_hash=hashed_password, role=role)
-
-        db.session.add(new_user)
-        db.session.commit()
-        flash("Account created successfully! Please login.", "success")
-        return redirect(url_for('auth.login'))
+        # Securely Save to Database with Error Handling
+        try:
+            hashed_password = generate_password_hash(password, method='scrypt')
+            new_user = User(
+                full_name=full_name, 
+                email=email, 
+                password_hash=hashed_password, 
+                role=role
+            )
+            db.session.add(new_user)
+            db.session.commit()
+            flash("Account created successfully! Please login.", "success")
+            return redirect(url_for('auth.login'))
+        except Exception as e:
+            db.session.rollback() # Undo the change if it fails
+            flash(f"An error occurred while creating your account: {str(e)}", "danger")
+            return redirect(url_for('auth.register'))
 
     return render_template('register.html')
 
