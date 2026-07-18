@@ -9,19 +9,20 @@
 </head>
 <body>
     <!-- Navigation Bar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-success mb-4">
-        <div class="container">
-            <a class="navbar-brand" href="{{ url_for('menu') }}">COLRS</a>
-            <div class="navbar-nav">
-                <a class="nav-link" href="{{ url_for('menu') }}">Menu</a>
-                <a class="nav-link" href="{{ url_for('cart_view') }}">Cart</a>
-            </div>
-        </div>
-    </nav>
+<nav class="navbar navbar-expand-lg navbar-dark bg-success mb-4">
+    <div class="container">
+        <!-- Add 'student.' before 'menu' -->
+        <a class="navbar-brand" href="{{ url_for('student.menu') }}">COLRS</a>
+        <div class="navbar-nav">
+            <!-- Add 'student.' before 'menu' -->
+            <a class="nav-link" href="{{ url_for('student.menu') }}">Menu</a>   
 
     <!-- Content Block (Where menu.html/cart.html will appear) -->
     <div class="container">
         {% block content %}{% endblock %}
+            <a class="nav-link" href="#">Cart</a> 
+        </div>
     </div>
+</nav>
 </body>
 </html>
