@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Available Cafeterias</h2>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for restaurant in restaurants %}
+        <div class="col">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">{{ restaurant.name }}</h5>
+                    <p class="text-muted">{{ restaurant.location }}</p>
+                    <p class="card-text">{{ restaurant.description }}</p>
+                </div>
+                <div class="card-footer bg-transparent border-top-0">
+                    <!-- You will link to the menu view here in the next step -->
+                    <a href="#" class="btn btn-outline-primary w-100">View Menu</a>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <p>No cafeterias found at the moment. Please check back later!</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -1,7 +1,7 @@
 from flask import Blueprint, request, redirect, url_for, render_template  # Add render_template here!
 from flask_login import login_required, current_user
 from app import db
-from app.models import MenuItem, Order, OrderItem
+from app.models import MenuItem, Order, OrderItem, Restaurant
 
 student_bp = Blueprint('student', __name__)
 
@@ -32,6 +32,13 @@ def menu():
     # Fetch available items and send them to the HTML template
     available_items = MenuItem.query.filter_by(is_available=True).all()
     return render_template('menu.html', items=available_items)
+
+@student_bp.route('/restaurants')
+def browse_restaurants():
+    # Query all restaurants from the database
+    restaurants = Restaurant.query.all()
+    # Pass them to the template
+    return render_template('student/restaurants.html', restaurants=restaurants)
     
     # Generate the menu catalog interface dynamically
     menu_html = ""
