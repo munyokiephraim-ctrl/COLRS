@@ -1,4 +1,4 @@
-from flask import Blueprint, request, redirect, url_for
+from flask import Blueprint, request, redirect, url_for, render_template  # Add render_template here!
 from flask_login import login_required, current_user
 from app import db
 from app.models import MenuItem, Order, OrderItem
@@ -8,7 +8,6 @@ student_bp = Blueprint('student', __name__)
 @student_bp.route('/menu', methods=['GET', 'POST'])
 @login_required
 def menu():
-    # Security: Ensure admins don't accidentally buy food here
     if current_user.role != 'Student':
         return "Access Denied: Student account required.", 403
 
@@ -20,30 +19,19 @@ def menu():
         item = MenuItem.query.get(item_id)
         if item:
             total_cost = item.price * quantity
-            
-            # 1. Create the main Order record
-            new_order = Order(
-                user_id=current_user.id,
-                total_amount=total_cost,
-                status='Placed'
-            )
+            new_order = Order(user_id=current_user.id, total_amount=total_cost, status='Placed')
             db.session.add(new_order)
-            db.session.commit() # Committing here gives us the order.id
+            db.session.commit()
             
-            # 2. Create the specific Order Line Item
-            order_item = OrderItem(
-                order_id=new_order.id,
-                item_id=item.id,
-                quantity=quantity,
-                unit_price=item.price
-            )
+            order_item = OrderItem(order_id=new_order.id, item_id=item.id, quantity=quantity, unit_price=item.price)
             db.session.add(order_item)
             db.session.commit()
             
-            return f"<h3>Order Placed Successfully!</h3><p>You ordered {quantity}x {item.name}. Total: KSh {total_cost:.2f}.</p><a href='/student/menu'>Back to Menu</a>"
+            return f"Order Placed Successfully! <a href='/menu'>Back to Menu</a>"
 
-    # Fetch available menu items from the database
+    # Fetch available items and send them to the HTML template
     available_items = MenuItem.query.filter_by(is_available=True).all()
+    return render_template('menu.html', items=available_items)
     
     # Generate the menu catalog interface dynamically
     menu_html = ""

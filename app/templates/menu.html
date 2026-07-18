@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Available Meals</h2>
+        <div class="bg-success text-white p-2 rounded">
+            Points Balance: {{ current_user.points_balance }}
+        </div>
+    </div>
+    
+    <div class="row">
+        {% for item in items %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">{{ item.name }}</h5>
+                    <p class="text-muted small">{{ item.description or "No description" }}</p>
+                    <h6 class="text-success mb-3">KSh {{ item.price }}</h6>
+                    
+                    <form method="POST">
+                        <input type="hidden" name="item_id" value="{{ item.id }}">
+                        <div class="input-group">
+                            <input type="number" name="quantity" value="1" min="1" class="form-control">
+                            <button type="submit" class="btn btn-primary">Order</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
