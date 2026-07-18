@@ -25,7 +25,7 @@ def create_app():
     from app.admin.routes import admin_bp
     from app.main_routes import main_bp
 
-    # Register blueprints ONLY ONCE
+    # Register blueprints exactly once
     app.register_blueprint(auth_bp, url_prefix='/auth')
     app.register_blueprint(student_bp, url_prefix='/student')
     app.register_blueprint(admin_bp, url_prefix='/admin')
