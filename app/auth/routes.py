@@ -13,12 +13,11 @@ def register():
 
     if request.method == 'POST':
         full_name = request.form.get('full_name')
-        email = request.form.get('email', '').strip().lower() # Ensure consistency
+        email = request.form.get('email', '').strip().lower()
         password = request.form.get('password')
         confirm_password = request.form.get('confirm_password')
         role = request.form.get('role', 'Student')
 
-        # Basic Validation
         if not full_name or not email or not password:
             flash("All fields are required.", "danger")
             return redirect(url_for('auth.register'))
@@ -27,28 +26,20 @@ def register():
             flash("Passwords do not match.", "danger")
             return redirect(url_for('auth.register'))
 
-        # Check existing user
-        existing_user = User.query.filter_by(email=email).first()
-        if existing_user:
+        if User.query.filter_by(email=email).first():
             flash("Email already registered.", "danger")
             return redirect(url_for('auth.register'))
 
-        # Securely Save to Database with Error Handling
         try:
             hashed_password = generate_password_hash(password, method='scrypt')
-            new_user = User(
-                full_name=full_name, 
-                email=email, 
-                password_hash=hashed_password, 
-                role=role
-            )
+            new_user = User(full_name=full_name, email=email, password_hash=hashed_password, role=role)
             db.session.add(new_user)
             db.session.commit()
-            flash("Account created successfully! Please login.", "success")
+            flash("Account created! Please login.", "success")
             return redirect(url_for('auth.login'))
         except Exception as e:
-            db.session.rollback() # Undo the change if it fails
-            flash(f"An error occurred while creating your account: {str(e)}", "danger")
+            db.session.rollback()
+            flash(f"Error: {str(e)}", "danger")
             return redirect(url_for('auth.register'))
 
     return render_template('register.html')
@@ -56,13 +47,11 @@ def register():
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('student.menu') if current_user.role == 'Student' else url_for('admin.dashboard'))
+        return redirect(url_for('admin.dashboard') if current_user.role == 'Admin' else url_for('student.menu'))
 
     if request.method == 'POST':
-        # Added .strip().lower() to handle accidental spaces or capitalization
         email = request.form.get('email', '').strip().lower()
         password = request.form.get('password')
-        
         user = User.query.filter_by(email=email).first()
 
         if not user or not check_password_hash(user.password_hash, password):
@@ -81,5 +70,4 @@ def login():
 @login_required
 def logout():
     logout_user()
-    flash("You have been logged out.", "info")
     return redirect(url_for('auth.login'))

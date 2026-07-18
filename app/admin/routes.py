@@ -1,7 +1,6 @@
-from flask import Blueprint, request, redirect, url_for
+from flask import Blueprint, render_template, abort
 from flask_login import login_required, current_user
-from app import db
-from app.models import MenuItem, Order
+from functools import wraps
 
 admin_bp = Blueprint('admin', __name__)
 
@@ -9,8 +8,22 @@ admin_bp = Blueprint('admin', __name__)
 @login_required
 def dashboard():
     # Security: Ensure only users with the 'Admin' role can access this blueprint
+    def admin_required(f):
+        @wraps(f)
+        def decorated_function(*args, **kwargs):
+            if not current_user.is_authenticated or current_user.role != 'Admin':
+                abort(403) # Forbidden
+        return f(*args, **kwargs)
+    return decorated_function
+
+@admin_bp.route('/dashboard')
+@login_required
+@admin_required
+def dashboard():
+    return "<h1>Welcome, Admin! This is your dashboard.</h1>"
     if current_user.role != 'Admin':
         return "Access Denied: Administrative privileges required.", 403
+
 
     # Handle adding a new menu item
     if request.method == 'POST':
