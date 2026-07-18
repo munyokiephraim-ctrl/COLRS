@@ -7,7 +7,6 @@
             <div class="card-body">
                 <h2 class="card-title text-center mb-4">Login</h2>
                 
-                <!-- Display flashed messages (errors/success) -->
                 {% with messages = get_flashed_messages() %}
                   {% if messages %}
                     {% for message in messages %}
@@ -16,14 +15,15 @@
                   {% endif %}
                 {% endwith %}
 
-                <form method="POST">
+                <!-- Added autocomplete="on" to help browser suggest logins -->
+                <form method="POST" autocomplete="on">
                     <div class="mb-3">
                         <label class="form-label">Email Address</label>
-                        <input type="email" name="email" class="form-control" required>
+                        <input type="email" name="email" class="form-control" autocomplete="email" required>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Password</label>
-                        <input type="password" name="password" class="form-control" required>
+                        <input type="password" name="password" class="form-control" autocomplete="current-password" required>
                     </div>
                     <button type="submit" class="btn btn-success w-100">Sign In</button>
                 </form>

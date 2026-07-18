@@ -46,15 +46,16 @@ def login():
         return redirect(url_for('student.menu') if current_user.role == 'Student' else url_for('admin.dashboard'))
 
     if request.method == 'POST':
-        email = request.form.get('email')
+        # Added .strip().lower() to handle accidental spaces or capitalization
+        email = request.form.get('email', '').strip().lower()
         password = request.form.get('password')
+        
         user = User.query.filter_by(email=email).first()
 
         if not user or not check_password_hash(user.password_hash, password):
             flash("Invalid email or password.", "danger")
             return redirect(url_for('auth.login'))
 
-        # remember=True keeps the user logged in even after closing the browser
         login_user(user, remember=True)
         
         if user.role == 'Admin':
