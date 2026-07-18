@@ -40,6 +40,11 @@ def browse_restaurants():
     # Pass them to the template
     return render_template('student/restaurants.html', restaurants=restaurants)
     
+@student_bp.route('/dashboard')
+@login_required
+def dashboard():
+    # This renders the dashboard and passes the logged-in user's info
+    return render_template('student/dashboard.html', user=current_user)
     # Generate the menu catalog interface dynamically
     menu_html = ""
     for item in available_items:

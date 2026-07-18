@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h2 class="card-title">Student Dashboard</h2>
+                    <hr>
+                    <p><strong>Name:</strong> {{ user.full_name }}</p>
+                    <p><strong>Email:</strong> {{ user.email }}</p>
+                    <p><strong>Loyalty Points:</strong> {{ user.loyalty_points }}</p>
+                    
+                    <div class="mt-4">
+                        <a href="{{ url_for('student.browse_restaurants') }}" class="btn btn-primary">Find Food</a>
+                        <a href="{{ url_for('auth.logout') }}" class="btn btn-outline-danger">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
