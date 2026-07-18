@@ -44,20 +44,30 @@ def register():
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('student.menu') if current_user.role == 'Student' else url_for('admin.dashboard'))
+        if current_user.role == 'Admin':
+            return redirect(url_for('admin.dashboard'))
+        return redirect(url_for('student.menu'))
 
     if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
+        
+        # 1. Basic validation: ensure data exists
+        if not email or not password:
+            flash("Please enter both email and password.", "danger")
+            return redirect(url_for('auth.login'))
+        
+        # 2. Find user
         user = User.query.filter_by(email=email).first()
 
+        # 3. Verify credentials
         if not user or not check_password_hash(user.password_hash, password):
             flash("Invalid email or password.", "danger")
             return redirect(url_for('auth.login'))
 
+        # 4. Login and redirect
         login_user(user)
         
-        # Route based on role
         if user.role == 'Admin':
             return redirect(url_for('admin.dashboard'))
         return redirect(url_for('student.menu'))
