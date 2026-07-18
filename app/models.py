@@ -1,68 +1,37 @@
-from datetime import datetime
+from app import db
 from flask_login import UserMixin
-from app import db, login_manager
 
-@login_manager.user_loader
-def load_user(user_id):
-    return User.query.get(int(user_id))
-
-class User(db.Model, UserMixin):
-    __tablename__ = 'users'
-    
+class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    full_name = db.Column(db.String(100), nullable=False)
-    email = db.Column(db.String(120), unique=True, nullable=False)
-    password_hash = db.Column(db.String(200), nullable=False)
-    role = db.Column(db.String(20), default='Student', nullable=False)  # 'Student' or 'Admin'
-    points_balance = db.Column(db.Integer, default=0, nullable=False)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    full_name = db.Column(db.String(150), nullable=False)
+    email = db.Column(db.String(150), unique=True, nullable=False)
+    password_hash = db.Column(db.String(256), nullable=False)
+    role = db.Column(db.String(50), default='Student')
+    # Loyalty engine field for upcoming Sprint 3 integration
+    loyalty_points = db.Column(db.Integer, default=0)
 
-    # Relationships
-    orders = db.relationship('Order', backref='customer', lazy=True)
-    loyalty_transactions = db.relationship('LoyaltyTransaction', backref='user', lazy=True)
-
-class MenuItem(db.Model):
-    __tablename__ = 'menu_items'
-    
+class Restaurant(db.Model):
+    __tablename__ = 'restaurant'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     description = db.Column(db.Text, nullable=True)
-    price = db.Column(db.Float, nullable=False)  # Price in KSh
-    category = db.Column(db.String(50), nullable=False)  # Mains, Snacks, Drinks, Desserts
-    is_available = db.Column(db.Boolean, default=True, nullable=False)
+    location = db.Column(db.String(100), nullable=False) # e.g., "Main Cafeteria, North Wing"
+    # Relationship allows easy access to all items in a specific restaurant
+    menu_items = db.relationship('MenuItem', backref='restaurant', lazy=True)
 
-    # Relationship
-    order_items = db.relationship('OrderItem', backref='menu_item', lazy=True)
-
-class Order(db.Model):
-    __tablename__ = 'orders'
-    
+class MenuItem(db.Model):
+    __tablename__ = 'menu_item'
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    total_amount = db.Column(db.Float, nullable=False)
-    points_redeemed = db.Column(db.Integer, default=0, nullable=False)
-    status = db.Column(db.String(20), default='Placed', nullable=False)  # Placed, Preparing, Ready
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    name = db.Column(db.String(100), nullable=False)
+    description = db.Column(db.Text, nullable=True)
+    price = db.Column(db.Float, nullable=False)
+    # Dietary tags stored as a string (e.g., "Vegan,Gluten-Free,Keto") 
+    # This enables the efficient filtering required for your system development
+    dietary_tags = db.Column(db.String(200), nullable=True)
+    restaurant_id = db.Column(db.Integer, db.ForeignKey('restaurant.id'), nullable=False)
 
-    # Relationships
-    items = db.relationship('OrderItem', backref='order', lazy=True, cascade="all, delete-orphan")
-    loyalty_transaction = db.relationship('LoyaltyTransaction', backref='order', uselist=False, lazy=True)
-
-class OrderItem(db.Model):
-    __tablename__ = 'order_items'
-    
-    id = db.Column(db.Integer, primary_key=True)
-    order_id = db.Column(db.Integer, db.ForeignKey('orders.id'), nullable=False)
-    item_id = db.Column(db.Integer, db.ForeignKey('menu_items.id'), nullable=False)
-    quantity = db.Column(db.Integer, nullable=False, default=1)
-    unit_price = db.Column(db.Float, nullable=False)
-
-class LoyaltyTransaction(db.Model):
-    __tablename__ = 'loyalty_transactions'
-    
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    order_id = db.Column(db.Integer, db.ForeignKey('orders.id'), nullable=True)  # Can be null if manual admin adjustment
-    transaction_type = db.Column(db.String(10), nullable=False)  # 'Credit' or 'Debit'
-    points = db.Column(db.Integer, nullable=False)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    def has_tag(self, tag):
+        """Helper method to check if an item matches a specific diet tag."""
+        if not self.dietary_tags:
+            return False
+        return tag.lower() in [t.strip().lower() for t in self.dietary_tags.split(',')]
