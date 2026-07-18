@@ -1,12 +1,44 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="text-center mt-5">
-    <h1 class="display-4">Welcome to COLRS</h1>
-    <p class="lead">Your campus restaurant discovery and navigation system.</p>
-    <div class="mt-4">
-        <a href="/auth/login" class="btn btn-success btn-lg">Login</a>
-        <a href="/auth/register" class="btn btn-outline-success btn-lg">Register</a>
+<div class="container mt-5">
+    <div class="p-5 mb-4 bg-light rounded-3 shadow-sm">
+        <div class="container-fluid py-5 text-center">
+            <h1 class="display-4 fw-bold">Welcome to COLRS</h1>
+            <p class="lead mb-4">The smarter way to discover, navigate, and order from your campus cafeterias.</p>
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                <a href="{{ url_for('student.browse_restaurants') }}" class="btn btn-primary btn-lg px-4 gap-3">Browse Cafeterias</a>
+                <a href="{{ url_for('auth.login') }}" class="btn btn-outline-secondary btn-lg px-4">Login</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Project Features -->
+    <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+        <div class="col">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold">Discover</h5>
+                    <p class="card-text">Explore different cafeteria outlets on campus and see what's cooking in real-time.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold">Filter by Diet</h5>
+                    <p class="card-text">Find meals that match your lifestyle—whether you're Vegan, Gluten-Free, or Keto.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold">Loyalty Rewards</h5>
+                    <p class="card-text">Earn points on every purchase and get rewarded for your loyalty.</p>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}
