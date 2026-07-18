@@ -19,12 +19,13 @@ def create_app():
     def load_user(user_id):
         return User.query.get(int(user_id))
 
-    # Register Blueprints
+    # Import blueprints
     from app.auth.routes import auth_bp
     from app.student.routes import student_bp
     from app.admin.routes import admin_bp
     from app.main_routes import main_bp
 
+    # Register blueprints ONLY ONCE
     app.register_blueprint(auth_bp, url_prefix='/auth')
     app.register_blueprint(student_bp, url_prefix='/student')
     app.register_blueprint(admin_bp, url_prefix='/admin')
