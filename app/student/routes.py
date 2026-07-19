@@ -14,7 +14,6 @@ def require_student():
 
 @student_bp.route('/dashboard')
 def dashboard():
-    # Fetch recent orders for the logged-in student
     orders = Order.query.filter_by(user_id=current_user.id).order_by(Order.created_at.desc()).all()
     return render_template('student/dashboard.html', orders=orders)
 
@@ -26,13 +25,13 @@ def menu():
     else:
         items = MenuItem.query.filter_by(is_available=True).all()
         
-    # Get unique categories for filtering
     categories = db.session.query(MenuItem.category).distinct().all()
     categories = [c[0] for c in categories]
     
     return render_template('student/menu.html', items=items, categories=categories, active_category=category)
 
 @student_bp.route('/cart')
+@student_bp.route('/view-cart', endpoint='view_cart')
 def cart():
     cart_data = session.get('cart', {})
     cart_items = []
@@ -85,7 +84,6 @@ def checkout():
                 'unit_price': float(item.price)
             })
             
-    # Create the Order
     new_order = Order(
         user_id=current_user.id,
         total_amount=subtotal,
@@ -94,7 +92,6 @@ def checkout():
     db.session.add(new_order)
     db.session.commit()
     
-    # Create Order Items
     for oi in order_items_to_create:
         order_item = OrderItem(
             order_id=new_order.id,
@@ -104,7 +101,6 @@ def checkout():
         )
         db.session.add(order_item)
         
-    # Award loyalty points (e.g., 10% of total spent or flat points)
     earned_points = int(subtotal * 0.1)
     current_user.points_balance += earned_points
     
@@ -117,7 +113,6 @@ def checkout():
     db.session.add(loyalty_tx)
     db.session.commit()
     
-    # Clear cart
     session.pop('cart', None)
     
     flash(f'Order placed successfully! You earned {earned_points} points.', 'success')
