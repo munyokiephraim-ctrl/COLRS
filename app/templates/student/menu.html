@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-3">{{ restaurant.name }} - Menu</h2>
+    <p class="text-muted">{{ restaurant.location }}</p>
+    <hr>
+    
+    <div class="row">
+        <!-- We will add real food items here later, for now let's just make sure the page loads -->
+        <div class="col-md-12">
+            <div class="alert alert-info">
+                The digital menu for {{ restaurant.name }} is currently being updated. Check back soon for today's meals!
+            </div>
+            <a href="{{ url_for('student.browse_restaurants') }}" class="btn btn-secondary">Back to Cafeterias</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

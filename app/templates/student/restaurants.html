@@ -14,7 +14,7 @@
                 </div>
                 <div class="card-footer bg-transparent border-top-0">
                     <!-- You will link to the menu view here in the next step -->
-                    <a href="#" class="btn btn-outline-primary w-100">View Menu</a>
+                    <a href="{{ url_for('student.view_menu', restaurant_id=restaurant.id) }}" class="btn btn-outline-primary w-100">View Menu</a>
                 </div>
             </div>
         </div>

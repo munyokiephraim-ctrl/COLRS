@@ -30,7 +30,7 @@ def menu():
             return f"Order Placed Successfully! <a href='/menu'>Back to Menu</a>"
 
     # Fetch available items and send them to the HTML template
-    available_items = MenuItem.query.filter_by(is_available=True).all()
+    available_items = MenuItem.query.all()
     return render_template('menu.html', items=available_items)
 
 @student_bp.route('/restaurants')
