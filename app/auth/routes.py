@@ -46,29 +46,33 @@ def register():
 
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
-    # 1. If they are already logged in, send them to their dashboard
     if current_user.is_authenticated:
         return redirect(url_for('admin.dashboard') if current_user.role == 'admin' else url_for('student.menu'))
 
-    # 2. Handle the login form submission
     if request.method == 'POST':
         email = request.form.get('email', '').strip().lower()
         password = request.form.get('password')
+        
         user = User.query.filter_by(email=email).first()
 
-        # Check if user exists and password is correct
-        if not user or not check_password_hash(user.password_hash, password):
+        # DEBUGGING PRINT (Check Railway logs for this)
+        if not user:
+            print(f"DEBUG: Login failed. No user found for email: {email}")
             flash("Invalid email or password.", "danger")
             return redirect(url_for('auth.login'))
         
-        # Log the user in
+        if not check_password_hash(user.password_hash, password):
+            print(f"DEBUG: Login failed. Password mismatch for user: {email}")
+            flash("Invalid email or password.", "danger")
+            return redirect(url_for('auth.login'))
+        
+        # If we reach here, user is valid
+        print(f"DEBUG: Login successful for user: {email}")
         login_user(user, remember=True)
         
-        # 3. Redirect based on role AFTER successful login
         if user.role == 'admin':
             return redirect(url_for('admin.dashboard'))
         else:
-            return redirect(url_for('student.menu')) # Or 'student.dashboard' if that's your route name
+            return redirect(url_for('student.menu'))
 
-    # 4. If it's a GET request, just show the login page
     return render_template('login.html')
