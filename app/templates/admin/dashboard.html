@@ -2,20 +2,75 @@
 
 {% block content %}
 <div class="container mt-5">
-    <div class="row">
-        <div class="col-md-12">
-            <h2 class="mb-4">Admin Dashboard — Order Management Queue</h2>
-            <div class="alert alert-warning">
-                <strong>Admin Mode:</strong> Connected to PostgreSQL. Active incoming orders will stream below.
-            </div>
-            
-            <div class="card shadow-sm mt-4">
-                <div class="card-header bg-dark text-white">
-                    <h5 class="mb-0">Live Incoming Orders</h5>
-                </div>
-                <div class="card-body">
-                    <p class="text-muted text-center py-4">Awaiting incoming student order payloads...</p>
-                </div>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }} show" role="alert">
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold">Admin Dashboard — Order Management Queue</h2>
+        <span class="badge bg-dark fs-6 px-3 py-2">Operator Mode</span>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-header bg-dark text-white">
+            <h5 class="mb-0 m-1">Live Operational Feed</h5>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Total Amount</th>
+                            <th>Current Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in orders %}
+                        <tr>
+                            <td class="fw-bold">#{{ order.order_id }}</td>
+                            <td class="text-primary fw-bold">KSh {{ order.total_amount }}</td>
+                            <td>
+                                {% if order.status == 'Placed' %}
+                                    <span class="badge bg-warning text-dark">{{ order.status }}</span>
+                                {% elif order.status == 'Preparing' %}
+                                    <span class="badge bg-info text-dark">{{ order.status }}</span>
+                                {% else %}
+                                    <span class="badge bg-success">{{ order.status }}</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <div class="d-flex gap-2">
+                                    {% if order.status == 'Placed' %}
+                                    <form action="{{ url_for('admin.update_order_status', order_id=order.order_id, new_status='Preparing') }}" method="POST" style="display:inline;">
+                                        <button type="submit" class="btn btn-sm btn-outline-info">Mark Preparing</button>
+                                    </form>
+                                    {% elif order.status == 'Preparing' %}
+                                    <form action="{{ url_for('admin.update_order_status', order_id=order.order_id, new_status='Ready') }}" method="POST" style="display:inline;">
+                                        <button type="submit" class="btn btn-sm btn-outline-success">Mark Ready for Collection</button>
+                                    </form>
+                                    {% else %}
+                                    <span class="text-muted small"><i class="bi bi-check-circle-fill text-success"></i> Handed Over</span>
+                                    {% endif %}
+                                </div>
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="4" class="text-center py-4 text-muted">
+                                No student orders have been placed in this execution window.
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
