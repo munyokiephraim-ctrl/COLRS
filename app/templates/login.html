@@ -1,34 +1,179 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COLRS - Login</title>
+    <style>
+        body {
+            background-color: #1a1c29;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .phone-frame {
+            background: #ffffff;
+            width: 380px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background-color: #1e5631;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+        }
+        .header .icon {
+            font-size: 32px;
+            margin-bottom: 5px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+        }
+        .header p {
+            margin: 5px 0 0 0;
+            font-size: 13px;
+            color: #d4edda;
+        }
+        .form-container {
+            padding: 30px;
+        }
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin-top: 0;
+            margin-bottom: 25px;
+            font-size: 20px;
+        }
+        .form-group {
+            margin-bottom: 18px;
+        }
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: bold;
+            color: #34495e;
+            font-size: 13px;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #dcdde1;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 14px;
+            background-color: #f8f9fa;
+        }
+        input:focus {
+            border-color: #1e5631;
+            outline: none;
+            background-color: #fff;
+        }
+        .forgot-link {
+            text-align: right;
+            margin-bottom: 20px;
+            font-size: 12px;
+        }
+        .forgot-link a {
+            color: #1e5631;
+            text-decoration: none;
+        }
+        .forgot-link a:hover {
+            text-decoration: underline;
+        }
+        button {
+            width: 100%;
+            background: #1e5631;
+            color: white;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 15px;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background: #143d22;
+        }
+        .footer-link {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 13px;
+            color: #636e72;
+        }
+        .footer-link a {
+            color: #1e5631;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .footer-link a:hover {
+            text-decoration: underline;
+        }
+        .alert {
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+            font-size: 13px;
+        }
+        .alert-danger { background: #f8d7da; color: #721c24; }
+        .alert-success { background: #d4edda; color: #155724; }
+        .alert-info { background: #d1ecf1; color: #0c5460; }
+    </style>
+</head>
+<body>
 
-{% block content %}
-<div class="row justify-content-center">
-    <div class="col-md-6">
-        <div class="card shadow-sm">
-            <div class="card-body">
-                <h2 class="card-title text-center mb-4">Login</h2>
+    <div class="phone-frame">
+        <div class="header">
+            <div class="icon">☕</div>
+            <h1>COLRS</h1>
+            <p>Order smarter. Earn rewards.</p>
+        </div>
+
+        <div class="form-container">
+            <h2>Welcome Back 👋</h2>
+
+            <!-- Flash Messages -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                {% for category, message in messages %}
+                  <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+
+            <form method="POST" action="{{ url_for('auth.login') }}">
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" name="email" required placeholder="student@usiu.ac.ke">
+                </div>
                 
-                {% with messages = get_flashed_messages() %}
-                  {% if messages %}
-                    {% for message in messages %}
-                      <div class="alert alert-danger">{{ message }}</div>
-                    {% endfor %}
-                  {% endif %}
-                {% endwith %}
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" name="password" required placeholder="Enter your password">
+                </div>
 
-                <!-- Added autocomplete="on" to help browser suggest logins -->
-                <form method="POST" autocomplete="on">
-                    <div class="mb-3">
-                        <label class="form-label">Email Address</label>
-                        <input type="email" name="email" class="form-control" autocomplete="email" required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Password</label>
-                        <input type="password" name="password" class="form-control" autocomplete="current-password" required>
-                    </div>
-                    <button type="submit" class="btn btn-success w-100">Sign In</button>
-                </form>
+                <div class="forgot-link">
+                    <a href="#">Forgot password?</a>
+                </div>
+
+                <button type="submit">Login &rarr;</button>
+            </form>
+
+            <div class="footer-link">
+                New here? <a href="{{ url_for('auth.register') }}">Create an account</a>
             </div>
         </div>
     </div>
-</div>
-{% endblock %}
+
+</body>
+</html>

@@ -16,7 +16,7 @@
         }
         .phone-frame {
             background: #ffffff;
-            width: 400px;
+            width: 380px;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             overflow: hidden;
@@ -29,49 +29,53 @@
             text-align: center;
             padding: 25px 20px;
         }
+        .header .icon {
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
         .header h1 {
             margin: 0;
-            font-size: 24px;
+            font-size: 22px;
             font-weight: bold;
         }
         .header p {
-            margin: 5px 0 0 0;
-            font-size: 13px;
+            margin: 4px 0 0 0;
+            font-size: 12px;
             color: #d4edda;
         }
         .form-container {
-            padding: 30px;
+            padding: 25px 30px;
         }
         h2 {
             text-align: center;
             color: #2c3e50;
             margin-top: 0;
-            margin-bottom: 5px;
-            font-size: 22px;
+            margin-bottom: 4px;
+            font-size: 20px;
         }
         .subtitle {
             text-align: center;
             color: #7f8c8d;
-            font-size: 13px;
-            margin-bottom: 25px;
+            font-size: 12px;
+            margin-bottom: 20px;
         }
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 14px;
         }
         label {
             display: block;
             margin-bottom: 5px;
             font-weight: bold;
             color: #34495e;
-            font-size: 13px;
+            font-size: 12px;
         }
         input {
             width: 100%;
-            padding: 12px;
+            padding: 11px;
             border: 1px solid #dcdde1;
             border-radius: 8px;
             box-sizing: border-box;
-            font-size: 14px;
+            font-size: 13px;
             background-color: #f8f9fa;
         }
         input:focus {
@@ -83,13 +87,13 @@
             width: 100%;
             background: #1e5631;
             color: white;
-            padding: 14px;
+            padding: 13px;
             border: none;
             border-radius: 8px;
             font-weight: bold;
             cursor: pointer;
-            font-size: 15px;
-            margin-top: 10px;
+            font-size: 14px;
+            margin-top: 5px;
             transition: background 0.2s;
         }
         button:hover {
@@ -99,9 +103,9 @@
             text-align: center;
             border-bottom: 1px solid #dcdde1;
             line-height: 0.1em;
-            margin: 25px 0 20px 0;
+            margin: 20px 0 15px 0;
             color: #b2bec3;
-            font-size: 12px;
+            font-size: 11px;
         }
         .divider span {
             background: #fff;
@@ -109,7 +113,7 @@
         }
         .footer-link {
             text-align: center;
-            font-size: 13px;
+            font-size: 12px;
             color: #636e72;
         }
         .footer-link a {
@@ -124,7 +128,7 @@
             padding: 10px;
             margin-bottom: 15px;
             border-radius: 6px;
-            font-size: 13px;
+            font-size: 12px;
         }
         .alert-danger { background: #f8d7da; color: #721c24; }
         .alert-warning { background: #fff3cd; color: #856404; }
@@ -135,7 +139,8 @@
 
     <div class="phone-frame">
         <div class="header">
-            <h1>☕ COLRS</h1>
+            <div class="icon">☕</div>
+            <h1>COLRS</h1>
             <p>Campus Cafeteria Ordering</p>
         </div>
 
@@ -152,7 +157,7 @@
               {% endif %}
             {% endwith %}
 
-            <form method="POST" onsubmit="return validatePassword()">
+            <form method="POST" action="{{ url_for('auth.register') }}" onsubmit="return validatePassword()">
                 <div class="form-group">
                     <label>Full Name</label>
                     <input type="text" name="full_name" required placeholder="Enter your full name">
