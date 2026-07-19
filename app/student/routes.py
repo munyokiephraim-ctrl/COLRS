@@ -14,43 +14,51 @@ def require_student():
 
 @student_bp.route('/dashboard')
 def dashboard():
-    orders = Order.query.filter_by(user_id=current_user.id).order_by(Order.created_at.desc()).all()
-    return render_template('student/dashboard.html', orders=orders)
+    try:
+        orders = Order.query.filter_by(user_id=current_user.id).order_by(Order.created_at.desc()).all()
+        return render_template('student/dashboard.html', orders=orders)
+    except Exception:
+        return render_template('student/dashboard.html', orders=[])
 
 @student_bp.route('/menu')
 def menu():
-    category = request.args.get('category', 'All')
-    if category and category != 'All':
-        items = MenuItem.query.filter_by(category=category, is_available=True).all()
-    else:
-        items = MenuItem.query.filter_by(is_available=True).all()
+    try:
+        category = request.args.get('category', 'All')
+        if category and category != 'All':
+            items = MenuItem.query.filter_by(category=category, is_available=True).all()
+        else:
+            items = MenuItem.query.filter_by(is_available=True).all()
+            
+        categories_query = db.session.query(MenuItem.category).distinct().all()
+        categories = [c[0] for c in categories_query if c[0]]
         
-    categories = db.session.query(MenuItem.category).distinct().all()
-    categories = [c[0] for c in categories]
-    
-    return render_template('student/menu.html', items=items, categories=categories, active_category=category)
+        return render_template('student/menu.html', items=items, categories=categories, active_category=category)
+    except Exception:
+        return render_template('student/menu.html', items=[], categories=['Beverages', 'Meals', 'Snacks'], active_category='All')
 
 @student_bp.route('/cart')
 @student_bp.route('/view-cart', endpoint='view_cart')
 def cart():
-    cart_data = session.get('cart', {})
-    cart_items = []
-    subtotal = 0
-    
-    for item_id_str, quantity in cart_data.items():
-        item = MenuItem.query.get(int(item_id_str))
-        if item:
-            item_total = float(item.price) * quantity
-            subtotal += item_total
-            cart_items.append({'item': item, 'quantity': quantity, 'total': item_total})
-            
-    return render_template('student/cart.html', cart_items=cart_items, subtotal=subtotal)
+    try:
+        cart_data = session.get('cart', {})
+        cart_items = []
+        subtotal = 0
+        
+        for item_id_str, quantity in cart_data.items():
+            item = MenuItem.query.get(int(item_id_str))
+            if item:
+                item_total = float(item.price) * quantity
+                subtotal += item_total
+                cart_items.append({'item': item, 'quantity': quantity, 'total': item_total})
+                
+        return render_template('student/cart.html', cart_items=cart_items, subtotal=subtotal)
+    except Exception:
+        return render_template('student/cart.html', cart_items=[], subtotal=0)
 
 @student_bp.route('/cart/add/<int:item_id>', methods=['POST'])
 def add_to_cart(item_id):
     item = MenuItem.query.get_or_404(item_id)
     cart = session.get('cart', {})
-    
     str_id = str(item_id)
     quantity = int(request.form.get('quantity', 1))
     
