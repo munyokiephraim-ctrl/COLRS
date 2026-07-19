@@ -33,4 +33,9 @@ def create_app():
     app.register_blueprint(student_bp, url_prefix='/student')
     app.register_blueprint(admin_bp, url_prefix='/admin')
 
+    # Homepage route to fix the 404 error
+    @app.route('/')
+    def index():
+        return "COLRS System is running!"
+
     return app
