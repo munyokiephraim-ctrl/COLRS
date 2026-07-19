@@ -76,3 +76,9 @@ def login():
             return redirect(url_for('student.menu'))
 
     return render_template('login.html')
+
+@auth_bp.route('/logout')
+def logout():
+    logout_user()
+    flash("You have been logged out.", "info")
+    return redirect(url_for('auth.login'))
