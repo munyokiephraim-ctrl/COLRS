@@ -9,6 +9,8 @@ auth_bp = Blueprint('auth', __name__)
 @auth_bp.route('/register', methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
+        if current_user.role and current_user.role.lower() == 'admin':
+            return redirect(url_for('admin.dashboard'))
         return redirect(url_for('student.menu'))
 
     if request.method == 'POST':
@@ -16,7 +18,7 @@ def register():
         email = request.form.get('email', '').strip().lower()
         password = request.form.get('password')
         confirm_password = request.form.get('confirm_password')
-        role = request.form.get('role', 'Student')
+        role = request.form.get('role', 'student').strip().lower()
 
         if not full_name or not email or not password:
             flash("All fields are required.", "danger")
@@ -47,7 +49,9 @@ def register():
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('admin.dashboard') if current_user.role == 'admin' else url_for('student.menu'))
+        if current_user.role and current_user.role.lower() == 'admin':
+            return redirect(url_for('admin.dashboard'))
+        return redirect(url_for('student.menu'))
 
     if request.method == 'POST':
         email = request.form.get('email', '').strip().lower()
@@ -55,7 +59,6 @@ def login():
         
         user = User.query.filter_by(email=email).first()
 
-        # DEBUGGING PRINT (Check Railway logs for this)
         if not user:
             print(f"DEBUG: Login failed. No user found for email: {email}")
             flash("Invalid email or password.", "danger")
@@ -66,11 +69,10 @@ def login():
             flash("Invalid email or password.", "danger")
             return redirect(url_for('auth.login'))
         
-        # If we reach here, user is valid
         print(f"DEBUG: Login successful for user: {email}")
         login_user(user, remember=True)
         
-        if user.role == 'admin':
+        if user.role and user.role.lower() == 'admin':
             return redirect(url_for('admin.dashboard'))
         else:
             return redirect(url_for('student.menu'))
