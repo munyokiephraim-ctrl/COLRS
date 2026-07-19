@@ -1,44 +1,84 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container mt-5">
-    <div class="p-5 mb-4 bg-light rounded-3 shadow-sm">
-        <div class="container-fluid py-5 text-center">
-            <h1 class="display-4 fw-bold">Welcome to COLRS</h1>
-            <p class="lead mb-4">The smarter way to discover, navigate, and order from your campus cafeterias.</p>
-            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-                <a href="{{ url_for('student.browse_restaurants') }}" class="btn btn-primary btn-lg px-4 gap-3">Browse Cafeterias</a>
-                <a href="{{ url_for('auth.login') }}" class="btn btn-outline-secondary btn-lg px-4">Login</a>
-            </div>
+<!-- Main Hero Section -->
+<div class="container-fluid bg-light py-5 mb-5 border-bottom">
+    <div class="container text-center py-5">
+        <h1 class="display-4 fw-bold text-success mb-3">Welcome to COLRS</h1>
+        <p class="lead text-muted mb-5 mx-auto" style="max-width: 600px;">
+            The official Cafeteria Ordering and Loyalty Reward System for USIU-A. 
+            Skip the lunch rush queue, pre-order your meals from your phone, and earn loyalty points with every single bite.
+        </p>
+
+        <!-- Dynamic Button Group -->
+        <div class="d-grid gap-3 d-sm-flex justify-content-sm-center mb-4">
+            {% if current_user.is_authenticated %}
+                
+                {% if current_user.role == 'admin' %}
+                    <!-- Admin View -->
+                    <a href="{{ url_for('admin.dashboard') }}" class="btn btn-success btn-lg px-4 shadow-sm">
+                        Go to Admin Dashboard
+                    </a>
+                {% else %}
+                    <!-- Logged-In Student View -->
+                    <a href="{{ url_for('student.menu') }}" class="btn btn-success btn-lg px-4 shadow-sm">
+                        Browse Cafeterias
+                    </a>
+                    <a href="{{ url_for('student.cart') }}" class="btn btn-outline-success btn-lg px-4 shadow-sm">
+                        View Cart
+                    </a>
+                {% endif %}
+                
+            {% else %}
+                <!-- Guest View (Not Logged In) -->
+                <a href="{{ url_for('student.menu') }}" class="btn btn-success btn-lg px-4 shadow-sm">
+                    Browse Cafeterias
+                </a>
+                <a href="{{ url_for('auth.login') }}" class="btn btn-outline-dark btn-lg px-4 shadow-sm">
+                    Login
+                </a>
+                <a href="{{ url_for('auth.register') }}" class="btn btn-outline-success btn-lg px-4 shadow-sm">
+                    Register
+                </a>
+            {% endif %}
         </div>
     </div>
+</div>
 
-    <!-- Project Features -->
-    <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+<!-- System Features Section -->
+<div class="container py-4 mb-5">
+    <div class="row g-4 text-center row-cols-1 row-cols-md-3">
+        
+        <!-- Feature 1 -->
         <div class="col">
-            <div class="card h-100 shadow-sm">
+            <div class="card h-100 border-0 shadow-sm p-4">
                 <div class="card-body">
-                    <h5 class="card-title fw-bold">Discover</h5>
-                    <p class="card-text">Explore different cafeteria outlets on campus and see what's cooking in real-time.</p>
+                    <h4 class="fw-bold text-dark mb-3">Skip the Queue</h4>
+                    <p class="text-muted mb-0">Order your food between classes. Get notified when it is ready for immediate pick-up at the counter.</p>
                 </div>
             </div>
         </div>
+
+        <!-- Feature 2 -->
         <div class="col">
-            <div class="card h-100 shadow-sm">
+            <div class="card h-100 border-0 shadow-sm p-4">
                 <div class="card-body">
-                    <h5 class="card-title fw-bold">Filter by Diet</h5>
-                    <p class="card-text">Find meals that match your lifestyle—whether you're Vegan, Gluten-Free, or Keto.</p>
+                    <h4 class="fw-bold text-dark mb-3">Earn Rewards</h4>
+                    <p class="text-muted mb-0">Automatically earn 1 loyalty point for every 10 KSh you spend. Redeem them directly at checkout.</p>
                 </div>
             </div>
         </div>
+
+        <!-- Feature 3 -->
         <div class="col">
-            <div class="card h-100 shadow-sm">
+            <div class="card h-100 border-0 shadow-sm p-4">
                 <div class="card-body">
-                    <h5 class="card-title fw-bold">Loyalty Rewards</h5>
-                    <p class="card-text">Earn points on every purchase and get rewarded for your loyalty.</p>
+                    <h4 class="fw-bold text-dark mb-3">Real-Time Updates</h4>
+                    <p class="text-muted mb-0">Track your meal's progress from 'Placed' to 'Preparing' to 'Ready' directly from your dashboard.</p>
                 </div>
             </div>
         </div>
+
     </div>
 </div>
 {% endblock %}
