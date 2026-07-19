@@ -46,33 +46,29 @@ def register():
 
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
+    # 1. If they are already logged in, send them to their dashboard
     if current_user.is_authenticated:
-        return redirect(url_for('admin.dashboard') if current_user.role == 'Admin' else url_for('student.menu'))
+        return redirect(url_for('admin.dashboard') if current_user.role == 'admin' else url_for('student.menu'))
 
+    # 2. Handle the login form submission
     if request.method == 'POST':
         email = request.form.get('email', '').strip().lower()
         password = request.form.get('password')
         user = User.query.filter_by(email=email).first()
 
+        # Check if user exists and password is correct
         if not user or not check_password_hash(user.password_hash, password):
             flash("Invalid email or password.", "danger")
             return redirect(url_for('auth.login'))
-        # Inside your login route function after verification passes:
-        if user and user.check_password(form.password.data):
-            login_user(user)
-
+        
+        # Log the user in
         login_user(user, remember=True)
         
-        # Check role flag directly from the logged-in user instance
-    if user.role == 'admin':
-        return redirect(url_for('admin.dashboard'))
-    else:
-        return redirect(url_for('student.dashboard'))
+        # 3. Redirect based on role AFTER successful login
+        if user.role == 'admin':
+            return redirect(url_for('admin.dashboard'))
+        else:
+            return redirect(url_for('student.menu')) # Or 'student.dashboard' if that's your route name
 
+    # 4. If it's a GET request, just show the login page
     return render_template('login.html')
-
-@auth_bp.route('/logout')
-@login_required
-def logout():
-    logout_user()
-    return redirect(url_for('auth.login'))
