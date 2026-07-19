@@ -8,7 +8,9 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(150), unique=True, nullable=False)
     password_hash = db.Column(db.String(256), nullable=False)
     role = db.Column(db.String(50), default='Student')
-    loyalty_points = db.Column(db.Integer, default=0)
+    points_balance = db.Column(db.Integer, default=0)
+
+
 
 class Restaurant(db.Model):
     __tablename__ = 'restaurant'
