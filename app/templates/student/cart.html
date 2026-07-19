@@ -29,6 +29,10 @@
                     <div class="d-flex justify-content-between mb-2">
                         <span>Subtotal</span>
                         <span class="fw-bold">KSh {{ subtotal }}</span>
+                        <!-- Locate this near line 32 of cart.html -->
+<form action="{{ url_for('student.place_order') }}" method="POST">
+    <button type="submit" class="btn btn-success w-100 py-2 fw-bold">Place Order via Pick-Up</button>
+</form>
                     </div>
                     <hr>
                     <div class="d-flex justify-content-between mb-4">

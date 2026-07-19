@@ -57,12 +57,17 @@ def login():
         if not user or not check_password_hash(user.password_hash, password):
             flash("Invalid email or password.", "danger")
             return redirect(url_for('auth.login'))
+        # Inside your login route function after verification passes:
+        if user and user.check_password(form.password.data):
+            login_user(user)
 
         login_user(user, remember=True)
         
-        if user.role == 'Admin':
-            return redirect(url_for('admin.dashboard'))
-        return redirect(url_for('student.menu'))
+        # Check role flag directly from the logged-in user instance
+    if user.role == 'admin':
+        return redirect(url_for('admin.dashboard'))
+    else:
+        return redirect(url_for('student.dashboard'))
 
     return render_template('login.html')
 
