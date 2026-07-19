@@ -62,9 +62,35 @@ def place_order():
             total_amount += item.price * qty
             items_to_process.append((item, qty))
             
+    # Check for points redemption (Threshold: >= 50 points)
+    redeem = request.form.get('redeem_points')
+    points_redeemed_count = 0
+    discount_amount = 0
+
+    if redeem and (current_user.points_balance or 0) >= 50:
+        points_redeemed_count = current_user.points_balance
+        discount_amount = points_redeemed_count / 10.0  # 10 points = KSh 1 discount
+        
+        if discount_amount > total_amount:
+            discount_amount = total_amount
+            points_redeemed_count = int(discount_amount * 10)
+
+        current_user.points_balance -= points_redeemed_count
+        
+        # Log debit transaction
+        debit_tx = LoyaltyTransaction(
+            user_id=current_user.id,
+            transaction_type='Debit',
+            points=points_redeemed_count
+        )
+        db.session.add(debit_tx)
+
+    final_amount = total_amount - discount_amount
+
     new_order = Order(
         user_id=current_user.id,
-        total_amount=total_amount,
+        total_amount=final_amount,
+        points_redeemed=points_redeemed_count,
         status='Placed'
     )
     db.session.add(new_order)
@@ -79,7 +105,8 @@ def place_order():
         )
         db.session.add(order_item)
         
-    points_earned = int(total_amount // 10)
+    # Earn new points on final paid amount (1 point per KSh 10)[cite: 1]
+    points_earned = int(final_amount // 10)
     if points_earned > 0:
         current_user.points_balance = (current_user.points_balance or 0) + points_earned
         loyalty_tx = LoyaltyTransaction(
