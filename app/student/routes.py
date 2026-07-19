@@ -5,11 +5,13 @@ from app.models import MenuItem, Order, OrderItem, Restaurant
 
 student_bp = Blueprint('student', __name__)
 
-@student_bp.route('/menu', methods=['GET', 'POST'])
+@student_bp.route('/menu')
 @login_required
 def menu():
-    if current_user.role != 'Student':
-        return "Access Denied: Student account required.", 403
+    # Query all food items from the database
+    available_items = MenuItem.query.all()
+    # Pass the items and the current logged-in user to the template
+    return render_template('student/menu.html', items=available_items, user=current_user)
 
     # Handle order placement
     if request.method == 'POST':
