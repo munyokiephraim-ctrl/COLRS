@@ -25,12 +25,10 @@ def login():
         
         login_allowed = False
         if user:
-            # Check if password is secure hash or legacy plaintext
             if user.password_hash.startswith(('pbkdf2:', 'scrypt:', 'argon2:')):
                 if check_password_hash(user.password_hash, password):
                     login_allowed = True
             else:
-                # Fallback: if it was plaintext, check it and upgrade it automatically
                 if user.password_hash == password:
                     user.password_hash = generate_password_hash(password)
                     db.session.commit()
@@ -45,7 +43,7 @@ def login():
         else:
             flash('Invalid email or password. Please try again.', 'danger')
 
-    return render_template('auth/login.html')
+    return render_template('login.html')
 
 @auth_bp.route('/register', methods=['GET', 'POST'])
 def register():
@@ -76,7 +74,7 @@ def register():
         flash('Account created successfully! Please log in.', 'success')
         return redirect(url_for('auth.login'))
 
-    return render_template('auth/register.html')
+    return render_template('register.html')
 
 @auth_bp.route('/logout')
 @login_required
