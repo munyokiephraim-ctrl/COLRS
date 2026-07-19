@@ -1,4 +1,4 @@
-from flask import Blueprint, abort
+from flask import Blueprint, abort, render_template
 from flask_login import login_required, current_user
 from functools import wraps
 
@@ -16,4 +16,5 @@ def admin_required(f):
 @login_required
 @admin_required
 def dashboard():
-    return "<h1>Welcome, Admin! This is your dashboard.</h1>"
+    # Renders the admin panel order queue layout
+    return render_template('admin/dashboard.html', user=current_user)
