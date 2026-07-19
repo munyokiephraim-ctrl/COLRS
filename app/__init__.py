@@ -34,8 +34,12 @@ def create_app():
     app.register_blueprint(admin_bp, url_prefix='/admin')
 
     # Homepage route to fix the 404 error
-    @app.route('/')
-    def index():
-        return "COLRS System is running!"
+    from flask import render_template # Add this import at the top
+
+# ... (rest of your code)
+
+@app.route('/')
+def index():
+    return render_template('index.html')
 
     return app
