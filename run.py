@@ -2,6 +2,7 @@ from app import create_app, db
 from app.auth.routes import auth_bp
 from app.student.routes import student_bp
 from app.admin.routes import admin_bp
+from flask import Flask
 
 app = create_app()
 app = Flask(__name__)
