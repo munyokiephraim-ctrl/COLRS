@@ -31,7 +31,7 @@
                     <h6 class="text-primary fw-bold mb-0">KSh {{ item.price }}</h6>
                 </div>
                 <div class="card-footer bg-transparent border-top-0 pt-0">
-                    <a href="{{ url_for('student.add_to_cart', item_id=item.item_id) }}" class="btn btn-outline-primary w-100 btn-sm">Add to Cart</a>
+                    <a href="{{ url_for('student.add_to_cart', item_id=item.id) }}" class="btn btn-outline-primary w-100 btn-sm">Add to Cart</a>
                 </div>
             </div>
         </div>

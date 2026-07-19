@@ -1,4 +1,4 @@
-from flask import Blueprint, request, redirect, url_for, session, flash, render_template  # Add render_template here!
+from flask import Blueprint, render_template, redirect, url_for, session, flash, request
 from flask_login import login_required, current_user
 from app import db
 from app.models import MenuItem, Order, OrderItem, Restaurant, LoyaltyTransaction
@@ -43,19 +43,14 @@ def browse_restaurants():
 @student_bp.route('/cart/add/<int:item_id>')
 @login_required
 def add_to_cart(item_id):
-    # Initialize cart session if it doesn't exist
     if 'cart' not in session:
         session['cart'] = {}
-    
     cart = session['cart']
     item_id_str = str(item_id)
-    
-    # Add item or increment quantity
     if item_id_str in cart:
         cart[item_id_str] += 1
     else:
         cart[item_id_str] = 1
-        
     session['cart'] = cart
     flash('Item added to cart!', 'success')
     return redirect(url_for('student.menu'))
@@ -66,14 +61,12 @@ def view_cart():
     cart = session.get('cart', {})
     cart_items = []
     subtotal = 0
-    
     for item_id, qty in cart.items():
         item = MenuItem.query.get(int(item_id))
         if item:
             item_total = item.price * qty
             subtotal += item_total
             cart_items.append({'item': item, 'quantity': qty, 'total': item_total})
-            
     return render_template('student/cart.html', cart_items=cart_items, subtotal=subtotal, user=current_user)
 
 @student_bp.route('/order/place', methods=['POST'])
@@ -84,7 +77,6 @@ def place_order():
         flash('Your cart is empty.', 'danger')
         return redirect(url_for('student.menu'))
         
-    # Calculate total amount
     total_amount = 0
     items_to_process = []
     for item_id, qty in cart.items():
@@ -92,46 +84,40 @@ def place_order():
         if item:
             total_amount += item.price * qty
             items_to_process.append((item, qty))
-
-    # 1. Create Main Order Record
+            
     new_order = Order(
-        user_id=current_user.user_id,
+        user_id=current_user.id,  # Updated property
         total_amount=total_amount,
         points_redeemed=0,
         status='Placed'
     )
     db.session.add(new_order)
-    db.session.flush()  # Generates the order_id before committing
+    db.session.flush()  
     
-    # 2. Create OrderItem Line Records
     for item, qty in items_to_process:
         order_item = OrderItem(
-            order_id=new_order.order_id,
-            item_id=item.item_id,
+            order_id=new_order.id,  # Updated property
+            item_id=item.id,  # Updated property
             quantity=qty,
             unit_price=item.price
         )
         db.session.add(order_item)
         
-    # 3. Calculate and Award Loyalty Points (1 point per 10 KSh)
     points_earned = int(total_amount // 10)
     if points_earned > 0:
         current_user.points_balance = (current_user.points_balance or 0) + points_earned
-        
         loyalty_tx = LoyaltyTransaction(
-            user_id=current_user.user_id,
-            order_id=new_order.order_id,
+            user_id=current_user.id,  # Updated property
+            order_id=new_order.id,  # Updated property
             transaction_type='Credit',
             points=points_earned
         )
         db.session.add(loyalty_tx)
         
-    # Commit transaction, clear cart session cache
     db.session.commit()
     session.pop('cart', None)
-    
     flash(u'Order placed successfully! Earned {} points!'.format(points_earned), 'success')
-    return redirect(url_for('student.menu'))        
+    return redirect(url_for('student.menu'))   
     
 @student_bp.route('/dashboard')
 @login_required

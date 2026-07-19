@@ -35,18 +35,23 @@
                     <tbody>
                         {% for order in orders %}
                         <tr>
-                            <td class="fw-bold">#{{ order.order_id }}</td>
-                            <td class="text-primary fw-bold">KSh {{ order.total_amount }}</td>
-                            <td>
-                                {% if order.status == 'Placed' %}
-                                    <span class="badge bg-warning text-dark">{{ order.status }}</span>
-                                {% elif order.status == 'Preparing' %}
-                                    <span class="badge bg-info text-dark">{{ order.status }}</span>
-                                {% else %}
-                                    <span class="badge bg-success">{{ order.status }}</span>
-                                {% endif %}
-                            </td>
-                            <td>
+    <td class="fw-bold">#{{ order.id }}</td>
+    <td class="text-primary fw-bold">KSh {{ order.total_amount }}</td>
+    <td>...</td>
+    <td>
+        <div class="d-flex gap-2">
+            {% if order.status == 'Placed' %}
+            <form action="{{ url_for('admin.update_order_status', order_id=order.id, new_status='Preparing') }}" method="POST" style="display:inline;">
+                <button type="submit" class="btn btn-sm btn-outline-info">Mark Preparing</button>
+            </form>
+            {% elif order.status == 'Preparing' %}
+            <form action="{{ url_for('admin.update_order_status', order_id=order.id, new_status='Ready') }}" method="POST" style="display:inline;">
+                <button type="submit" class="btn btn-sm btn-outline-success">Mark Ready</button>
+            </form>
+            {% endif %}
+        </div>
+    </td>
+</tr>
                                 <div class="d-flex gap-2">
                                     {% if order.status == 'Placed' %}
                                     <form action="{{ url_for('admin.update_order_status', order_id=order.order_id, new_status='Preparing') }}" method="POST" style="display:inline;">

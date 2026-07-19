@@ -35,32 +35,31 @@ class MenuItem(db.Model):
 class Order(db.Model):
     __tablename__ = 'order'
     
-    order_id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable=False)
+    id = db.Column(db.Integer, primary_key=True)  # Changed to id
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)  # Points to user.id
     total_amount = db.Column(db.Float, nullable=False)
     points_redeemed = db.Column(db.Integer, default=0)
-    status = db.Column(db.String(20), default='Placed')  # Placed, Preparing, Ready
+    status = db.Column(db.String(20), default='Placed')  
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     
-    # Relationships
     items = db.relationship('OrderItem', backref='order', lazy=True)
     transactions = db.relationship('LoyaltyTransaction', backref='order', lazy=True)
 
 class OrderItem(db.Model):
     __tablename__ = 'order_item'
     
-    order_item_id = db.Column(db.Integer, primary_key=True)
-    order_id = db.Column(db.Integer, db.ForeignKey('order.order_id'), nullable=False)
-    item_id = db.Column(db.Integer, db.ForeignKey('menu_item.item_id'), nullable=False)
+    id = db.Column(db.Integer, primary_key=True)  # Changed to id
+    order_id = db.Column(db.Integer, db.ForeignKey('order.id'), nullable=False)  # Points to order.id
+    item_id = db.Column(db.Integer, db.ForeignKey('menu_item.id'), nullable=False)  # Points to menu_item.id
     quantity = db.Column(db.Integer, nullable=False, default=1)
     unit_price = db.Column(db.Float, nullable=False)
 
 class LoyaltyTransaction(db.Model):
     __tablename__ = 'loyalty_transaction'
     
-    transaction_id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable=False)
-    order_id = db.Column(db.Integer, db.ForeignKey('order.order_id'), nullable=True)
-    transaction_type = db.Column(db.String(10), nullable=False)  # Credit / Debit
+    id = db.Column(db.Integer, primary_key=True)  # Changed to id
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)  # Points to user.id
+    order_id = db.Column(db.Integer, db.ForeignKey('order.id'), nullable=True)  # Points to order.id
+    transaction_type = db.Column(db.String(10), nullable=False)  
     points = db.Column(db.Integer, nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)

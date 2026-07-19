@@ -8,7 +8,6 @@ admin_bp = Blueprint('admin', __name__)
 @admin_bp.route('/dashboard')
 @login_required
 def dashboard():
-    # Query all orders, sorting by most recent first
     all_orders = Order.query.order_by(Order.created_at.desc()).all()
     return render_template('admin/dashboard.html', orders=all_orders, user=current_user)
 
@@ -19,5 +18,5 @@ def update_order_status(order_id, new_status):
     if new_status in ['Placed', 'Preparing', 'Ready']:
         order.status = new_status
         db.session.commit()
-        flash('Order #{} status updated to {}!'.format(order_id, new_status), 'success')
+        flash('Order #{} status updated to {}!'.format(order.id, new_status), 'success') # Updated property
     return redirect(url_for('admin.dashboard'))
