@@ -2,95 +2,151 @@
 
 {% block content %}
 
-<div class="container mt-5">
+<div class="d-flex justify-content-between align-items-center mb-4">
 
-    <div class="row">
+    <div>
 
-        <div class="col-lg-8 mx-auto">
+        <h2 class="fw-bold mb-0">
+            Student Dashboard
+        </h2>
 
-            <div class="card shadow-sm">
+        <small class="text-muted">
+            Welcome back! Track your orders and loyalty rewards.
+        </small>
+
+    </div>
+
+    <span class="badge bg-success px-3 py-2">
+        {{ current_user.points_balance }} Points
+    </span>
+
+</div>
+
+<div class="card shadow-sm mb-4">
+
+    <div class="card-body">
+
+        <div class="row">
+
+            <div class="col-md-4">
+
+                <h6 class="text-muted mb-1">
+                    Student Name
+                </h6>
+
+                <p class="fw-bold mb-0">
+                    {{ current_user.full_name }}
+                </p>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <h6 class="text-muted mb-1">
+                    Email
+                </h6>
+
+                <p class="mb-0">
+                    {{ current_user.email }}
+                </p>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <h6 class="text-muted mb-1">
+                    Loyalty Balance
+                </h6>
+
+                <p class="fw-bold text-success mb-0">
+                    {{ current_user.points_balance }} Points
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="card shadow-sm">
+
+    <div class="card-header bg-primary text-white">
+
+        <h5 class="mb-0">
+            My Orders
+        </h5>
+
+    </div>
+
+    <div class="card-body">
+
+        {% if orders %}
+
+            {% for order in orders %}
+
+            <div class="card mb-3 border">
 
                 <div class="card-body">
 
-                    <h2 class="fw-bold mb-4">
-                        Student Dashboard
-                    </h2>
+                    <div class="d-flex justify-content-between align-items-center">
 
-                    <hr>
+                        <div>
 
-                    <p>
-                        <strong>Name:</strong>
-                        {{ current_user.full_name }}
-                    </p>
+                            <h5 class="mb-1">
+                                Order #{{ order.id }}
+                            </h5>
 
-                    <p>
-                        <strong>Email:</strong>
-                        {{ current_user.email }}
-                    </p>
+                            <small class="text-muted">
+                                {{ order.created_at.strftime('%d %b %Y %I:%M %p') }}
+                            </small>
 
-                    <p>
-                        <strong>Loyalty Points:</strong>
-                        {{ current_user.points_balance }}
-                    </p>
+                        </div>
 
-                    <hr>
+                        <div class="text-end">
 
-                    <h4 class="mt-4 mb-3">
-                        My Orders
-                    </h4>
-
-                    {% if orders %}
-
-                        {% for order in orders %}
-
-                        <div class="card mb-3">
-
-                            <div class="card-body">
-
-                                <div class="d-flex justify-content-between">
-
-                                    <div>
-                                        <strong>Order #{{ order.id }}</strong>
-                                    </div>
-
-                                    <span class="badge bg-primary">
-                                        {{ order.status }}
-                                    </span>
-
-                                </div>
-
-                                <div class="mt-2">
-                                    Total: <strong>KSh {{ order.total_amount }}</strong>
-                                </div>
-
-                                <small class="text-muted">
-                                    {{ order.created_at.strftime('%d %b %Y %I:%M %p') }}
-                                </small>
-
+                            <div class="fw-bold text-success">
+                                KSh {{ "%.2f"|format(order.total_amount) }}
                             </div>
 
+                            {% if order.status == "Placed" %}
+
+                                <span class="badge bg-warning text-dark">
+                                    Placed
+                                </span>
+
+                            {% elif order.status == "Preparing" %}
+
+                                <span class="badge bg-info">
+                                    Preparing
+                                </span>
+
+                            {% elif order.status == "Ready" %}
+
+                                <span class="badge bg-primary">
+                                    Ready for Pickup
+                                </span>
+
+                            {% else %}
+
+                                <span class="badge bg-success">
+                                    Completed
+                                </span>
+
+                            {% endif %}
+
                         </div>
 
-                        {% endfor %}
+                    </div>
 
-                    {% else %}
+                    <div class="mt-3">
 
-                        <div class="alert alert-info">
-                            You haven't placed any orders yet.
-                        </div>
+                        <a href="{{ url_for('student.order_details', order_id=order.id) }}"
+                           class="btn btn-outline-primary btn-sm">
 
-                    {% endif %}
+                            View Order Details
 
-                    <div class="mt-4">
-
-                        <a href="{{ url_for('student.menu') }}"
-                           class="btn btn-primary">
-                            Order More Food
-                        </a>
-
-                        <a href="{{ url_for('auth.logout') }}"
-                           class="btn btn-outline-danger">
-                            Logout
                         </a>
 
                     </div>
@@ -99,9 +155,37 @@
 
             </div>
 
-        </div>
+            {% endfor %}
+
+        {% else %}
+
+            <div class="alert alert-info text-center">
+
+                You haven't placed any orders yet.
+
+            </div>
+
+        {% endif %}
 
     </div>
+
+</div>
+
+<div class="mt-4">
+
+    <a href="{{ url_for('student.menu') }}"
+       class="btn btn-primary">
+
+        Order More Food
+
+    </a>
+
+    <a href="{{ url_for('auth.logout') }}"
+       class="btn btn-outline-danger">
+
+        Logout
+
+    </a>
 
 </div>
 

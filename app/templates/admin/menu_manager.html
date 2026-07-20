@@ -2,94 +2,147 @@
 
 {% block content %}
 
-<div class="container mt-4">
+<div class="d-flex justify-content-between align-items-center mb-4">
 
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2>Menu Manager</h2>
+    <div>
+
+        <h2 class="fw-bold mb-0">
+            Cafeteria Menu Management
+        </h2>
+
+        <small class="text-muted">
+            Add and maintain meals available to students.
+        </small>
+
     </div>
 
-    <!-- Add New Menu Item -->
-    <div class="card shadow-sm mb-4">
+    <span class="badge bg-dark px-3 py-2">
+        Menu Manager
+    </span>
 
-        <div class="card-body">
+</div>
 
-            <h5 class="card-title">Add New Menu Item</h5>
+<div class="mb-3">
 
-            <form method="POST">
+    <a href="{{ url_for('admin.dashboard') }}"
+       class="btn btn-outline-primary">
 
-                <div class="row g-3">
+        ← Back to Dashboard
 
-                    <div class="col-md-3">
-                        <input
-                            type="text"
-                            name="name"
-                            class="form-control"
-                            placeholder="Item Name"
-                            required>
-                    </div>
+    </a>
 
-                    <div class="col-md-3">
-                        <input
-                            type="text"
-                            name="category"
-                            class="form-control"
-                            placeholder="Category"
-                            required>
-                    </div>
+</div>
 
-                    <div class="col-md-2">
-                        <input
-                            type="number"
-                            step="0.01"
-                            name="price"
-                            class="form-control"
-                            placeholder="Price"
-                            required>
-                    </div>
+<!-- Add New Menu Item -->
 
-                    <div class="col-md-4">
-                        <input
-                            type="text"
-                            name="description"
-                            class="form-control"
-                            placeholder="Description">
-                    </div>
+<div class="card shadow-sm mb-4">
 
-                    <div class="col-12">
-                        <button
-                            type="submit"
-                            class="btn btn-success">
-                            Add Menu Item
-                        </button>
-                    </div>
+    <div class="card-header bg-success text-white">
+
+        <h5 class="mb-0">
+            Add New Menu Item
+        </h5>
+
+    </div>
+
+    <div class="card-body">
+
+        <form method="POST">
+
+            <div class="row g-3">
+
+                <div class="col-md-3">
+
+                    <input
+                        type="text"
+                        name="name"
+                        class="form-control"
+                        placeholder="Item Name"
+                        required>
 
                 </div>
 
-            </form>
+                <div class="col-md-3">
 
-        </div>
+                    <input
+                        type="text"
+                        name="category"
+                        class="form-control"
+                        placeholder="Category"
+                        required>
+
+                </div>
+
+                <div class="col-md-2">
+
+                    <input
+                        type="number"
+                        step="0.01"
+                        name="price"
+                        class="form-control"
+                        placeholder="Price (KSh)"
+                        required>
+
+                </div>
+
+                <div class="col-md-4">
+
+                    <input
+                        type="text"
+                        name="description"
+                        class="form-control"
+                        placeholder="Short Description">
+
+                </div>
+
+                <div class="col-12">
+
+                    <button
+                        type="submit"
+                        class="btn btn-success">
+
+                        + Add Menu Item
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </form>
 
     </div>
 
-    <!-- Existing Menu -->
+</div>
 
-    <div class="card shadow-sm">
+<!-- Current Menu -->
 
-        <div class="card-header bg-dark text-white">
-            <h5 class="mb-0">Current Menu</h5>
-        </div>
+<div class="card shadow-sm">
 
-        <div class="card-body">
+    <div class="card-header bg-dark text-white">
 
-            <table class="table table-hover">
+        <h5 class="mb-0">
+            Current Cafeteria Menu
+        </h5>
 
-                <thead>
+    </div>
+
+    <div class="card-body">
+
+        <div class="table-responsive">
+
+            <table class="table table-hover table-bordered align-middle">
+
+                <thead class="table-light">
 
                     <tr>
 
-                        <th>Name</th>
+                        <th>Item Name</th>
+
                         <th>Category</th>
+
                         <th>Price</th>
+
                         <th>Description</th>
 
                     </tr>
@@ -102,13 +155,33 @@
 
                     <tr>
 
-                        <td>{{ item.name }}</td>
+                        <td>
 
-                        <td>{{ item.category }}</td>
+                            <strong>{{ item.name }}</strong>
 
-                        <td>KSh {{ item.price }}</td>
+                        </td>
 
-                        <td>{{ item.description }}</td>
+                        <td>
+
+                            <span class="badge bg-secondary">
+                                {{ item.category }}
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            <span class="fw-bold text-success">
+                                KSh {{ "%.2f"|format(item.price) }}
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            {{ item.description or "No description provided." }}
+
+                        </td>
 
                     </tr>
 
@@ -116,9 +189,9 @@
 
                     <tr>
 
-                        <td colspan="4" class="text-center">
+                        <td colspan="4" class="text-center text-muted py-4">
 
-                            No menu items available.
+                            No menu items have been added yet.
 
                         </td>
 
@@ -131,15 +204,6 @@
             </table>
 
         </div>
-
-    </div>
-
-    <div class="mt-4">
-
-        <a href="{{ url_for('admin.dashboard') }}"
-           class="btn btn-secondary">
-            ← Back to Dashboard
-        </a>
 
     </div>
 

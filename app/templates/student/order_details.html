@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="row">
+
+    <div class="col-lg-8 mx-auto">
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+
+            <h2 class="fw-bold">
+                Order #{{ order.id }}
+            </h2>
+
+            {% if order.status == "Placed" %}
+                <span class="badge bg-warning text-dark">
+                    Placed
+                </span>
+
+            {% elif order.status == "Preparing" %}
+                <span class="badge bg-info">
+                    Preparing
+                </span>
+
+            {% elif order.status == "Ready" %}
+                <span class="badge bg-primary">
+                    Ready
+                </span>
+
+            {% else %}
+                <span class="badge bg-success">
+                    Completed
+                </span>
+            {% endif %}
+
+        </div>
+
+        <div class="card shadow-sm">
+
+            <div class="card-body">
+
+                <p class="text-muted mb-4">
+                    Ordered on
+                    {{ order.created_at.strftime('%d %b %Y %I:%M %p') }}
+                </p>
+
+                <h5 class="fw-bold mb-3">
+                    Items Ordered
+                </h5>
+
+                {% if order.items %}
+
+                    {% for item in order.items %}
+
+                    <div class="d-flex justify-content-between align-items-center border-bottom py-3">
+
+                        <div>
+
+                            <h6 class="mb-1">
+                                {{ item.item.name }}
+                            </h6>
+
+                            <small class="text-muted">
+                                Quantity: {{ item.quantity }}
+                                ×
+                                KSh {{ item.unit_price }}
+                            </small>
+
+                        </div>
+
+                        <strong class="text-primary">
+                            KSh {{ "%.2f"|format(item.quantity * item.unit_price) }}
+                        </strong>
+
+                    </div>
+
+                    {% endfor %}
+
+                {% else %}
+
+                    <div class="alert alert-warning">
+                        No order items found.
+                    </div>
+
+                {% endif %}
+
+                <hr>
+
+                <div class="d-flex justify-content-between align-items-center">
+
+                    <h4 class="mb-0">
+                        Total
+                    </h4>
+
+                    <h4 class="text-success mb-0">
+                        KSh {{ "%.2f"|format(order.total_amount) }}
+                    </h4>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="mt-4">
+
+            <a href="{{ url_for('student.dashboard') }}"
+               class="btn btn-secondary">
+
+                ← Back to Dashboard
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

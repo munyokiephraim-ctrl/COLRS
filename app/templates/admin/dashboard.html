@@ -3,11 +3,47 @@
 {% block content %}
 
 <div class="d-flex justify-content-between align-items-center mb-4">
-    <h2 class="fw-bold">Admin Dashboard</h2>
 
-    <span class="badge bg-dark fs-6">
+    <div>
+        <h2 class="fw-bold mb-0">
+            Cafeteria Operations Dashboard
+        </h2>
+
+        <small class="text-muted">
+            Monitor and manage student food orders in real time.
+        </small>
+    </div>
+
+    <span class="badge bg-dark px-3 py-2">
         Operator Mode
     </span>
+
+</div>
+
+<!-- Statistics Card -->
+
+<div class="row mb-4">
+
+    <div class="col-md-4">
+
+        <div class="card shadow-sm border-0">
+
+            <div class="card-body">
+
+                <h6 class="text-muted">
+                    Total Orders
+                </h6>
+
+                <h2 class="fw-bold">
+                    {{ orders|length }}
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
 </div>
 
 {% if orders %}
@@ -15,25 +51,35 @@
 <div class="card shadow-sm">
 
     <div class="card-header bg-dark text-white">
+
         <h5 class="mb-0">
             Order Management Queue
         </h5>
+
     </div>
 
     <div class="card-body">
 
         <div class="table-responsive">
 
-            <table class="table table-hover align-middle">
+            <table class="table table-hover table-bordered align-middle">
 
                 <thead class="table-light">
+
                     <tr>
+
                         <th>Order #</th>
+
                         <th>Total</th>
+
                         <th>Status</th>
+
                         <th>Date</th>
+
                         <th>Action</th>
+
                     </tr>
+
                 </thead>
 
                 <tbody>
@@ -47,61 +93,84 @@
                         </td>
 
                         <td>
-                            KSh {{ "%.2f"|format(order.total_amount) }}
+                            <span class="fw-bold text-success">
+                                KSh {{ "%.2f"|format(order.total_amount) }}
+                            </span>
                         </td>
 
                         <td>
 
                             {% if order.status == "Placed" %}
-                                <span class="badge bg-warning text-dark">Placed</span>
+
+                                <span class="badge bg-warning text-dark px-3">
+                                    Awaiting Preparation
+                                </span>
 
                             {% elif order.status == "Preparing" %}
-                                <span class="badge bg-info">Preparing</span>
+
+                                <span class="badge bg-info px-3">
+                                    Preparing
+                                </span>
 
                             {% elif order.status == "Ready" %}
-                                <span class="badge bg-primary">Ready</span>
+
+                                <span class="badge bg-primary px-3">
+                                    Ready for Pickup
+                                </span>
 
                             {% else %}
-                                <span class="badge bg-success">Completed</span>
+
+                                <span class="badge bg-success px-3">
+                                    Completed
+                                </span>
+
                             {% endif %}
 
                         </td>
 
                         <td>
+
                             {{ order.created_at.strftime('%d %b %Y %I:%M %p') }}
+
                         </td>
 
                         <td>
 
                             {% if order.status == "Placed" %}
 
-                                <form action="{{ url_for('admin.update_order_status', order_id=order.id) }}" method="POST">
-                                    <input type="hidden" name="status" value="Preparing">
+                            <form action="{{ url_for('admin.update_order_status', order_id=order.id) }}" method="POST">
 
-                                    <button type="submit" class="btn btn-info btn-sm">
-                                        Mark Preparing
-                                    </button>
-                                </form>
+                                <input type="hidden" name="status" value="Preparing">
+
+                                <button type="submit" class="btn btn-info btn-sm">
+                                    Mark Preparing
+                                </button>
+
+                            </form>
 
                             {% elif order.status == "Preparing" %}
 
-                                <form action="{{ url_for('admin.update_order_status', order_id=order.id) }}" method="POST">
-                                    <input type="hidden" name="status" value="Ready">
+                            <form action="{{ url_for('admin.update_order_status', order_id=order.id) }}" method="POST">
 
-                                    <button type="submit" class="btn btn-success btn-sm">
-                                        Mark Ready
-                                    </button>
-                                </form>
+                                <input type="hidden" name="status" value="Ready">
+
+                                <button type="submit" class="btn btn-primary btn-sm">
+                                    Mark Ready
+                                </button>
+
+                            </form>
 
                             {% elif order.status == "Ready" %}
 
-                                <form action="{{ url_for('admin.update_order_status', order_id=order.id) }}" method="POST">
-                                    <input type="hidden" name="status" value="Completed">
+                            <form action="{{ url_for('admin.update_order_status', order_id=order.id) }}" method="POST">
 
-                                    <button type="submit" class="btn btn-dark btn-sm">
-                                        Complete Order
-                                    </button>
-                                </form>
+                                <input type="hidden" name="status" value="Completed">
+
+                                <button type="submit" class="btn btn-success btn-sm">
+                                    Complete Order
+                                </button>
+
+                            </form>
 
                             {% else %}
 
@@ -130,19 +199,27 @@
 {% else %}
 
 <div class="alert alert-info">
-    There are currently no active orders.
+
+    No customer orders have been placed yet.
+
 </div>
 
 {% endif %}
 
 <div class="mt-4">
 
-    <a href="{{ url_for('admin.manage_menu') }}" class="btn btn-primary">
+    <a href="{{ url_for('admin.manage_menu') }}"
+       class="btn btn-primary">
+
         Manage Menu
+
     </a>
 
-    <a href="{{ url_for('auth.logout') }}" class="btn btn-outline-danger">
+    <a href="{{ url_for('auth.logout') }}"
+       class="btn btn-outline-danger">
+
         Logout
+
     </a>
 
 </div>
