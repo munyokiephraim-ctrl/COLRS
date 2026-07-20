@@ -37,11 +37,21 @@ def login():
                         login_allowed = True
 
             if login_allowed:
+
+                print("====================================")
+                print("LOGIN SUCCESS")
+                print("Email:", user.email)
+                print("Role :", user.role)
+                print("====================================")
+
                 login_user(user)
-                flash('Logged in successfully!', 'success')
-                if user.role == 'admin':
-                    return redirect(url_for('admin.dashboard'))
-                return redirect(url_for('student.menu'))
+
+                flash("Logged in successfully!", "success")
+
+                if user.role == "admin":
+                    return redirect(url_for("admin.dashboard"))
+
+                return redirect(url_for("student.menu"))
             else:
                 flash('Invalid email or password. Please try again.', 'danger')
         except Exception as e:
