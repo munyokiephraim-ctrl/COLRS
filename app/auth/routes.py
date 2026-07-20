@@ -24,6 +24,17 @@ def login():
             password = request.form.get('password', '')
             
             user = User.query.filter_by(email=email).first()
+            print("==============================")
+            print("USER FOUND:", user)
+
+            if user:
+                print("ID:", user.id)
+                print("EMAIL:", user.email)
+                print("ROLE:", user.role)
+                print("TABLE SHOULD BE:", User.__tablename__)
+            else:
+                print("NO USER FOUND")
+            print("==============================")
             
             login_allowed = False
             if user and user.password_hash:
