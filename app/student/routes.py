@@ -7,6 +7,10 @@ from app.models import MenuItem, Order, OrderItem, LoyaltyTransaction
 student_bp = Blueprint("student", __name__)
 
 
+# ==========================
+# Student Protection
+# ==========================
+
 @student_bp.before_request
 @login_required
 def require_student():
@@ -17,10 +21,13 @@ def require_student():
 # ==========================
 # Dashboard
 # ==========================
+
 @student_bp.route("/dashboard")
 def dashboard():
+
     orders = (
-        Order.query.filter_by(user_id=current_user.id)
+        Order.query
+        .filter_by(user_id=current_user.id)
         .order_by(Order.created_at.desc())
         .all()
     )
@@ -34,6 +41,7 @@ def dashboard():
 # ==========================
 # Menu
 # ==========================
+
 @student_bp.route("/menu")
 def menu():
 
@@ -66,8 +74,10 @@ def menu():
 # ==========================
 # Add To Cart
 # ==========================
+
 @student_bp.route("/cart/add/<int:item_id>", methods=["POST"])
 def add_to_cart(item_id):
+
     item = MenuItem.query.get_or_404(item_id)
 
     cart = session.get("cart", {})
@@ -82,20 +92,18 @@ def add_to_cart(item_id):
     session["cart"] = cart
     session.modified = True
 
-    print("AFTER ADD:", dict(session))
-
     flash(f"{item.name} added to cart!", "success")
 
     return redirect(url_for("student.view_cart"))
 
+
 # ==========================
-# Cart
+# View Cart
 # ==========================
+
 @student_bp.route("/cart")
 @student_bp.route("/view-cart", endpoint="view_cart")
 def cart():
-
-    print("INSIDE CART:", dict(session))
 
     cart = session.get("cart", {})
 
@@ -103,9 +111,11 @@ def cart():
     subtotal = 0
 
     for item_id, qty in cart.items():
+
         item = MenuItem.query.get(int(item_id))
 
         if item:
+
             total = item.price * qty
             subtotal += total
 
@@ -121,9 +131,11 @@ def cart():
         subtotal=subtotal
     )
 
+
 # ==========================
 # Checkout
 # ==========================
+
 @student_bp.route("/checkout", methods=["POST"])
 def checkout():
 
@@ -181,8 +193,26 @@ def checkout():
     session.pop("cart", None)
 
     flash(
-        f"Order placed successfully! You earned {earned_points} points.",
-        "success",
+        f"Order placed successfully! You earned {earned_points} loyalty points.",
+        "success"
     )
 
     return redirect(url_for("student.dashboard"))
+
+
+# ==========================
+# Order Details
+# ==========================
+
+@student_bp.route("/order/<int:order_id>")
+def order_details(order_id):
+
+    order = Order.query.filter_by(
+        id=order_id,
+        user_id=current_user.id
+    ).first_or_404()
+
+    return render_template(
+        "student/order_details.html",
+        order=order
+    )
