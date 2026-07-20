@@ -22,19 +22,27 @@ def dashboard():
 
 @student_bp.route('/menu')
 def menu():
-    try:
-        category = request.args.get('category', 'All')
-        if category and category != 'All':
-            items = MenuItem.query.filter_by(category=category, is_available=True).all()
-        else:
-            items = MenuItem.query.filter_by(is_available=True).all()
-            
-        categories_query = db.session.query(MenuItem.category).distinct().all()
-        categories = [c[0] for c in categories_query if c[0]]
-        
-        return render_template('student/menu.html', items=items, categories=categories, active_category=category)
-    except Exception:
-        return render_template('student/menu.html', items=[], categories=['Beverages', 'Meals', 'Snacks'], active_category='All')
+    category = request.args.get('category', 'All')
+
+    if category != 'All':
+        items = MenuItem.query.filter_by(
+            category=category,
+            is_available=True
+        ).all()
+    else:
+        items = MenuItem.query.filter_by(
+            is_available=True
+        ).all()
+
+    categories_query = db.session.query(MenuItem.category).distinct().all()
+    categories = [c[0] for c in categories_query if c[0]]
+
+    return render_template(
+        'student/menu.html',
+        items=items,
+        categories=categories,
+        active_category=category
+    )
 
 @student_bp.route('/cart')
 @student_bp.route('/view-cart', endpoint='view_cart')
