@@ -1,0 +1,325 @@
+/* ===========================
+   Google Font
+=========================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+/* ===========================
+   Background
+=========================== */
+
+body{
+
+    min-height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:
+        linear-gradient(
+            rgba(15,35,20,.75),
+            rgba(15,35,20,.80)
+        ),
+        url("../images/login-bg.jpg");
+
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+
+}
+
+/* ===========================
+   Main Wrapper
+=========================== */
+
+.auth-wrapper{
+
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:40px;
+
+}
+
+/* ===========================
+   Login/Register Card
+=========================== */
+
+.auth-card{
+
+    width:430px;
+
+    background:rgba(255,255,255,.95);
+
+    backdrop-filter:blur(12px);
+
+    border-radius:24px;
+
+    overflow:hidden;
+
+    box-shadow:0 20px 50px rgba(0,0,0,.35);
+
+    border:1px solid rgba(255,255,255,.3);
+
+}
+
+/* ===========================
+   Header
+=========================== */
+
+.auth-header{
+
+    text-align:center;
+
+    padding:40px 30px;
+
+    background:linear-gradient(
+        135deg,
+        #2E7D32,
+        #43A047,
+        #F57C00
+    );
+
+    color:white;
+
+}
+
+.logo-circle{
+
+    width:75px;
+    height:75px;
+
+    margin:auto auto 15px;
+
+    border-radius:50%;
+
+    background:white;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-size:34px;
+
+    color:#F57C00;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.25);
+
+}
+
+.auth-header h1{
+
+    font-size:30px;
+    font-weight:700;
+    margin-bottom:8px;
+    letter-spacing:1px;
+
+}
+
+.auth-header p{
+
+    font-size:14px;
+    opacity:.95;
+
+}
+
+/* ===========================
+   Form Body
+=========================== */
+
+.auth-body{
+
+    background:white;
+    padding:35px;
+
+}
+
+.auth-body h2{
+
+    text-align:center;
+
+    color:#1B5E20;
+
+    margin-bottom:8px;
+
+    font-weight:600;
+
+}
+
+.auth-subtitle{
+
+    text-align:center;
+
+    color:#777;
+
+    font-size:14px;
+
+    margin-bottom:28px;
+
+}
+
+/* ===========================
+   Labels
+=========================== */
+
+.form-label{
+
+    font-weight:600;
+
+    color:#2c3e50;
+
+    margin-bottom:8px;
+
+}
+
+/* ===========================
+   Inputs
+=========================== */
+
+.form-control{
+
+    padding:13px 15px;
+
+    border-radius:12px;
+
+    border:1px solid #dcdcdc;
+
+    transition:.3s;
+
+}
+
+.form-control:focus{
+
+    border-color:#43A047;
+
+    box-shadow:0 0 0 .2rem rgba(67,160,71,.18);
+
+}
+
+/* ===========================
+   Button
+=========================== */
+
+.btn-success{
+
+    background:#2E7D32;
+
+    border:none;
+
+    border-radius:12px;
+
+    padding:13px;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+.btn-success:hover{
+
+    background:#F57C00;
+
+    transform:translateY(-2px);
+
+}
+
+/* ===========================
+   Links
+=========================== */
+
+a{
+
+    text-decoration:none;
+
+    transition:.3s;
+
+}
+
+a:hover{
+
+    color:#F57C00 !important;
+
+}
+
+/* ===========================
+   Alerts
+=========================== */
+
+.alert{
+
+    border-radius:10px;
+
+    font-size:14px;
+
+}
+
+/* ===========================
+   Divider
+=========================== */
+
+hr{
+
+    margin:28px 0;
+
+    opacity:.15;
+
+}
+
+/* ===========================
+   Animation
+=========================== */
+
+.auth-card{
+
+    animation:fadeIn .8s ease;
+
+}
+
+@keyframes fadeIn{
+
+    from{
+
+        opacity:0;
+        transform:translateY(25px);
+
+    }
+
+    to{
+
+        opacity:1;
+        transform:translateY(0);
+
+    }
+
+}
+
+/* ===========================
+   Responsive
+=========================== */
+
+@media(max-width:500px){
+
+    .auth-wrapper{
+
+        padding:20px;
+
+    }
+
+    .auth-card{
+
+        width:100%;
+
+    }
+
+}

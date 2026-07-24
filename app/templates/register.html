@@ -1,205 +1,163 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>COLRS - Create Account</title>
-    <style>
-        body {
-            background-color: #1a1c29;
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-        }
-        .phone-frame {
-            background: #ffffff;
-            width: 380px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
-        .header {
-            background-color: #1e5631;
-            color: white;
-            text-align: center;
-            padding: 25px 20px;
-        }
-        .header .icon {
-            font-size: 28px;
-            margin-bottom: 5px;
-        }
-        .header h1 {
-            margin: 0;
-            font-size: 22px;
-            font-weight: bold;
-        }
-        .header p {
-            margin: 4px 0 0 0;
-            font-size: 12px;
-            color: #d4edda;
-        }
-        .form-container {
-            padding: 25px 30px;
-        }
-        h2 {
-            text-align: center;
-            color: #2c3e50;
-            margin-top: 0;
-            margin-bottom: 4px;
-            font-size: 20px;
-        }
-        .subtitle {
-            text-align: center;
-            color: #7f8c8d;
-            font-size: 12px;
-            margin-bottom: 20px;
-        }
-        .form-group {
-            margin-bottom: 14px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-            color: #34495e;
-            font-size: 12px;
-        }
-        input {
-            width: 100%;
-            padding: 11px;
-            border: 1px solid #dcdde1;
-            border-radius: 8px;
-            box-sizing: border-box;
-            font-size: 13px;
-            background-color: #f8f9fa;
-        }
-        input:focus {
-            border-color: #1e5631;
-            outline: none;
-            background-color: #fff;
-        }
-        button {
-            width: 100%;
-            background: #1e5631;
-            color: white;
-            padding: 13px;
-            border: none;
-            border-radius: 8px;
-            font-weight: bold;
-            cursor: pointer;
-            font-size: 14px;
-            margin-top: 5px;
-            transition: background 0.2s;
-        }
-        button:hover {
-            background: #143d22;
-        }
-        .divider {
-            text-align: center;
-            border-bottom: 1px solid #dcdde1;
-            line-height: 0.1em;
-            margin: 20px 0 15px 0;
-            color: #b2bec3;
-            font-size: 11px;
-        }
-        .divider span {
-            background: #fff;
-            padding: 0 10px;
-        }
-        .footer-link {
-            text-align: center;
-            font-size: 12px;
-            color: #636e72;
-        }
-        .footer-link a {
-            color: #1e5631;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        .footer-link a:hover {
-            text-decoration: underline;
-        }
-        .alert {
-            padding: 10px;
-            margin-bottom: 15px;
-            border-radius: 6px;
-            font-size: 12px;
-        }
-        .alert-danger { background: #f8d7da; color: #721c24; }
-        .alert-warning { background: #fff3cd; color: #856404; }
-        .alert-success { background: #d4edda; color: #155724; }
-    </style>
-</head>
-<body>
+{% extends "base.html" %}
 
-    <div class="phone-frame">
-        <div class="header">
-            <div class="icon">☕</div>
+{% block content %}
+
+<div class="auth-wrapper">
+
+    <div class="auth-card">
+
+        <div class="auth-header">
+
+            <div class="logo-circle">
+                ☕
+            </div>
+
             <h1>COLRS</h1>
-            <p>Campus Cafeteria Ordering</p>
+
+            <p>
+                Campus Cafeteria Ordering & Loyalty Reward System
+            </p>
+
         </div>
 
-        <div class="form-container">
-            <h2>Create Account</h2>
-            <div class="subtitle">Join COLRS to order and earn points</div>
+        <div class="auth-body">
 
-            <!-- Flash Messages -->
+            <h2>
+                Create Account
+            </h2>
+
+            <p class="auth-subtitle">
+                Join COLRS to order meals and earn loyalty rewards.
+            </p>
+
             {% with messages = get_flashed_messages(with_categories=true) %}
-              {% if messages %}
-                {% for category, message in messages %}
-                  <div class="alert alert-{{ category }}">{{ message }}</div>
-                {% endfor %}
-              {% endif %}
+                {% if messages %}
+                    {% for category, message in messages %}
+
+                        <div class="alert alert-{{ category }}">
+
+                            {{ message }}
+
+                        </div>
+
+                    {% endfor %}
+                {% endif %}
             {% endwith %}
 
-            <form method="POST" action="{{ url_for('auth.register') }}" onsubmit="return validatePassword()">
-                <div class="form-group">
-                    <label>Full Name</label>
-                    <input type="text" name="full_name" required placeholder="Enter your full name">
+            <form method="POST"
+                  action="{{ url_for('auth.register') }}"
+                  onsubmit="return validatePassword()">
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        name="full_name"
+                        class="form-control"
+                        placeholder="Enter your full name"
+                        required>
+
                 </div>
 
-                <div class="form-group">
-                    <label>Email Address</label>
-                    <input type="email" name="email" required placeholder="student@usiu.ac.ke">
-                </div>
-                
-                <div class="form-group">
-                    <label>Password</label>
-                    <input type="password" id="password" name="password" required placeholder="Create a password">
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        name="email"
+                        class="form-control"
+                        placeholder="student@usiu.ac.ke"
+                        required>
+
                 </div>
 
-                <div class="form-group">
-                    <label>Confirm Password</label>
-                    <input type="password" id="confirm_password" required placeholder="Confirm your password">
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        class="form-control"
+                        placeholder="Create a password"
+                        required>
+
                 </div>
 
-                <button type="submit">Create Account &rarr;</button>
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Confirm Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="confirm_password"
+                        class="form-control"
+                        placeholder="Confirm your password"
+                        required>
+
+                </div>
+
+                <button
+                    type="submit"
+                    class="btn btn-success w-100 py-2 fw-bold">
+
+                    Create Account →
+
+                </button>
+
             </form>
 
-            <div class="divider"><span>or</span></div>
+            <hr>
 
-            <div class="footer-link">
-                Already have an account? <a href="{{ url_for('auth.login') }}">Login</a>
-            </div>
+            <p class="text-center mb-0">
+
+                Already have an account?
+
+                <a href="{{ url_for('auth.login') }}"
+                   class="fw-bold text-success text-decoration-none">
+
+                    Login
+
+                </a>
+
+            </p>
+
         </div>
+
     </div>
 
-    <script>
-        function validatePassword() {
-            var pass = document.getElementById("password").value;
-            var confirmPass = document.getElementById("confirm_password").value;
-            if (pass !== confirmPass) {
-                alert("Passwords do not match!");
-                return false;
-            }
-            return true;
-        }
-    </script>
+</div>
 
-</body>
-</html>
+<script>
+
+function validatePassword() {
+
+    var pass = document.getElementById("password").value;
+    var confirmPass = document.getElementById("confirm_password").value;
+
+    if (pass !== confirmPass) {
+
+        alert("Passwords do not match!");
+        return false;
+
+    }
+
+    return true;
+
+}
+
+</script>
+
+{% endblock %}
