@@ -1,0 +1,180 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container py-4">
+
+    <div class="card shadow border-0">
+
+        <div class="card-header bg-warning">
+
+            <h2 class="mb-0">
+
+                ✏ Edit Menu Item
+
+            </h2>
+
+        </div>
+
+        <div class="card-body p-4">
+
+            <form method="POST">
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+
+                        Meal Name
+
+                    </label>
+
+                    <input
+                        type="text"
+                        name="name"
+                        class="form-control"
+                        value="{{ item.name }}"
+                        required>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+
+                        Description
+
+                    </label>
+
+                    <textarea
+                        name="description"
+                        rows="4"
+                        class="form-control"
+                        required>{{ item.description }}</textarea>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-6">
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+
+                                Price (KSh)
+
+                            </label>
+
+                            <input
+                                type="number"
+                                step="0.01"
+                                name="price"
+                                class="form-control"
+                                value="{{ item.price }}"
+                                required>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+
+                                Category
+
+                            </label>
+
+                            <select
+                                name="category"
+                                class="form-select">
+
+                                <option value="Meals"
+                                {% if item.category=="Meals" %}selected{% endif %}>
+
+                                    Meals
+
+                                </option>
+
+                                <option value="Beverages"
+                                {% if item.category=="Beverages" %}selected{% endif %}>
+
+                                    Beverages
+
+                                </option>
+
+                                <option value="Desserts"
+                                {% if item.category=="Desserts" %}selected{% endif %}>
+
+                                    Desserts
+
+                                </option>
+
+                                <option value="Snacks"
+                                {% if item.category=="Snacks" %}selected{% endif %}>
+
+                                    Snacks
+
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="form-check form-switch mb-4">
+
+                    <input
+                        class="form-check-input"
+                        type="checkbox"
+                        name="is_available"
+                        id="available"
+
+                        {% if item.is_available %}
+                        checked
+                        {% endif %}>
+
+                    <label
+                        class="form-check-label"
+                        for="available">
+
+                        Available for students
+
+                    </label>
+
+                </div>
+
+                <div class="d-flex justify-content-between">
+
+                    <a
+                        href="{{ url_for('admin.manage_menu') }}"
+                        class="btn btn-secondary">
+
+                        ← Cancel
+
+                    </a>
+
+                    <button
+                        type="submit"
+                        class="btn btn-warning">
+
+                        💾 Save Changes
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

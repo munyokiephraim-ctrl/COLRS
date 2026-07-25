@@ -7,21 +7,22 @@ from app.models import MenuItem, Order
 admin_bp = Blueprint("admin", __name__)
 
 
-# ==========================
-# Admin Protection
-# ==========================
+# ==================================================
+# ADMIN PROTECTION
+# ==================================================
 
 @admin_bp.before_request
 @login_required
 def require_admin():
+
     if current_user.role.lower() != "admin":
         flash("Access denied. Admin privileges required.", "danger")
         return redirect(url_for("student.menu"))
 
 
-# ==========================
-# Dashboard
-# ==========================
+# ==================================================
+# DASHBOARD
+# ==================================================
 
 @admin_bp.route("/dashboard")
 def dashboard():
@@ -38,9 +39,9 @@ def dashboard():
     )
 
 
-# ==========================
-# Update Order Status
-# ==========================
+# ==================================================
+# UPDATE ORDER STATUS
+# ==================================================
 
 @admin_bp.route("/order/<int:order_id>/update", methods=["POST"])
 def update_order_status(order_id):
@@ -49,25 +50,50 @@ def update_order_status(order_id):
 
     new_status = request.form.get("status")
 
-    if new_status in ["Placed", "Preparing", "Ready", "Completed"]:
+    if new_status in [
+        "Placed",
+        "Preparing",
+        "Ready",
+        "Completed"
+    ]:
 
         order.status = new_status
+
         db.session.commit()
 
         flash(
-            f"Order #{order.id} updated to {new_status}.",
+            f"Order #{order.id} updated successfully.",
             "success"
         )
 
     return redirect(url_for("admin.dashboard"))
 
 
-# ==========================
-# Menu Manager
-# ==========================
+# ==================================================
+# MENU MANAGER
+# ==================================================
 
-@admin_bp.route("/menu", methods=["GET", "POST"])
+@admin_bp.route("/menu")
 def manage_menu():
+
+    items = (
+        MenuItem.query
+        .order_by(MenuItem.category, MenuItem.name)
+        .all()
+    )
+
+    return render_template(
+        "admin/menu_manager.html",
+        items=items
+    )
+
+
+# ==================================================
+# ADD MENU ITEM
+# ==================================================
+
+@admin_bp.route("/menu/add", methods=["GET", "POST"])
+def add_menu_item():
 
     if request.method == "POST":
 
@@ -82,13 +108,68 @@ def manage_menu():
         db.session.add(item)
         db.session.commit()
 
-        flash("Menu item added successfully!", "success")
+        flash(
+            "Menu item added successfully!",
+            "success"
+        )
 
         return redirect(url_for("admin.manage_menu"))
 
-    items = MenuItem.query.order_by(MenuItem.name).all()
+    return render_template(
+        "admin/add_menu_item.html"
+    )
+
+
+# ==================================================
+# EDIT MENU ITEM
+# ==================================================
+
+@admin_bp.route("/menu/edit/<int:item_id>", methods=["GET", "POST"])
+def edit_menu_item(item_id):
+
+    item = MenuItem.query.get_or_404(item_id)
+
+    if request.method == "POST":
+
+        item.name = request.form.get("name")
+        item.description = request.form.get("description")
+        item.price = float(request.form.get("price"))
+        item.category = request.form.get("category")
+
+        item.is_available = (
+            request.form.get("is_available") == "on"
+        )
+
+        db.session.commit()
+
+        flash(
+            "Menu item updated successfully!",
+            "success"
+        )
+
+        return redirect(url_for("admin.manage_menu"))
 
     return render_template(
-        "admin/menu_manager.html",
-        items=items
+        "admin/edit_menu_item.html",
+        item=item
     )
+
+
+# ==================================================
+# DELETE MENU ITEM
+# ==================================================
+
+@admin_bp.route("/menu/delete/<int:item_id>", methods=["POST"])
+def delete_menu_item(item_id):
+
+    item = MenuItem.query.get_or_404(item_id)
+
+    db.session.delete(item)
+    db.session.commit()
+
+    flash(
+        "Menu item deleted successfully.",
+        "success"
+    )
+
+    return redirect(url_for("admin.manage_menu"))

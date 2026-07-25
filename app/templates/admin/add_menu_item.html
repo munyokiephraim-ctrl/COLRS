@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container py-4">
+
+    <div class="card shadow border-0">
+
+        <div class="card-header bg-success text-white">
+
+            <h2 class="mb-0">
+
+                ➕ Add New Menu Item
+
+            </h2>
+
+        </div>
+
+        <div class="card-body p-4">
+
+            <form method="POST">
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+
+                        Meal Name
+
+                    </label>
+
+                    <input
+                        type="text"
+                        name="name"
+                        class="form-control"
+                        required>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+
+                        Description
+
+                    </label>
+
+                    <textarea
+                        name="description"
+                        rows="4"
+                        class="form-control"
+                        required></textarea>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-6">
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+
+                                Price (KSh)
+
+                            </label>
+
+                            <input
+                                type="number"
+                                step="0.01"
+                                name="price"
+                                class="form-control"
+                                required>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+
+                                Category
+
+                            </label>
+
+                            <select
+                                name="category"
+                                class="form-select"
+                                required>
+
+                                <option value="Meals">
+
+                                    Meals
+
+                                </option>
+
+                                <option value="Beverages">
+
+                                    Beverages
+
+                                </option>
+
+                                <option value="Desserts">
+
+                                    Desserts
+
+                                </option>
+
+                                <option value="Snacks">
+
+                                    Snacks
+
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="d-flex justify-content-between">
+
+                    <a
+                        href="{{ url_for('admin.manage_menu') }}"
+                        class="btn btn-secondary">
+
+                        ← Cancel
+
+                    </a>
+
+                    <button
+                        type="submit"
+                        class="btn btn-success">
+
+                        ➕ Save Menu Item
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
