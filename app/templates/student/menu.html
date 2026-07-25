@@ -56,27 +56,23 @@
 
 <!-- CATEGORIES -->
 
-<div class="mb-5">
+<div class="category-buttons my-4">
 
-    <button class="btn btn-success rounded-pill me-2">
+    <a href="{{ url_for('student.menu', category='All') }}"
+       class="category-btn {% if active_category == 'All' %}active{% endif %}">
         All
-    </button>
+    </a>
 
-    <button class="btn btn-outline-success rounded-pill me-2">
-        Meals
-    </button>
+    {% for category in categories %}
 
-    <button class="btn btn-outline-success rounded-pill me-2">
-        Beverages
-    </button>
+    <a href="{{ url_for('student.menu', category=category) }}"
+       class="category-btn {% if active_category == category %}active{% endif %}">
+        {{ category }}
+    </a>
 
-    <button class="btn btn-outline-success rounded-pill me-2">
-        Snacks
-    </button>
+    {% endfor %}
 
-    <button class="btn btn-outline-success rounded-pill">
-        Desserts
-    </button>
+</div>
 
 </div>
 

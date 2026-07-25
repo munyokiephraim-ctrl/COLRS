@@ -915,3 +915,105 @@ DASHBOARD IMPROVEMENTS
 }
 
 }
+
+/* ===========================
+   Fixed Navbar
+=========================== */
+
+body{
+    padding-top:90px;
+}
+
+/* ===========================
+   Student Card
+=========================== */
+
+.student-card{
+    min-height:250px;
+}
+
+.student-name{
+    font-weight:700;
+    margin-top:10px;
+    margin-bottom:12px;
+    color:#1b5e20;
+}
+
+.student-email{
+    font-size:.9rem;
+    color:#666;
+    word-break:break-word;
+    margin:0;
+}
+
+/* ===========================
+   Dashboard Cards
+=========================== */
+
+.dashboard-card{
+    padding:40px;
+}
+
+/* ===========================
+   Meal Cards
+=========================== */
+
+.meal-card{
+    display:flex;
+    flex-direction:column;
+    height:100%;
+}
+
+.meal-card .card-body{
+    display:flex;
+    flex-direction:column;
+}
+
+.meal-card p{
+    flex-grow:1;
+}
+
+.meal-image{
+    width:100%;
+    height:260px;
+    object-fit:cover;
+}
+
+/* ===========================
+   Category Buttons
+=========================== */
+
+.category-buttons{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    margin-bottom:35px;
+}
+
+.category-btn{
+    padding:10px 22px;
+    border-radius:50px;
+    text-decoration:none;
+    font-weight:600;
+    color:#198754;
+    border:2px solid #198754;
+    transition:.3s;
+}
+
+.category-btn:hover{
+    background:#198754;
+    color:#fff;
+}
+
+.category-btn.active{
+    background:#198754;
+    color:#fff;
+}
+
+/* ===========================
+   Better Layout
+=========================== */
+
+.container{
+    max-width:1280px;
+}
