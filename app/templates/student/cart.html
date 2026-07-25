@@ -2,26 +2,19 @@
 
 {% block content %}
 
-<div class="d-flex justify-content-between align-items-center mb-4">
+<div class="cart-hero mb-5">
 
-    <div>
+    <div class="cart-hero-overlay">
 
-        <h2 class="fw-bold mb-0">
-            Shopping Cart
-        </h2>
+        <h1>
+            🛒 Your Shopping Cart
+        </h1>
 
-        <small class="text-muted">
-            Review your selected meals before placing your order.
-        </small>
+        <p>
+            Review your meals before proceeding to payment.
+        </p>
 
     </div>
-
-    <a href="{{ url_for('student.menu') }}"
-       class="btn btn-outline-secondary">
-
-        ← Continue Shopping
-
-    </a>
 
 </div>
 
@@ -29,42 +22,69 @@
 
 <div class="row">
 
+    <!-- LEFT SIDE -->
+
     <div class="col-lg-8">
 
         {% for item_data in cart_items %}
 
-        <div class="card shadow-sm border-0 mb-3">
+        <div class="cart-item mb-4">
 
-            <div class="card-body">
+            {% if item_data.item.name == "Chicken Burger" %}
 
-                <div class="d-flex justify-content-between align-items-center">
+                <img src="{{ url_for('static', filename='images/meals/burger.jpg') }}">
 
-                    <div>
+            {% elif item_data.item.name == "Espresso Coffee" %}
 
-                        <h5 class="fw-bold mb-1">
-                            {{ item_data.item.name }}
-                        </h5>
+                <img src="{{ url_for('static', filename='images/meals/coffee.jpg') }}">
 
-                        <p class="text-muted mb-0">
+            {% elif item_data.item.name == "Chocolate Brownie" %}
 
-                            Quantity:
-                            <strong>{{ item_data.quantity }}</strong>
+                <img src="{{ url_for('static', filename='images/meals/brownie.jpg') }}">
 
-                        </p>
+            {% elif item_data.item.name == "Bottled Water" %}
 
-                    </div>
+                <img src="{{ url_for('static', filename='images/meals/water.jpg') }}">
 
-                    <div class="text-end">
+            {% elif item_data.item.name == "Samosa (2 pcs)" %}
 
-                        <h5 class="text-success fw-bold mb-0">
+                <img src="{{ url_for('static', filename='images/meals/samosa.jpg') }}">
 
-                            KSh {{ "%.2f"|format(item_data.total) }}
+            {% else %}
 
-                        </h5>
+                <img src="{{ url_for('static', filename='images/meals/default-food.jpg') }}">
 
-                    </div>
+            {% endif %}
+
+            <div class="cart-details">
+
+                <h4>{{ item_data.item.name }}</h4>
+
+                <p>
+
+                    {{ item_data.item.description }}
+
+                </p>
+
+                <div class="quantity-box">
+
+                    <button class="btn btn-outline-secondary btn-sm">−</button>
+
+                    <span>{{ item_data.quantity }}</span>
+
+                    <button class="btn btn-outline-secondary btn-sm">+</button>
 
                 </div>
+
+            </div>
+
+            <div class="text-end">
+
+                <h4 class="text-success">
+
+                    KSh {{ "%.2f"|format(item_data.total) }}
+
+                </h4>
 
             </div>
 
@@ -74,67 +94,96 @@
 
     </div>
 
+    <!-- RIGHT SIDE -->
+
     <div class="col-lg-4">
 
-        <div class="card shadow-sm">
+        <div class="summary-card">
 
-            <div class="card-header bg-success text-white">
+            <h3>
 
-                <h5 class="mb-0">
+                Order Summary
 
-                    Order Summary
+            </h3>
 
-                </h5>
+            <hr>
+
+            <div class="summary-row">
+
+                <span>Subtotal</span>
+
+                <strong>KSh {{ "%.2f"|format(subtotal) }}</strong>
+
+            </div>
+
+            <div class="summary-row">
+
+                <span>Delivery</span>
+
+                <strong>FREE</strong>
 
             </div>
 
-            <div class="card-body">
+            <div class="summary-row">
 
-                <div class="d-flex justify-content-between mb-3">
+                <span>Pick-Up</span>
 
-                    <span>
-
-                        Subtotal
-
-                    </span>
-
-                    <strong>
-
-                        KSh {{ "%.2f"|format(subtotal) }}
-
-                    </strong>
-
-                </div>
-
-                <hr>
-
-                <p class="text-muted small">
-
-                    Your loyalty points will automatically be updated after the order is successfully placed.
-
-                </p>
-
-                <form action="{{ url_for('student.checkout') }}"
-                      method="POST">
-
-                    <button
-                        type="submit"
-                        class="btn btn-success w-100">
-
-                        Place Order
-
-                    </button>
-
-                </form>
-
-                <a href="{{ url_for('student.menu') }}"
-                   class="btn btn-outline-primary w-100 mt-2">
-
-                    Add More Meals
-
-                </a>
+                <strong>Main Cafeteria</strong>
 
             </div>
+
+            <hr>
+
+            <div class="summary-row total">
+
+                <span>Total</span>
+
+                <strong>KSh {{ "%.2f"|format(subtotal) }}</strong>
+
+            </div>
+
+            <div class="alert alert-success mt-4">
+
+                ⭐ You'll earn approximately
+
+                <strong>
+
+                    {{ (subtotal * 0.1)|int }}
+
+                </strong>
+
+                loyalty points.
+
+            </div>
+
+            <h6 class="mt-4">
+
+                Payment Method
+
+            </h6>
+
+            <div class="payment-option">
+
+                📱 M-Pesa
+
+            </div>
+
+            <form action="{{ url_for('student.checkout') }}" method="GET">
+
+                <button class="btn btn-warning btn-lg w-100 fw-bold mt-4">
+
+                    Proceed to Checkout →
+
+                </button>
+
+            </form>
+
+            <a href="{{ url_for('student.menu') }}"
+               class="btn btn-outline-success w-100 mt-3">
+
+                Continue Shopping
+
+            </a>
 
         </div>
 
@@ -144,30 +193,28 @@
 
 {% else %}
 
-<div class="card shadow-sm">
+<div class="empty-cart">
 
-    <div class="card-body text-center py-5">
+    <img src="{{ url_for('static', filename='images/cart-empty.png') }}">
 
-        <h3 class="mb-3">
+    <h2>
 
-            🛒 Your Cart is Empty
+        Your Cart is Empty
 
-        </h3>
+    </h2>
 
-        <p class="text-muted">
+    <p>
 
-            You haven't added any meals yet.
+        Looks like you haven't added any delicious meals yet.
 
-        </p>
+    </p>
 
-        <a href="{{ url_for('student.menu') }}"
-           class="btn btn-primary">
+    <a href="{{ url_for('student.menu') }}"
+       class="btn btn-warning btn-lg">
 
-            Browse Available Meals
+        Browse Meals
 
-        </a>
-
-    </div>
+    </a>
 
 </div>
 

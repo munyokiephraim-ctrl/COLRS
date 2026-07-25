@@ -82,12 +82,12 @@ def add_to_cart(item_id):
 
     cart = session.get("cart", {})
 
-    item_key = str(item.id)
+    key = str(item.id)
 
-    if item_key in cart:
-        cart[item_key] += 1
+    if key in cart:
+        cart[key] += 1
     else:
-        cart[item_key] = 1
+        cart[key] = 1
 
     session["cart"] = cart
     session.modified = True
@@ -117,6 +117,7 @@ def cart():
         if item:
 
             total = item.price * qty
+
             subtotal += total
 
             cart_items.append({
@@ -136,7 +137,7 @@ def cart():
 # Checkout
 # ==========================
 
-@student_bp.route("/checkout", methods=["POST"])
+@student_bp.route("/checkout", methods=["GET", "POST"])
 def checkout():
 
     cart = session.get("cart", {})
@@ -145,7 +146,43 @@ def checkout():
         flash("Your cart is empty.", "warning")
         return redirect(url_for("student.view_cart"))
 
+    cart_items = []
     subtotal = 0
+
+    for item_id, qty in cart.items():
+
+        item = MenuItem.query.get(int(item_id))
+
+        if item:
+
+            total = item.price * qty
+
+            subtotal += total
+
+            cart_items.append({
+                "item": item,
+                "quantity": qty,
+                "total": total
+            })
+
+    # -----------------------
+    # Show Checkout Page
+    # -----------------------
+
+    if request.method == "GET":
+
+        return render_template(
+            "student/checkout.html",
+            cart_items=cart_items,
+            subtotal=subtotal
+        )
+
+    # -----------------------
+    # Complete Order
+    # -----------------------
+
+    payment_method = request.form.get("payment_method")
+    phone = request.form.get("phone")
 
     order = Order(
         user_id=current_user.id,
@@ -156,26 +193,20 @@ def checkout():
     db.session.add(order)
     db.session.commit()
 
-    for item_id, qty in cart.items():
+    for item in cart_items:
 
-        item = MenuItem.query.get(int(item_id))
-
-        if item:
-
-            subtotal += item.price * qty
-
-            db.session.add(
-                OrderItem(
-                    order_id=order.id,
-                    item_id=item.id,
-                    quantity=qty,
-                    unit_price=item.price
-                )
+        db.session.add(
+            OrderItem(
+                order_id=order.id,
+                item_id=item["item"].id,
+                quantity=item["quantity"],
+                unit_price=item["item"].price
             )
+        )
 
     order.total_amount = subtotal
 
-    earned_points = int(subtotal * 0.1)
+    earned_points = int(subtotal * 0.10)
 
     current_user.points_balance += earned_points
 
@@ -193,7 +224,8 @@ def checkout():
     session.pop("cart", None)
 
     flash(
-        f"Order placed successfully! You earned {earned_points} loyalty points.",
+        f"Order placed successfully via {payment_method}! "
+        f"You earned {earned_points} loyalty points.",
         "success"
     )
 

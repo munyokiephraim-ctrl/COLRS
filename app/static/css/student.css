@@ -1,0 +1,619 @@
+/* ===========================
+STUDENT DASHBOARD
+=========================== */
+
+.hero-banner{
+
+    background:
+        linear-gradient(rgba(18,82,40,.72),
+        rgba(18,82,40,.72)),
+        url("../images/dashboard/hero-banner.jpg");
+
+    background-size:cover;
+    background-position:center;
+
+    border-radius:20px;
+
+    min-height:340px;
+
+    display:flex;
+    align-items:center;
+
+    padding:60px;
+
+    color:white;
+
+    margin-bottom:40px;
+
+}
+
+.hero-banner h1{
+
+    font-size:3rem;
+
+    font-weight:700;
+
+}
+
+.hero-banner p{
+
+    font-size:1.2rem;
+
+    color:#f8f9fa;
+
+    max-width:650px;
+
+}
+
+/* ========================= */
+
+.dashboard-card{
+
+    background:white;
+
+    border-radius:18px;
+
+    padding:35px;
+
+    text-align:center;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+    transition:.3s;
+
+    height:100%;
+
+}
+
+.dashboard-card:hover{
+
+    transform:translateY(-8px);
+
+}
+
+.dashboard-card h5{
+
+    color:#2e7d32;
+
+    font-weight:600;
+
+}
+
+.dashboard-card h1{
+
+    font-size:3rem;
+
+    font-weight:700;
+
+}
+
+.dashboard-card .points{
+
+    color:#ff9800;
+
+}
+
+.dashboard-card p{
+
+    color:#666;
+
+}
+
+/* ========================= */
+
+.section-title{
+
+    font-weight:700;
+
+    color:#1b5e20;
+
+    margin-bottom:25px;
+
+}
+
+/* ========================= */
+
+.meal-card{
+
+    border:none;
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+    transition:.3s;
+
+    background:white;
+
+}
+
+.meal-card:hover{
+
+    transform:translateY(-8px);
+
+}
+
+.meal-image{
+
+    width:100%;
+
+    height:230px;
+
+    object-fit:cover;
+
+}
+
+.meal-card h4{
+
+    margin-top:12px;
+
+    font-weight:700;
+
+}
+
+.meal-card h5{
+
+    color:#2e7d32;
+
+    font-weight:700;
+
+}
+
+/* ========================= */
+
+.order-card{
+
+    display:grid;
+
+    grid-template-columns:2fr 1fr 1fr 1fr;
+
+    align-items:center;
+
+    gap:20px;
+
+    background:#fff;
+
+    padding:20px;
+
+    border-radius:15px;
+
+    margin-bottom:15px;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.06);
+
+}
+
+/* ========================= */
+
+.promo-banner{
+
+    background:
+        linear-gradient(rgba(255,140,0,.78),
+        rgba(255,140,0,.78)),
+        url("../images/dashboard/promo-banner.jpg");
+
+    background-size:cover;
+
+    background-position:center;
+
+    border-radius:20px;
+
+    padding:60px;
+
+    text-align:center;
+
+    color:white;
+
+}
+
+.promo-banner h2{
+
+    font-size:2.4rem;
+
+    font-weight:700;
+
+}
+
+.promo-banner p{
+
+    font-size:1.2rem;
+
+    margin:20px 0;
+
+}
+
+/* ========================= */
+
+.btn-warning{
+
+    border-radius:12px;
+
+    padding:12px 30px;
+
+}
+
+.btn-light{
+
+    border-radius:12px;
+
+    padding:12px 30px;
+
+}
+
+/* ==========================
+MENU HERO
+========================== */
+
+.menu-hero{
+
+height:320px;
+
+border-radius:20px;
+
+overflow:hidden;
+
+background:
+linear-gradient(rgba(25,80,40,.68),
+rgba(25,80,40,.68)),
+url("../images/dashboard/cafeteria.jpg");
+
+background-size:cover;
+
+background-position:center;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+}
+
+.hero-overlay{
+
+text-align:center;
+
+color:white;
+
+}
+
+.hero-overlay h1{
+
+font-size:3rem;
+
+font-weight:700;
+
+}
+
+.hero-overlay p{
+
+font-size:1.2rem;
+
+margin:20px 0;
+
+}
+
+/* ===================== */
+
+.points-card{
+
+background:#2e7d32;
+
+color:white;
+
+border-radius:15px;
+
+padding:15px;
+
+font-size:1.5rem;
+
+font-weight:700;
+
+text-align:center;
+
+}
+
+.points-card small{
+
+display:block;
+
+font-size:.8rem;
+
+margin-top:5px;
+
+}
+
+/* ===================== */
+
+.meal-card{
+
+background:white;
+
+border-radius:18px;
+
+overflow:hidden;
+
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+transition:.35s;
+
+height:100%;
+
+}
+
+.meal-card:hover{
+
+transform:translateY(-10px);
+
+box-shadow:0 20px 40px rgba(0,0,0,.15);
+
+}
+
+.meal-image{
+
+width:100%;
+
+height:220px;
+
+object-fit:cover;
+
+}
+
+.meal-card .card-body{
+
+padding:25px;
+
+}
+
+.meal-card h4{
+
+font-weight:700;
+
+}
+
+.meal-card p{
+
+color:#666;
+
+min-height:60px;
+
+}
+
+.price{
+
+color:#2e7d32;
+
+font-weight:700;
+
+}
+
+/* ================================
+CART HERO
+================================ */
+
+.cart-hero{
+
+height:220px;
+
+border-radius:20px;
+
+background:
+linear-gradient(rgba(20,80,35,.70),
+rgba(20,80,35,.70)),
+url("../images/dashboard/cafeteria.jpg");
+
+background-size:cover;
+
+background-position:center;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+margin-bottom:40px;
+
+}
+
+.cart-hero-overlay{
+
+color:white;
+
+text-align:center;
+
+}
+
+.cart-hero-overlay h1{
+
+font-size:3rem;
+
+font-weight:700;
+
+}
+
+/* ================================ */
+
+.cart-item{
+
+display:flex;
+
+gap:25px;
+
+align-items:center;
+
+background:white;
+
+padding:20px;
+
+border-radius:18px;
+
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+}
+
+.cart-item img{
+
+width:140px;
+
+height:140px;
+
+object-fit:cover;
+
+border-radius:15px;
+
+}
+
+.cart-details{
+
+flex:1;
+
+}
+
+.cart-details h4{
+
+font-weight:700;
+
+}
+
+.cart-details p{
+
+color:#666;
+
+}
+
+.quantity-box{
+
+display:flex;
+
+gap:15px;
+
+align-items:center;
+
+margin-top:15px;
+
+}
+
+.summary-card{
+
+background:white;
+
+padding:30px;
+
+border-radius:20px;
+
+box-shadow:0 15px 35px rgba(0,0,0,.08);
+
+position:sticky;
+
+top:30px;
+
+}
+
+.summary-row{
+
+display:flex;
+
+justify-content:space-between;
+
+margin:18px 0;
+
+}
+
+.total{
+
+font-size:22px;
+
+font-weight:700;
+
+}
+
+.payment-option{
+
+padding:15px;
+
+background:#d4edda;
+
+border-radius:12px;
+
+font-weight:600;
+
+margin-top:10px;
+
+}
+
+.empty-cart{
+
+text-align:center;
+
+padding:70px;
+
+background:white;
+
+border-radius:20px;
+
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+}
+
+.empty-cart img{
+
+width:220px;
+
+margin-bottom:30px;
+
+}
+
+/* ================================
+CHECKOUT PAGE
+================================ */
+
+.checkout-hero{
+
+    background:
+    linear-gradient(rgba(20,80,40,.75),
+    rgba(20,80,40,.75)),
+    url("../images/dashboard/cafeteria.jpg");
+
+    background-size:cover;
+    background-position:center;
+
+    border-radius:18px;
+}
+
+.payment-option{
+
+    border:1px solid #ddd;
+
+    padding:18px;
+
+    border-radius:12px;
+
+    margin-bottom:15px;
+
+    transition:.3s;
+
+    cursor:pointer;
+}
+
+.payment-option:hover{
+
+    border-color:#ff9800;
+
+    background:#fffaf2;
+
+}
+
+.payment-option input{
+
+    margin-right:12px;
+
+}
+
+.sticky-top{
+
+    top:20px;
+
+}
