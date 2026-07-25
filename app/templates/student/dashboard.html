@@ -2,128 +2,31 @@
 
 {% block content %}
 
-<!-- Hero Banner -->
-<div class="hero-banner mb-4">
+<div class="container-fluid py-4">
 
-    <div class="hero-content">
+    <!-- ================= HERO SECTION ================= -->
 
-        <h1>
-            Welcome back,
-            {{ current_user.full_name.split()[0] }} 👋
-        </h1>
+    <div class="hero-banner mb-5">
 
-        <p>
-            Discover today's meals, order ahead,
-            earn loyalty rewards and skip the queue.
-        </p>
+        <div class="hero-overlay">
 
-        <a href="{{ url_for('student.menu') }}"
-           class="btn btn-warning btn-lg fw-bold">
+            <div class="hero-content">
 
-            🍔 Browse Today's Menu
-
-        </a>
-
-    </div>
-
-</div>
-
-<!-- Statistics -->
-
-<div class="row g-4 mb-5">
-
-    <div class="col-md-4">
-
-        <div class="dashboard-card">
-
-            <h5>⭐ Loyalty Rewards</h5>
-
-            <h1 class="points">
-
-                {{ current_user.points_balance }}
-
-            </h1>
-
-            <p>Available Points</p>
-
-        </div>
-
-    </div>
-
-    <div class="col-md-4">
-
-        <div class="dashboard-card">
-
-            <h5>📦 Orders Made</h5>
-
-            <h1>
-
-                {{ orders|length }}
-
-            </h1>
-
-            <p>Total Orders</p>
-
-        </div>
-
-    </div>
-
-    <div class="col-md-4">
-
-        <div class="dashboard-card">
-
-            <h5>🎓 Student</h5>
-
-            <h4>
-
-                {{ current_user.full_name }}
-
-            </h4>
-
-            <small>
-
-                {{ current_user.email }}
-
-            </small>
-
-        </div>
-
-    </div>
-
-</div>
-
-<!-- Today's Specials -->
-
-<h2 class="section-title">
-    🔥 Today's Specials
-</h2>
-
-<div class="row g-4 mb-5">
-
-    <div class="col-lg-4">
-
-        <div class="meal-card">
-
-            <img src="{{ url_for('static', filename='images/meals/burger.jpg') }}"
-                 class="meal-image">
-
-            <div class="card-body">
-
-                <span class="badge bg-success">
-                    Popular
-                </span>
-
-                <h4>
-                    Chicken Burger
-                </h4>
+                <h1>
+                    Welcome back, {{ current_user.full_name.split()[0] }} 👋
+                </h1>
 
                 <p>
-                    Juicy grilled chicken burger with fresh vegetables.
+                    Order your favourite cafeteria meals, collect loyalty rewards,
+                    and skip the queue.
                 </p>
 
-                <h5>
-                    KSh 350.00
-                </h5>
+                <a href="{{ url_for('student.menu') }}"
+                   class="btn btn-warning btn-lg fw-bold mt-3">
+
+                    🍽 Browse Menu
+
+                </a>
 
             </div>
 
@@ -131,30 +34,87 @@
 
     </div>
 
-    <div class="col-lg-4">
 
-        <div class="meal-card">
 
-            <img src="{{ url_for('static', filename='images/meals/coffee.jpg') }}"
-                 class="meal-image">
+    <!-- ================= QUICK STATS ================= -->
 
-            <div class="card-body">
+    <div class="row g-4 mb-5">
 
-                <span class="badge bg-warning text-dark">
-                    Fresh
-                </span>
+        <div class="col-md-4">
 
-                <h4>
-                    Espresso Coffee
-                </h4>
+            <div class="dashboard-card">
+
+                <div class="icon-circle bg-success">
+                    ⭐
+                </div>
+
+                <h6>Loyalty Points</h6>
+
+                <h2 class="points">
+
+                    {{ current_user.points_balance }}
+
+                </h2>
 
                 <p>
-                    Rich, freshly brewed coffee prepared daily.
+                    Available Rewards
                 </p>
 
+            </div>
+
+        </div>
+
+
+
+        <div class="col-md-4">
+
+            <div class="dashboard-card">
+
+                <div class="icon-circle bg-warning">
+                    📦
+                </div>
+
+                <h6>Total Orders</h6>
+
+                <h2>
+
+                    {{ orders|length }}
+
+                </h2>
+
+                <p>
+
+                    Orders Completed
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="col-md-4">
+
+            <div class="dashboard-card">
+
+                <div class="icon-circle bg-primary">
+                    🎓
+                </div>
+
+                <h6>Student Account</h6>
+
                 <h5>
-                    KSh 150.00
+
+                    {{ current_user.full_name }}
+
                 </h5>
+
+                <small>
+
+                    {{ current_user.email }}
+
+                </small>
 
             </div>
 
@@ -162,30 +122,66 @@
 
     </div>
 
-    <div class="col-lg-4">
 
-        <div class="meal-card">
 
-            <img src="{{ url_for('static', filename='images/meals/brownie.jpg') }}"
-                 class="meal-image">
+    <!-- ================= FEATURED SECTION ================= -->
 
-            <div class="card-body">
+    <div class="row g-4 mb-5">
 
-                <span class="badge bg-danger">
-                    Dessert
-                </span>
+        <div class="col-lg-8">
 
-                <h4>
-                    Chocolate Brownie
-                </h4>
+            <div class="feature-card">
 
-                <p>
-                    Rich chocolate brownie served warm.
-                </p>
+                <div class="feature-text">
 
-                <h5>
-                    KSh 200.00
-                </h5>
+                    <h2>🔥 Today's Recommendation</h2>
+
+                    <p>
+
+                        Our Chicken Burger is today's best seller.
+                        Freshly grilled chicken, lettuce, tomatoes,
+                        cheese and our signature sauce.
+
+                    </p>
+
+                    <a href="{{ url_for('student.menu') }}"
+                       class="btn btn-success">
+
+                        Order Now
+
+                    </a>
+
+                </div>
+
+                <div class="feature-image">
+
+                    <img src="{{ url_for('static', filename='images/meals/burger.jpg') }}">
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="col-lg-4">
+
+            <div class="mini-card">
+
+                <img src="{{ url_for('static', filename='images/meals/coffee.jpg') }}">
+
+                <div class="mini-content">
+
+                    <h4>Fresh Coffee</h4>
+
+                    <p>
+
+                        Start your morning with a hot espresso.
+
+                    </p>
+
+                </div>
 
             </div>
 
@@ -193,23 +189,21 @@
 
     </div>
 
-</div>
 
-<!-- Recent Orders -->
 
-<div class="card shadow border-0 mb-5">
+    <!-- ================= RECENT ORDERS ================= -->
 
-    <div class="card-header bg-success text-white">
+    <div class="dashboard-section">
 
-        <h4 class="mb-0">
+        <div class="section-title">
 
-            📦 Recent Orders
+            <h3>
 
-        </h4>
+                📦 Recent Orders
 
-    </div>
+            </h3>
 
-    <div class="card-body">
+        </div>
 
         {% if orders %}
 
@@ -235,7 +229,7 @@
 
                 <div>
 
-                    <strong>
+                    <strong class="text-success">
 
                         KSh {{ "%.2f"|format(order.total_amount) }}
 
@@ -247,35 +241,35 @@
 
                     {% if order.status=="Placed" %}
 
-                    <span class="badge bg-warning text-dark">
+                        <span class="badge bg-warning text-dark">
 
-                        Placed
+                            Placed
 
-                    </span>
+                        </span>
 
                     {% elif order.status=="Preparing" %}
 
-                    <span class="badge bg-info">
+                        <span class="badge bg-info">
 
-                        Preparing
+                            Preparing
 
-                    </span>
+                        </span>
 
                     {% elif order.status=="Ready" %}
 
-                    <span class="badge bg-primary">
+                        <span class="badge bg-primary">
 
-                        Ready
+                            Ready
 
-                    </span>
+                        </span>
 
                     {% else %}
 
-                    <span class="badge bg-success">
+                        <span class="badge bg-success">
 
-                        Completed
+                            Completed
 
-                    </span>
+                        </span>
 
                     {% endif %}
 
@@ -300,7 +294,15 @@
 
             <div class="alert alert-info">
 
-                You haven't placed any orders yet.
+                No orders yet.
+
+                <a href="{{ url_for('student.menu') }}">
+
+                    Browse the menu
+
+                </a>
+
+                to place your first order.
 
             </div>
 
@@ -308,31 +310,37 @@
 
     </div>
 
-</div>
 
-<!-- Promotion -->
 
-<div class="promo-banner">
+    <!-- ================= PROMOTION ================= -->
 
-    <h2>
+    <div class="promo-banner mt-5">
 
-        🎉 Today's Promotion
+        <div class="promo-overlay">
 
-    </h2>
+            <h2>
 
-    <p>
+                🎉 Today's Promotion
 
-        Buy any Chicken Burger today and receive
-        a FREE Bottled Water.
+            </h2>
 
-    </p>
+            <p>
 
-    <a href="{{ url_for('student.menu') }}"
-       class="btn btn-light btn-lg">
+                Buy any Chicken Burger today and receive
+                a FREE Bottled Water.
 
-        Order Now
+            </p>
 
-    </a>
+            <a href="{{ url_for('student.menu') }}"
+               class="btn btn-warning btn-lg">
+
+                Claim Offer
+
+            </a>
+
+        </div>
+
+    </div>
 
 </div>
 

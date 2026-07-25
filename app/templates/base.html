@@ -17,14 +17,21 @@
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Custom CSS -->
+    <!-- Auth CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
+
+    <!-- Student CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/student.css') }}">
 
 </head>
 
 <body>
 
-{% if current_user.is_authenticated %}
+<!-- ===================================== -->
+<!-- NAVBAR (Hidden on Login/Register) -->
+<!-- ===================================== -->
+
+{% if request.endpoint not in ['auth.login', 'auth.register'] %}
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-success shadow-sm">
 
@@ -34,20 +41,23 @@
             ☕ COLRS
         </a>
 
-        <button class="navbar-toggler"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbar">
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav">
 
             <span class="navbar-toggler-icon"></span>
 
         </button>
 
-        <div class="collapse navbar-collapse" id="navbar">
+        <div class="collapse navbar-collapse" id="navbarNav">
 
             <ul class="navbar-nav ms-auto">
 
-                {% if current_user.role == "student" %}
+                {% if current_user.is_authenticated %}
+
+                    {% if current_user.role == "student" %}
 
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('student.dashboard') }}">
@@ -55,44 +65,29 @@
                         </a>
                     </li>
 
+                    {% endif %}
+
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('student.menu') }}">
-                            Menu
+                        <a class="nav-link" href="{{ url_for('auth.logout') }}">
+                            Logout
+                        </a>
+                    </li>
+
+                {% else %}
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('auth.login') }}">
+                            Login
                         </a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('student.view_cart') }}">
-                            Cart
-                        </a>
-                    </li>
-
-                {% elif current_user.role == "admin" %}
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('admin.dashboard') }}">
-                            Dashboard
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('admin.manage_menu') }}">
-                            Menu Manager
+                        <a class="nav-link" href="{{ url_for('auth.register') }}">
+                            Register
                         </a>
                     </li>
 
                 {% endif %}
-
-                <li class="nav-item">
-
-                    <a class="nav-link text-warning fw-semibold"
-                       href="{{ url_for('auth.logout') }}">
-
-                        Logout
-
-                    </a>
-
-                </li>
 
             </ul>
 
@@ -104,11 +99,24 @@
 
 {% endif %}
 
+<!-- ===================================== -->
+<!-- LOGIN / REGISTER -->
+<!-- ===================================== -->
 
-<div class="container mt-4">
+{% if request.endpoint in ['auth.login', 'auth.register'] %}
+
+    {% block content %}
+    {% endblock %}
+
+{% else %}
+
+<!-- ===================================== -->
+<!-- OTHER PAGES -->
+<!-- ===================================== -->
+
+<div class="container py-4">
 
     {% with messages = get_flashed_messages(with_categories=true) %}
-
         {% if messages %}
 
             {% for category, message in messages %}
@@ -118,6 +126,7 @@
                     {{ message }}
 
                     <button
+                        type="button"
                         class="btn-close"
                         data-bs-dismiss="alert">
                     </button>
@@ -127,15 +136,16 @@
             {% endfor %}
 
         {% endif %}
-
     {% endwith %}
 
-    {% block content %}{% endblock %}
+    {% block content %}
+    {% endblock %}
 
 </div>
+
+{% endif %}
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
-
 </html>

@@ -28,7 +28,7 @@ body{
             rgba(15,35,20,.75),
             rgba(15,35,20,.80)
         ),
-        url("../images/login-bg.jpg");
+        url("../images/backgrounds/login-bg.jpg");
 
     background-size:cover;
     background-position:center;
@@ -59,17 +59,26 @@ body{
 
     width:430px;
 
-    background:rgba(255,255,255,.95);
+    background:rgba(255,255,255,.92);
 
-    backdrop-filter:blur(12px);
+    backdrop-filter:blur(16px);
 
-    border-radius:24px;
+    border-radius:25px;
 
     overflow:hidden;
 
-    box-shadow:0 20px 50px rgba(0,0,0,.35);
+    border:none;
 
-    border:1px solid rgba(255,255,255,.3);
+    box-shadow:
+        0 30px 60px rgba(0,0,0,.35);
+
+    transition:.35s;
+
+}
+
+.auth-card:hover{
+
+    transform:translateY(-5px);
 
 }
 
@@ -79,41 +88,45 @@ body{
 
 .auth-header{
 
-    text-align:center;
-
-    padding:40px 30px;
-
-    background:linear-gradient(
+    background:
+    linear-gradient(
         135deg,
         #2E7D32,
         #43A047,
-        #F57C00
+        #66BB6A
     );
 
     color:white;
+
+    padding:45px 30px;
 
 }
 
 .logo-circle{
 
-    width:75px;
-    height:75px;
+    width:90px;
 
-    margin:auto auto 15px;
+    height:90px;
+
+    background:#FFA726;
 
     border-radius:50%;
 
-    background:white;
-
     display:flex;
+
     justify-content:center;
+
     align-items:center;
 
-    font-size:34px;
+    font-size:42px;
 
-    color:#F57C00;
+    color:white;
 
-    box-shadow:0 8px 20px rgba(0,0,0,.25);
+    margin:auto;
+
+    margin-bottom:18px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.25);
 
 }
 
@@ -188,11 +201,15 @@ body{
 
 .form-control{
 
-    padding:13px 15px;
+    height:55px;
 
-    border-radius:12px;
+    border-radius:14px;
 
-    border:1px solid #dcdcdc;
+    border:2px solid #EAEAEA;
+
+    padding-left:18px;
+
+    font-size:15px;
 
     transition:.3s;
 
@@ -202,7 +219,7 @@ body{
 
     border-color:#43A047;
 
-    box-shadow:0 0 0 .2rem rgba(67,160,71,.18);
+    box-shadow:0 0 15px rgba(67,160,71,.18);
 
 }
 
@@ -212,15 +229,17 @@ body{
 
 .btn-success{
 
+    height:56px;
+
+    font-size:17px;
+
+    font-weight:600;
+
+    border-radius:14px;
+
     background:#2E7D32;
 
     border:none;
-
-    border-radius:12px;
-
-    padding:13px;
-
-    font-weight:600;
 
     transition:.3s;
 
@@ -228,11 +247,13 @@ body{
 
 .btn-success:hover{
 
-    background:#F57C00;
+    background:#FB8C00;
 
     transform:translateY(-2px);
 
 }
+
+
 
 /* ===========================
    Links
@@ -240,15 +261,15 @@ body{
 
 a{
 
-    text-decoration:none;
+    color:#2E7D32;
 
-    transition:.3s;
+    font-weight:600;
 
 }
 
 a:hover{
 
-    color:#F57C00 !important;
+    color:#FB8C00 !important;
 
 }
 
@@ -321,5 +342,31 @@ hr{
         width:100%;
 
     }
+
+}
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(25px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+.auth-card{
+
+    animation:fadeUp .8s ease;
 
 }
