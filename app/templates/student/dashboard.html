@@ -294,36 +294,37 @@ Welcome back,
 
                             <div class="col-lg-3 mt-3 mt-lg-0">
 
-                                {% if order.status == "Placed" %}
+{% if order.status == "Placed" %}
 
-                                    <span class="badge bg-warning text-dark px-3 py-2">
+<span class="badge bg-warning text-dark px-3 py-2">
+    📥 Placed
+</span>
 
-                                        📥 Placed
+{% elif order.status == "Preparing" %}
 
-                                    </span>
+<span class="badge bg-info px-3 py-2">
+    👨‍🍳 Preparing
+</span>
 
-                                {% elif order.status == "Preparing" %}
+{% elif order.status == "Ready" %}
 
-                                    <span class="badge bg-info px-3 py-2">
+<span class="badge bg-primary px-3 py-2">
+    ✅ Ready
+</span>
 
-                                        👨‍🍳 Preparing
+{% elif order.status == "Completed" %}
 
-                                    </span>
-
-                                {% elif order.status == "Ready" %}
-
-                                    <span class="badge bg-primary px-3 py-2">
-
-                                        ✅ Ready
-
-                                    </span>
-
-                                {% elif order.status == "Completed" %}
-
-<span class="badge completed-status px-3 py-2">
+<span class="badge bg-success px-3 py-2">
     ✔ Completed
 </span>
 
+{% else %}
+
+<span class="badge bg-secondary px-3 py-2">
+    ❓ {{ order.status }}
+</span>
+
+{% endif %}
 {% else %}
 
 <span class="badge unknown-status px-3 py-2">
