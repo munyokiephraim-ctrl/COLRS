@@ -49,6 +49,23 @@ def dashboard():
         pending_orders=Order.query.filter_by(status="Placed").count()
     )
 
+# ==================================================
+# ORDER MANAGEMENT
+# ==================================================
+
+@admin_bp.route("/orders")
+def orders():
+
+    orders = (
+        Order.query
+        .order_by(Order.created_at.desc())
+        .all()
+    )
+
+    return render_template(
+        "admin/orders.html",
+        orders=orders
+    )
 
 # ==================================================
 # UPDATE ORDER STATUS

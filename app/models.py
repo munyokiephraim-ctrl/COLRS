@@ -33,6 +33,11 @@ class Order(db.Model):
     items = db.relationship('OrderItem', backref='order', lazy=True)
     transactions = db.relationship('LoyaltyTransaction', backref='order', lazy=True)
 
+    user = db.relationship(
+    "User",
+    backref="orders"
+)
+
 class OrderItem(db.Model):
     __tablename__ = 'order_items'
 
