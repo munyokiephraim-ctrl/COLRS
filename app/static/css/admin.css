@@ -1,271 +1,1232 @@
-/* ==========================================
-   ADMIN PANEL
-========================================== */
+/* ==========================================================
+   COLRS ADMIN STYLESHEET
+   PART 1
+   Global • Navbar • Hero • Buttons • Statistics
+========================================================== */
 
-/* ==========================================
-   HERO
-========================================== */
+
+/* ==========================================================
+   GLOBAL
+========================================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+
+    font-family:"Poppins",sans-serif;
+
+    background:#f5f7fb;
+
+    color:#343a40;
+
+    padding-top:90px;
+
+    overflow-x:hidden;
+
+    line-height:1.6;
+}
+
+.container,
+.container-fluid{
+
+    max-width:1320px;
+
+    margin:auto;
+
+    padding-left:15px;
+
+    padding-right:15px;
+}
+
+img{
+
+    display:block;
+
+    max-width:100%;
+}
+
+
+/* ==========================================================
+   NAVBAR
+========================================================== */
+
+.navbar{
+
+    background:#14532d !important;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.12);
+}
+
+.navbar-brand{
+
+    color:#fff !important;
+
+    font-size:1.6rem;
+
+    font-weight:700;
+}
+
+.navbar-brand:hover{
+
+    color:#ffd54f !important;
+}
+
+.navbar-dark .navbar-nav .nav-link{
+
+    color:#fff !important;
+
+    font-weight:600;
+
+    margin-left:12px;
+
+    transition:.3s;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover{
+
+    color:#ffd54f !important;
+
+    transform:translateY(-2px);
+}
+
+
+/* ==========================================================
+   BUTTONS
+========================================================== */
+
+.btn{
+
+    border-radius:14px;
+
+    font-weight:600;
+
+    transition:.3s ease;
+
+    padding:11px 26px;
+}
+
+.btn-success:hover,
+.btn-primary:hover,
+.btn-warning:hover,
+.btn-danger:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 12px 24px rgba(0,0,0,.15);
+}
+
+
+/* ==========================================================
+   ADMIN HERO
+========================================================== */
 
 .admin-hero{
-    background:linear-gradient(135deg,#198754,#146c43);
+
+    position:relative;
+
+    border-radius:24px;
+
+    overflow:hidden;
+
+    padding:70px 60px;
+
+    background:
+
+        linear-gradient(
+            rgba(20,83,45,.82),
+            rgba(20,83,45,.82)
+        ),
+
+        url("../images/backgrounds/admin-hero.jpg");
+
+    background-size:cover;
+
+    background-position:center;
+
+    background-repeat:no-repeat;
+
     color:#fff;
-    padding:50px;
-    border-radius:20px;
-    box-shadow:0 15px 35px rgba(0,0,0,.15);
+
+    box-shadow:0 18px 40px rgba(0,0,0,.15);
 }
 
 .admin-hero h1{
-    font-size:2.8rem;
+
+    font-size:3rem;
+
     font-weight:700;
-    margin-bottom:15px;
+
+    margin-bottom:20px;
 }
 
 .admin-hero p{
-    font-size:1.1rem;
-    color:#eef7f0;
-    margin-bottom:25px;
-    max-width:650px;
+
+    font-size:1.15rem;
+
+    color:#f1f1f1;
+
+    line-height:1.8;
 }
 
-/* ==========================================
-   SEARCH
-========================================== */
 
-#menuSearch{
-    border-radius:12px;
-    border:1px solid #d8d8d8;
-    padding:14px 18px;
-    transition:.3s;
-}
+/* ==========================================================
+   SECTION TITLES
+========================================================== */
 
-#menuSearch:focus{
-    border-color:#198754;
-    box-shadow:0 0 0 .2rem rgba(25,135,84,.15);
-}
+.section-title{
 
-/* ==========================================
-   CARD
-========================================== */
+    color:#14532d;
 
-.meal-admin-card{
-    border-radius:18px;
-    overflow:hidden;
-    transition:.3s;
-    background:#fff;
-}
-
-.meal-admin-card:hover{
-    transform:translateY(-8px);
-    box-shadow:0 20px 40px rgba(0,0,0,.12) !important;
-}
-
-/* ==========================================
-   IMAGE
-========================================== */
-
-.admin-meal-img{
-    width:100%;
-    height:190px;
-    object-fit:cover;
-    display:block;
-}
-
-/* ==========================================
-   CARD BODY
-========================================== */
-
-.meal-admin-card .card-body{
-    display:flex;
-    flex-direction:column;
-    padding:25px;
-}
-
-.meal-admin-card h4{
-    font-size:1.35rem;
     font-weight:700;
-    color:#222;
+
+    margin-bottom:25px;
+}
+
+
+/* ==========================================================
+   STATISTICS
+========================================================== */
+
+.admin-stat{
+
+    background:#fff;
+
+    border-radius:20px;
+
+    padding:35px;
+
+    text-align:center;
+
+    height:100%;
+
+    border:1px solid rgba(0,0,0,.05);
+
+    box-shadow:0 12px 28px rgba(0,0,0,.08);
+
+    transition:.3s;
+}
+
+.admin-stat:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:0 20px 40px rgba(0,0,0,.12);
+}
+
+.stat-icon{
+
+    width:75px;
+
+    height:75px;
+
+    margin:0 auto 22px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    color:#fff;
+
+    font-size:30px;
+
+    box-shadow:0 10px 24px rgba(0,0,0,.18);
+}
+
+.admin-stat h2{
+
+    font-size:2.6rem;
+
+    font-weight:700;
+
+    color:#14532d;
+
     margin-bottom:10px;
 }
 
-.meal-description{
-    color:#666;
-    line-height:1.6;
-    min-height:65px;
-    margin-bottom:20px;
-    flex-grow:1;
+.admin-stat p{
+
+    color:#6c757d;
+
+    margin:0;
+
+    font-weight:500;
 }
 
-/* ==========================================
-   PRICE
-========================================== */
+/* ==========================================================
+   COLRS ADMIN STYLESHEET
+   PART 2
+   Quick Actions • Tables • Forms • Cards
+========================================================== */
 
-.meal-admin-card .text-success{
-    font-size:1.5rem;
-    font-weight:700;
-}
 
-/* ==========================================
-   BADGES
-========================================== */
+/* ==========================================================
+   QUICK ACTION CARDS
+========================================================== */
 
-.badge{
-    border-radius:50px;
-    padding:8px 14px;
-    font-weight:600;
-}
+.quick-card{
 
-/* ==========================================
-   BUTTONS
-========================================== */
+    background:#fff;
 
-.meal-admin-card .btn{
-    border-radius:10px;
-    padding:11px;
-    font-weight:600;
-    transition:.3s;
-}
+    border-radius:22px;
 
-.meal-admin-card .btn-warning:hover{
-    transform:translateY(-2px);
-}
+    padding:35px;
 
-.meal-admin-card .btn-danger:hover{
-    transform:translateY(-2px);
-}
-
-/* ==========================================
-   EMPTY STATE
-========================================== */
-
-.empty-state{
     text-align:center;
-    padding:70px 40px;
+
+    height:100%;
+
+    border:1px solid rgba(0,0,0,.05);
+
+    box-shadow:0 12px 28px rgba(0,0,0,.08);
+
+    transition:.3s ease;
 }
 
-.empty-state img{
-    width:180px;
+.quick-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:0 20px 40px rgba(0,0,0,.12);
+}
+
+.quick-icon{
+
+    width:80px;
+
+    height:80px;
+
+    margin:0 auto 25px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:#198754;
+
+    color:#fff;
+
+    font-size:34px;
+
+    box-shadow:0 12px 25px rgba(25,135,84,.25);
+}
+
+.quick-card h4{
+
+    color:#14532d;
+
+    font-weight:700;
+
+    margin-bottom:15px;
+}
+
+.quick-card p{
+
+    color:#6c757d;
+
+    line-height:1.8;
+
     margin-bottom:25px;
 }
 
-.empty-state h3{
-    font-weight:700;
-    color:#222;
+
+/* ==========================================================
+   CONTENT CARDS
+========================================================== */
+
+.table-card,
+.form-card,
+.content-card{
+
+    background:#fff;
+
+    border-radius:22px;
+
+    padding:35px;
+
+    border:1px solid rgba(0,0,0,.05);
+
+    box-shadow:0 12px 28px rgba(0,0,0,.08);
+
+    margin-bottom:30px;
 }
 
-.empty-state p{
-    color:#666;
-}
 
-/* ==========================================
+/* ==========================================================
    TABLES
-========================================== */
+========================================================== */
 
 .table{
-    background:#fff;
-    border-radius:15px;
-    overflow:hidden;
-}
 
-.table thead{
-    background:#198754;
-    color:#fff;
-}
+    margin-bottom:0;
 
-.table th{
-    font-weight:600;
-}
-
-.table td{
     vertical-align:middle;
 }
 
-/* ==========================================
+.table thead th{
+
+    background:#14532d;
+
+    color:#fff;
+
+    border:none;
+
+    font-weight:600;
+
+    padding:16px;
+}
+
+.table tbody td{
+
+    padding:18px 16px;
+
+    border-color:#f0f0f0;
+}
+
+.table tbody tr{
+
+    transition:.25s ease;
+}
+
+.table tbody tr:hover{
+
+    background:#f8fafc;
+}
+
+.table-responsive{
+
+    border-radius:18px;
+
+    overflow:hidden;
+}
+
+
+/* ==========================================================
+   BADGES
+========================================================== */
+
+.badge{
+
+    padding:8px 16px;
+
+    border-radius:50px;
+
+    font-size:.85rem;
+
+    font-weight:600;
+}
+
+.badge.bg-warning{
+
+    color:#212529;
+}
+
+
+/* ==========================================================
    FORMS
-========================================== */
+========================================================== */
+
+.form-label{
+
+    font-weight:600;
+
+    margin-bottom:8px;
+
+    color:#14532d;
+}
 
 .form-control,
 .form-select{
-    border-radius:12px;
+
+    border-radius:14px;
+
+    border:2px solid #dee2e6;
+
     padding:12px 15px;
+
+    transition:.3s;
 }
 
 .form-control:focus,
 .form-select:focus{
+
     border-color:#198754;
+
     box-shadow:0 0 0 .2rem rgba(25,135,84,.15);
 }
 
-/* ==========================================
-   ADMIN DASHBOARD CARDS
-========================================== */
 
-.admin-stat-card{
-    background:#fff;
+/* ==========================================================
+   INPUT GROUPS
+========================================================== */
+
+.input-group-text{
+
+    border-radius:14px 0 0 14px;
+
+    border:2px solid #dee2e6;
+
+    background:#f8f9fa;
+}
+
+
+/* ==========================================================
+   SEARCH BAR
+========================================================== */
+
+.search-box{
+
+    position:relative;
+
+    margin-bottom:30px;
+}
+
+.search-box .form-control{
+
+    padding-left:48px;
+}
+
+.search-box i{
+
+    position:absolute;
+
+    left:18px;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    color:#6c757d;
+}
+
+
+/* ==========================================================
+   ALERTS
+========================================================== */
+
+.alert{
+
+    border:none;
+
     border-radius:18px;
-    padding:30px;
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
-    transition:.3s;
-    text-align:center;
+
+    box-shadow:0 10px 22px rgba(0,0,0,.06);
 }
 
-.admin-stat-card:hover{
-    transform:translateY(-6px);
+/* ==========================================================
+   COLRS ADMIN STYLESHEET
+   PART 3
+   Menu Management • Orders • Rewards
+========================================================== */
+
+
+/* ==========================================================
+   MENU MANAGEMENT
+========================================================== */
+
+.menu-card{
+
+    background:#fff;
+
+    border-radius:22px;
+
+    overflow:hidden;
+
+    height:100%;
+
+    border:1px solid rgba(0,0,0,.05);
+
+    box-shadow:0 12px 28px rgba(0,0,0,.08);
+
+    transition:.3s ease;
 }
 
-.admin-stat-card i{
-    font-size:2.5rem;
+.menu-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:0 20px 40px rgba(0,0,0,.12);
+}
+
+.menu-card img{
+
+    width:100%;
+
+    height:240px;
+
+    object-fit:cover;
+}
+
+.menu-card .card-body{
+
+    padding:25px;
+}
+
+.menu-card h4{
+
+    color:#14532d;
+
+    font-weight:700;
+
+    margin-bottom:12px;
+}
+
+.menu-card p{
+
+    color:#6c757d;
+
+    line-height:1.7;
+
+    margin-bottom:18px;
+}
+
+.menu-price{
+
     color:#198754;
+
+    font-size:1.35rem;
+
+    font-weight:700;
+}
+
+
+/* ==========================================================
+   CATEGORY BADGES
+========================================================== */
+
+.category-badge{
+
+    display:inline-block;
+
+    padding:6px 14px;
+
+    border-radius:50px;
+
+    background:#e9f7ef;
+
+    color:#198754;
+
+    font-size:.8rem;
+
+    font-weight:600;
+}
+
+
+/* ==========================================================
+   IMAGE PREVIEW
+========================================================== */
+
+.image-preview{
+
+    width:100%;
+
+    max-height:260px;
+
+    overflow:hidden;
+
+    border-radius:18px;
+
+    border:2px dashed #ced4da;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:#f8f9fa;
+
+    margin-top:15px;
+}
+
+.image-preview img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+}
+
+
+/* ==========================================================
+   ACTION BUTTONS
+========================================================== */
+
+.action-buttons{
+
+    display:flex;
+
+    gap:10px;
+
+    flex-wrap:wrap;
+}
+
+.action-buttons .btn{
+
+    flex:1;
+}
+
+
+/* ==========================================================
+   ORDER CARDS
+========================================================== */
+
+.order-card{
+
+    background:#fff;
+
+    border-radius:20px;
+
+    padding:25px;
+
+    margin-bottom:20px;
+
+    border:1px solid rgba(0,0,0,.05);
+
+    box-shadow:0 12px 28px rgba(0,0,0,.08);
+
+    transition:.3s ease;
+}
+
+.order-card:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:0 18px 36px rgba(0,0,0,.12);
+}
+
+.order-card h5{
+
+    color:#14532d;
+
+    font-weight:700;
+
+    margin-bottom:10px;
+}
+
+.order-card p{
+
+    color:#6c757d;
+
+    margin-bottom:8px;
+}
+
+
+/* ==========================================================
+   STATUS COLORS
+========================================================== */
+
+.status-pending{
+
+    background:#fff3cd;
+
+    color:#856404;
+}
+
+.status-preparing{
+
+    background:#cfe2ff;
+
+    color:#084298;
+}
+
+.status-ready{
+
+    background:#d1ecf1;
+
+    color:#055160;
+}
+
+.status-completed{
+
+    background:#d4edda;
+
+    color:#155724;
+}
+
+
+/* ==========================================================
+   REWARDS
+========================================================== */
+
+.reward-card{
+
+    background:#fff;
+
+    border-radius:22px;
+
+    padding:30px;
+
+    text-align:center;
+
+    height:100%;
+
+    border:1px solid rgba(0,0,0,.05);
+
+    box-shadow:0 12px 28px rgba(0,0,0,.08);
+
+    transition:.3s ease;
+}
+
+.reward-card:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:0 20px 38px rgba(0,0,0,.12);
+}
+
+.reward-icon{
+
+    width:80px;
+
+    height:80px;
+
+    margin:0 auto 20px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:#ffc107;
+
+    color:#212529;
+
+    font-size:34px;
+
+    box-shadow:0 12px 24px rgba(255,193,7,.25);
+}
+
+.reward-card h4{
+
+    color:#14532d;
+
+    font-weight:700;
+
+    margin-bottom:12px;
+}
+
+.reward-card p{
+
+    color:#6c757d;
+
+    margin-bottom:20px;
+}
+
+
+/* ==========================================================
+   EMPTY STATES
+========================================================== */
+
+.empty-state{
+
+    text-align:center;
+
+    padding:70px 20px;
+
+    background:#fff;
+
+    border-radius:22px;
+
+    box-shadow:0 12px 28px rgba(0,0,0,.08);
+}
+
+.empty-state i{
+
+    font-size:70px;
+
+    color:#ced4da;
+
+    margin-bottom:20px;
+}
+
+.empty-state h3{
+
+    color:#14532d;
+
     margin-bottom:15px;
 }
 
-.admin-stat-card h2{
-    font-size:2.4rem;
-    font-weight:700;
-    margin-bottom:5px;
+.empty-state p{
+
+    color:#6c757d;
+
+    margin-bottom:25px;
 }
 
-.admin-stat-card p{
-    color:#666;
-    margin:0;
-}
+/* ==========================================================
+   COLRS ADMIN STYLESHEET
+   PART 4
+   Responsive • Utilities • Final Cleanup
+========================================================== */
 
-/* ==========================================
-   CARDS
-========================================== */
 
-.card{
-    border-radius:18px;
-}
-
-/* ==========================================
+/* ==========================================================
    RESPONSIVE
-========================================== */
+========================================================== */
 
-@media(max-width:992px){
+@media (max-width:1200px){
 
     .admin-hero{
-        padding:35px;
-        text-align:center;
+
+        padding:60px 45px;
     }
 
     .admin-hero h1{
-        font-size:2.2rem;
-    }
 
-    .admin-meal-img{
-        height:180px;
+        font-size:2.6rem;
     }
 
 }
 
-@media(max-width:768px){
 
-    .admin-meal-img{
-        height:170px;
+@media (max-width:992px){
+
+    body{
+
+        padding-top:80px;
     }
 
-    .meal-admin-card .card-body{
-        padding:20px;
+    .admin-hero{
+
+        padding:50px 30px;
+
+        text-align:center;
     }
 
+    .admin-hero .btn{
+
+        margin-top:20px;
+    }
+
+    .admin-stat{
+
+        padding:28px;
+    }
+
+    .quick-card{
+
+        padding:28px;
+    }
+
+    .table-card,
+    .form-card,
+    .content-card{
+
+        padding:25px;
+    }
+
+    .menu-card img{
+
+        height:220px;
+    }
+
+    .summary-card{
+
+        position:static;
+    }
+
+}
+
+
+@media (max-width:768px){
+
+    .admin-hero h1{
+
+        font-size:2.2rem;
+    }
+
+    .admin-hero p{
+
+        font-size:1rem;
+    }
+
+    .stat-icon{
+
+        width:65px;
+
+        height:65px;
+
+        font-size:26px;
+    }
+
+    .admin-stat h2{
+
+        font-size:2rem;
+    }
+
+    .quick-icon{
+
+        width:70px;
+
+        height:70px;
+
+        font-size:28px;
+    }
+
+    .table thead{
+
+        display:none;
+    }
+
+    .table,
+    .table tbody,
+    .table tr,
+    .table td{
+
+        display:block;
+
+        width:100%;
+    }
+
+    .table tr{
+
+        margin-bottom:18px;
+
+        border:1px solid #dee2e6;
+
+        border-radius:18px;
+
+        overflow:hidden;
+
+        background:#fff;
+    }
+
+    .table td{
+
+        text-align:right;
+
+        padding:14px 18px;
+
+        position:relative;
+
+        border:none;
+    }
+
+    .table td::before{
+
+        content:attr(data-label);
+
+        position:absolute;
+
+        left:18px;
+
+        font-weight:600;
+
+        color:#14532d;
+    }
+
+    .action-buttons{
+
+        flex-direction:column;
+    }
+
+}
+
+
+@media (max-width:576px){
+
+    .container,
+    .container-fluid{
+
+        padding-left:15px;
+
+        padding-right:15px;
+    }
+
+    .admin-hero{
+
+        padding:35px 20px;
+    }
+
+    .admin-hero h1{
+
+        font-size:1.9rem;
+    }
+
+    .section-title{
+
+        text-align:center;
+    }
+
+    .btn{
+
+        width:100%;
+    }
+
+    .quick-card,
+    .admin-stat,
+    .reward-card{
+
+        padding:24px;
+    }
+
+    .menu-card img{
+
+        height:200px;
+    }
+
+}
+
+
+/* ==========================================================
+   SCROLLBAR
+========================================================== */
+
+::-webkit-scrollbar{
+
+    width:8px;
+}
+
+::-webkit-scrollbar-track{
+
+    background:#f1f1f1;
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#198754;
+
+    border-radius:20px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:#14532d;
+}
+
+
+/* ==========================================================
+   LINKS
+========================================================== */
+
+a{
+
+    text-decoration:none;
+
+    transition:.3s;
+}
+
+a:hover{
+
+    text-decoration:none;
+}
+
+
+/* ==========================================================
+   UTILITIES
+========================================================== */
+
+.shadow-soft{
+
+    box-shadow:0 12px 28px rgba(0,0,0,.08);
+}
+
+.rounded-xl{
+
+    border-radius:22px;
+}
+
+.text-green{
+
+    color:#14532d;
+}
+
+.bg-light-green{
+
+    background:#e9f7ef;
+}
+
+.cursor-pointer{
+
+    cursor:pointer;
+}
+
+
+/* ==========================================================
+   ANIMATIONS
+========================================================== */
+
+@keyframes fadeInUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(20px);
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+    }
+
+}
+
+.admin-hero,
+.admin-stat,
+.quick-card,
+.menu-card,
+.reward-card,
+.order-card,
+.table-card,
+.form-card{
+
+    animation:fadeInUp .5s ease;
+}
+
+
+/* ==========================================================
+   FINAL CLEANUP
+========================================================== */
+
+img{
+
+    max-width:100%;
+
+    display:block;
+}
+
+.table{
+
+    margin-bottom:0;
+}
+
+.card{
+
+    border:none;
+}
+
+.container,
+.container-fluid{
+
+    overflow-x:hidden;
+}
+
+.row{
+
+    margin-left:0;
+
+    margin-right:0;
 }

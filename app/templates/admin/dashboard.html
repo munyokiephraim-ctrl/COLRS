@@ -2,557 +2,285 @@
 
 {% block content %}
 
-<style>
+<div class="container py-4">
 
-/* ===============================
-   ADMIN HERO
-=================================*/
+    <!-- ==========================================
+         HERO
+    =========================================== -->
 
-.admin-hero{
+    <section class="admin-hero mb-5">
 
-    background:
-    linear-gradient(rgba(16,70,35,.82), rgba(16,70,35,.82)),
-    url("{{ url_for('static', filename='images/backgrounds/admin-hero.jpg') }}");
+        <div class="row align-items-center">
 
-    background-size:cover;
-    background-position:center;
+            <div class="col-lg-8">
 
-    border-radius:22px;
+                <span class="badge bg-warning text-dark mb-3">
+                    Administrator
+                </span>
 
-    padding:80px 60px;
+                <h1 class="display-5 fw-bold text-white">
+                    Welcome back,
+                    {{ current_user.username }}
+                </h1>
 
-    color:white;
+                <p class="lead text-white-50 mt-3">
 
-    margin-bottom:45px;
+                    Monitor orders, manage meals,
+                    update loyalty rewards and keep
+                    the COLRS cafeteria running smoothly.
 
-    box-shadow:0 15px 35px rgba(0,0,0,.20);
-
-}
-
-.admin-hero h1{
-
-    font-size:42px;
-    font-weight:700;
-}
-
-.admin-hero p{
-
-    font-size:18px;
-    opacity:.95;
-    max-width:700px;
-}
-
-/* ===============================
-   STAT CARDS
-=================================*/
-
-.admin-stat{
-
-    background:white;
-
-    border-radius:18px;
-
-    padding:35px;
-
-    text-align:center;
-
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
-
-    transition:.3s;
-
-    height:100%;
-}
-
-.admin-stat:hover{
-
-    transform:translateY(-5px);
-
-}
-
-.admin-stat .icon{
-
-    width:65px;
-    height:65px;
-
-    border-radius:50%;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    margin:auto auto 18px;
-
-    font-size:28px;
-
-    color:white;
-}
-
-.admin-stat h2{
-
-    font-weight:700;
-    color:#1B5E20;
-}
-
-.admin-stat h6{
-
-    color:#777;
-}
-
-/* ===============================
-   QUICK ACTIONS
-=================================*/
-
-.quick-card{
-
-    background:white;
-
-    border-radius:18px;
-
-    padding:30px;
-
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
-
-}
-
-.quick-card .btn{
-
-    margin-bottom:12px;
-
-    border-radius:12px;
-
-    padding:12px;
-
-    font-weight:600;
-}
-
-/* ===============================
-   TABLE
-=================================*/
-
-.table-card{
-
-    background:white;
-
-    border-radius:18px;
-
-    overflow:hidden;
-
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
-
-}
-
-.table-card .card-header{
-
-    background:#1B5E20;
-
-    color:white;
-
-    padding:18px 25px;
-
-    border:none;
-
-}
-
-.table tbody tr:hover{
-
-    background:#f8fff8;
-
-}
-
-</style>
-
-<div class="container-fluid py-4">
-
-<!-- HERO -->
-
-<div class="admin-hero">
-
-    <h1>
-
-        ☕ COLRS Administration
-
-    </h1>
-
-    <p>
-
-        Welcome back. Manage cafeteria meals, monitor student orders,
-        update order statuses and keep daily operations running smoothly.
-
-    </p>
-
-    <div class="mt-4">
-
-        <a href="{{ url_for('admin.manage_menu') }}"
-           class="btn btn-warning btn-lg fw-bold me-2">
-
-            🍽 Manage Menu
-
-        </a>
-
-        <a href="#orders"
-           class="btn btn-light btn-lg fw-bold">
-
-            📦 View Orders
-
-        </a>
-
-    </div>
-
-</div>
-
-<!-- STATISTICS -->
-
-<div class="row g-4 mb-5">
-
-    <div class="col-lg-3 col-md-6">
-
-        <div class="admin-stat">
-
-            <div class="icon bg-success">
-
-                📦
+                </p>
 
             </div>
 
-            <h2>
+            <div class="col-lg-4 text-lg-end mt-4 mt-lg-0">
 
-                {{ orders|length }}
+                <a href="{{ url_for('admin.manage_menu') }}"
+                   class="btn btn-warning btn-lg">
 
-            </h2>
+                    <i class="bi bi-plus-circle"></i>
 
-            <h6>
+                    Add Meal
 
-                Total Orders
-
-            </h6>
-
-        </div>
-
-    </div>
-
-    <div class="col-lg-3 col-md-6">
-
-        <div class="admin-stat">
-
-            <div class="icon bg-warning">
-
-                ⏳
+                </a>
 
             </div>
 
-            <h2>
-
-                {{ orders|selectattr("status","equalto","Placed")|list|length }}
-
-            </h2>
-
-            <h6>
-
-                Awaiting Preparation
-
-            </h6>
-
         </div>
 
-    </div>
+    </section>
 
-    <div class="col-lg-3 col-md-6">
 
-        <div class="admin-stat">
+    <!-- ==========================================
+         STATISTICS
+    =========================================== -->
 
-            <div class="icon bg-info">
+    <div class="row g-4 mb-5">
 
-                👨‍🍳
+        <div class="col-lg-3 col-md-6">
+
+            <div class="admin-stat">
+
+                <div class="stat-icon bg-success">
+
+                    <i class="bi bi-box-seam"></i>
+
+                </div>
+
+                <h2>
+
+                    {{ total_orders }}
+
+                </h2>
+
+                <p>
+
+                    Total Orders
+
+                </p>
 
             </div>
 
-            <h2>
-
-                {{ orders|selectattr("status","equalto","Preparing")|list|length }}
-
-            </h2>
-
-            <h6>
-
-                Preparing
-
-            </h6>
-
         </div>
 
-    </div>
 
-    <div class="col-lg-3 col-md-6">
+        <div class="col-lg-3 col-md-6">
 
-        <div class="admin-stat">
+            <div class="admin-stat">
 
-            <div class="icon bg-primary">
+                <div class="stat-icon bg-primary">
 
-                ✅
+                    <i class="bi bi-cup-hot-fill"></i>
+
+                </div>
+
+                <h2>
+
+                    {{ total_meals }}
+
+                </h2>
+
+                <p>
+
+                    Meals Available
+
+                </p>
 
             </div>
 
-            <h2>
+        </div>
 
-                {{ orders|selectattr("status","equalto","Completed")|list|length }}
 
-            </h2>
+        <div class="col-lg-3 col-md-6">
 
-            <h6>
+            <div class="admin-stat">
 
-                Completed
+                <div class="stat-icon bg-warning">
 
-            </h6>
+                    <i class="bi bi-people-fill"></i>
+
+                </div>
+
+                <h2>
+
+                    {{ total_students }}
+
+                </h2>
+
+                <p>
+
+                    Students
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-lg-3 col-md-6">
+
+            <div class="admin-stat">
+
+                <div class="stat-icon bg-danger">
+
+                    <i class="bi bi-clock-history"></i>
+
+                </div>
+
+                <h2>
+
+                    {{ pending_orders }}
+
+                </h2>
+
+                <p>
+
+                    Pending Orders
+
+                </p>
+
+            </div>
 
         </div>
 
     </div>
 
-</div>
 
-<div class="row mb-5">
+    <!-- ==========================================
+         QUICK ACTIONS
+    =========================================== -->
 
-    <div class="col-lg-3">
+    <h3 class="section-title mb-4">
 
-        <div class="quick-card">
+        Quick Actions
 
-            <h4 class="mb-4">
+    </h3>
 
-                ⚡ Quick Actions
+    <div class="row g-4 mb-5">
 
-            </h4>
+        <div class="col-lg-4">
 
-            <a href="{{ url_for('admin.manage_menu') }}"
-               class="btn btn-success w-100">
+            <div class="quick-card">
 
-                🍔 Manage Menu
+                <div class="quick-icon">
 
-            </a>
+                    <i class="bi bi-plus-circle-fill"></i>
 
-            <a href="#orders"
-               class="btn btn-outline-success w-100">
+                </div>
 
-                📦 Order Queue
+                <h4>
 
-            </a>
-
-            <a href="{{ url_for('auth.logout') }}"
-               class="btn btn-outline-danger w-100">
-
-                🚪 Logout
-
-            </a>
-
-        </div>
-
-    </div>
-
-    <div class="col-lg-9">
-
-        <div class="table-card" id="orders">
-
-            <div class="card-header">
-
-                <h4 class="mb-0">
-
-                    📋 Order Management Queue
+                    Add New Meal
 
                 </h4>
 
+                <p>
+
+                    Create breakfast,
+                    lunch, snacks and drinks
+                    available for students.
+
+                </p>
+
+                <a href="{{ url_for('admin.manage_menu') }}"
+                   class="btn btn-success">
+
+                    Manage Menu
+
+                </a>
+
             </div>
 
-            <div class="card-body">
+        </div>
 
-{% if orders %}
 
-<div class="table-responsive">
+        <div class="col-lg-4">
 
-    <table class="table table-hover align-middle mb-0">
+            <div class="quick-card">
 
-        <thead class="table-light">
+                <div class="quick-icon">
 
-            <tr>
+                    <i class="bi bi-receipt-cutoff"></i>
 
-                <th>Order #</th>
+                </div>
 
-                <th>Amount</th>
+                <h4>
 
-                <th>Status</th>
+                    Manage Orders
 
-                <th>Date</th>
+                </h4>
 
-                <th class="text-center">Action</th>
+                <p>
 
-            </tr>
+                    View student orders,
+                    update status and monitor
+                    deliveries in real time.
 
-        </thead>
+                </p>
 
-        <tbody>
+                <a href="{{ url_for('admin.orders') }}"
+                   class="btn btn-primary">
 
-            {% for order in orders %}
+                    View Orders
 
-            <tr>
+                </a>
 
-                <td>
+            </div>
 
-                    <strong>#{{ order.id }}</strong>
+        </div>
 
-                </td>
 
-                <td>
+        <div class="col-lg-4">
 
-                    <span class="fw-bold text-success">
+            <div class="quick-card">
 
-                        KSh {{ "%.2f"|format(order.total_amount) }}
+                <div class="quick-icon">
 
-                    </span>
+                    <i class="bi bi-gift-fill"></i>
 
-                </td>
+                </div>
 
-                <td>
+                <h4>
 
-                    {% if order.status == "Placed" %}
+                    Loyalty Rewards
 
-                        <span class="badge bg-warning text-dark px-3 py-2">
+                </h4>
 
-                            Awaiting Preparation
+                <p>
 
-                        </span>
+                    Configure reward points
+                    and manage student
+                    redemption options.
 
-                    {% elif order.status == "Preparing" %}
+                </p>
 
-                        <span class="badge bg-info px-3 py-2">
+                <a href="{{ url_for('admin.rewards') }}"
+                   class="btn btn-warning">
 
-                            Preparing
+                    Rewards
 
-                        </span>
-
-                    {% elif order.status == "Ready" %}
-
-                        <span class="badge bg-primary px-3 py-2">
-
-                            Ready for Pickup
-
-                        </span>
-
-                    {% else %}
-
-                        <span class="badge bg-success px-3 py-2">
-
-                            Completed
-
-                        </span>
-
-                    {% endif %}
-
-                </td>
-
-                <td>
-
-                    {{ order.created_at.strftime('%d %b %Y %I:%M %p') }}
-
-                </td>
-
-                <td class="text-center">
-
-                    {% if order.status == "Placed" %}
-
-                    <form action="{{ url_for('admin.update_order_status', order_id=order.id) }}"
-                          method="POST">
-
-                        <input
-                            type="hidden"
-                            name="status"
-                            value="Preparing">
-
-                        <button
-                            class="btn btn-info btn-sm">
-
-                            👨‍🍳 Mark Preparing
-
-                        </button>
-
-                    </form>
-
-                    {% elif order.status == "Preparing" %}
-
-                    <form action="{{ url_for('admin.update_order_status', order_id=order.id) }}"
-                          method="POST">
-
-                        <input
-                            type="hidden"
-                            name="status"
-                            value="Ready">
-
-                        <button
-                            class="btn btn-primary btn-sm">
-
-                            ✅ Mark Ready
-
-                        </button>
-
-                    </form>
-
-                    {% elif order.status == "Ready" %}
-
-                    <form action="{{ url_for('admin.update_order_status', order_id=order.id) }}"
-                          method="POST">
-
-                        <input
-                            type="hidden"
-                            name="status"
-                            value="Completed">
-
-                        <button
-                            class="btn btn-success btn-sm">
-
-                            ✔ Complete Order
-
-                        </button>
-
-                    </form>
-
-                    {% else %}
-
-                    <span class="text-success fw-bold">
-
-                        ✔ Completed
-
-                    </span>
-
-                    {% endif %}
-
-                </td>
-
-            </tr>
-
-            {% endfor %}
-
-        </tbody>
-
-    </table>
-
-</div>
-
-{% else %}
-
-<div class="text-center py-5">
-
-    <h2 class="mb-3">
-
-        📦 No Orders Yet
-
-    </h2>
-
-    <p class="text-muted">
-
-        Student orders will appear here once they begin ordering meals.
-
-    </p>
-
-</div>
-
-{% endif %}
+                </a>
 
             </div>
 
@@ -560,34 +288,162 @@
 
     </div>
 
-</div>
 
-<div class="row mt-5">
+    <!-- ==========================================
+         RECENT ORDERS
+    =========================================== -->
 
-    <div class="col">
+    <div class="table-card">
 
-        <div class="alert alert-success border-0 shadow-sm">
+        <div class="d-flex justify-content-between align-items-center mb-4">
 
-            <h5 class="fw-bold">
+            <h3 class="mb-0">
 
-                ☕ COLRS Administration Panel
+                Recent Orders
 
-            </h5>
+            </h3>
 
-            <p class="mb-0">
+                        {% if recent_orders %}
 
-                Use this dashboard to manage cafeteria operations, monitor incoming
-                orders, update preparation status, and maintain an efficient service
-                for students.
+            <div class="table-responsive">
 
-            </p>
+                <table class="table align-middle">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Order #</th>
+                            <th>Student</th>
+                            <th>Meal</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                            <th>Date</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% for order in recent_orders %}
+
+                        <tr>
+
+                            <td>
+
+                                <strong>
+
+                                    #{{ order.id }}
+
+                                </strong>
+
+                            </td>
+
+                            <td>
+
+                                {{ order.student.username }}
+
+                            </td>
+
+                            <td>
+
+                                {{ order.meal.name }}
+
+                            </td>
+
+                            <td>
+
+                                KES {{ "%.2f"|format(order.total_price) }}
+
+                            </td>
+
+                            <td>
+
+                                {% if order.status == "Pending" %}
+
+                                    <span class="badge bg-warning text-dark">
+
+                                        Pending
+
+                                    </span>
+
+                                {% elif order.status == "Preparing" %}
+
+                                    <span class="badge bg-primary">
+
+                                        Preparing
+
+                                    </span>
+
+                                {% elif order.status == "Ready" %}
+
+                                    <span class="badge bg-info">
+
+                                        Ready
+
+                                    </span>
+
+                                {% elif order.status == "Completed" %}
+
+                                    <span class="badge bg-success">
+
+                                        Completed
+
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="badge bg-secondary">
+
+                                        {{ order.status }}
+
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+                            <td>
+
+                                {{ order.created_at.strftime("%d %b %Y") }}
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            {% else %}
+
+            <div class="text-center py-5">
+
+                <i class="bi bi-inbox display-1 text-secondary"></i>
+
+                <h3 class="mt-4">
+
+                    No Orders Yet
+
+                </h3>
+
+                <p class="text-muted">
+
+                    Student orders will appear here once they start placing them.
+
+                </p>
+
+            </div>
+
+            {% endif %}
 
         </div>
 
-    </div>
-
 </div>
 
-</div>
-
-{% endblock %}     
+{% endblock %}
