@@ -5,6 +5,46 @@
 ========================================================== */
 
 /* ==========================================================
+   DASHBOARD PAGE BACKGROUND
+========================================================== */
+
+.dashboard-page{
+
+    min-height:100vh;
+
+    background:
+        linear-gradient(
+            rgba(248,250,252,.88),
+            rgba(238,245,241,.92)
+        ),
+        url("../images/dashboard/hero-banner.jpg");
+
+    background-size:cover;
+
+    background-position:center;
+
+    background-attachment:fixed;
+
+    padding-bottom:60px;
+
+}
+
+
+.dashboard-container{
+
+    width:100%;
+
+    max-width:1500px;
+
+    margin:auto;
+
+    padding-left:35px;
+
+    padding-right:35px;
+
+}
+
+/* ==========================================================
    GLOBAL
 ========================================================== */
 
@@ -197,7 +237,7 @@ img{
 
     min-height:380px;
 
-    padding:50px;
+    padding:60px;
 
     margin-bottom:45px;
 
@@ -208,13 +248,16 @@ img{
     background:
         linear-gradient(
             90deg,
-            rgba(20,83,45,.92),
-            rgba(20,83,45,.65)
+            rgba(20,83,45,.85),
+            rgba(20,83,45,.45)
         ),
         url("../images/dashboard/hero-banner.jpg");
 
     background-size:cover;
+
     background-position:center;
+
+    background-repeat:no-repeat;
 
 }
 
@@ -256,7 +299,9 @@ img{
 
 .dashboard-card{
 
-    background:#fff;
+    background:rgba(255,255,255,.92);
+
+    backdrop-filter:blur(10px);
 
     border-radius:20px;
 
@@ -415,7 +460,9 @@ img{
 
     gap:40px;
 
-    background:#fff;
+    background:rgba(255,255,255,.92);
+
+    backdrop-filter:blur(10px);
 
     border-radius:24px;
 
@@ -496,7 +543,9 @@ img{
 
 .mini-card{
 
-    background:#fff;
+    background:rgba(255,255,255,.92);
+
+    backdrop-filter:blur(10px);
 
     border-radius:24px;
 
@@ -578,7 +627,9 @@ img{
 
 .order-card{
 
-    background:#fff;
+    background:rgba(255,255,255,.92);
+
+backdrop-filter:blur(10px);
 
     border:1px solid #ececec;
 
