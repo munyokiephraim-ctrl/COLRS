@@ -236,117 +236,110 @@ Welcome back,
     </section>
 
         <!-- ================= RECENT ORDERS ================= -->
+<section class="dashboard-section">
 
-    <section class="dashboard-section">
+    <div class="d-flex justify-content-between align-items-center mb-4">
 
-        <div class="d-flex justify-content-between align-items-center mb-4">
+        <h3 class="mb-0">
+            📦 Recent Orders
+        </h3>
 
-            <h3 class="mb-0">
-                📦 Recent Orders
-            </h3>
+        <a href="{{ url_for('student.menu') }}"
+           class="btn btn-outline-success">
 
-            <a href="{{ url_for('student.menu') }}"
-               class="btn btn-outline-success">
+            New Order
 
-                New Order
+        </a>
 
-            </a>
+    </div>
 
-        </div>
 
-        {% if orders %}
+    {% if orders %}
 
-            <div class="row g-3">
+        <div class="row g-3">
 
-                {% for order in orders %}
+            {% for order in orders %}
 
-                <div class="col-12">
+            <div class="col-12">
 
-                    <div class="order-card">
+                <div class="order-card">
 
-                        <div class="row align-items-center">
+                    <div class="row align-items-center">
 
-                            <div class="col-lg-3">
+                        <div class="col-lg-3">
 
-                                <h5 class="mb-1">
+                            <h5 class="mb-1">
+                                Order #{{ order.id }}
+                            </h5>
 
-                                    Order #{{ order.id }}
+                            <small class="text-muted">
+                                {{ order.created_at.strftime('%d %b %Y %I:%M %p') }}
+                            </small>
 
-                                </h5>
+                        </div>
 
-                                <small class="text-muted">
 
-                                    {{ order.created_at.strftime('%d %b %Y %I:%M %p') }}
+                        <div class="col-lg-2 mt-3 mt-lg-0">
 
-                                </small>
+                            <strong class="text-success fs-5">
 
-                            </div>
+                                KSh {{ "%.2f"|format(order.total_amount) }}
 
-                            <div class="col-lg-2 mt-3 mt-lg-0">
+                            </strong>
 
-                                <strong class="text-success fs-5">
+                        </div>
 
-                                    KSh {{ "%.2f"|format(order.total_amount) }}
 
-                                </strong>
+                        <div class="col-lg-3 mt-3 mt-lg-0">
 
-                            </div>
+                            {% if order.status == "Placed" %}
 
-                            <div class="col-lg-3 mt-3 mt-lg-0">
+                                <span class="badge bg-warning text-dark px-3 py-2">
+                                    📥 Placed
+                                </span>
 
-{% if order.status == "Placed" %}
 
-<span class="badge bg-warning text-dark px-3 py-2">
-    📥 Placed
-</span>
+                            {% elif order.status == "Preparing" %}
 
-{% elif order.status == "Preparing" %}
+                                <span class="badge bg-info px-3 py-2">
+                                    👨‍🍳 Preparing
+                                </span>
 
-<span class="badge bg-info px-3 py-2">
-    👨‍🍳 Preparing
-</span>
 
-{% elif order.status == "Ready" %}
+                            {% elif order.status == "Ready" %}
 
-<span class="badge bg-primary px-3 py-2">
-    ✅ Ready
-</span>
+                                <span class="badge bg-primary px-3 py-2">
+                                    ✅ Ready
+                                </span>
 
-{% elif order.status == "Completed" %}
 
-<span class="badge bg-success px-3 py-2">
-    ✔ Completed
-</span>
+                            {% elif order.status == "Completed" %}
 
-{% else %}
+                                <span class="badge bg-success px-3 py-2">
+                                    ✔ Completed
+                                </span>
 
-<span class="badge bg-secondary px-3 py-2">
-    ❓ {{ order.status }}
-</span>
 
-{% endif %}
-{% else %}
+                            {% else %}
 
-<span class="badge unknown-status px-3 py-2">
-    ❓ {{ order.status }}
-</span>
+                                <span class="badge bg-secondary px-3 py-2">
+                                    {{ order.status }}
+                                </span>
 
-{% endif %}
 
-                                {% endif %}
+                            {% endif %}
 
-                            </div>
+                        </div>
 
-                            <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
 
-                                <a href="{{ url_for('student.order_details', order_id=order.id) }}"
-                                   class="btn btn-success">
+                        <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
 
-                                    View Details
+                            <a href="{{ url_for('student.order_details', order_id=order.id) }}"
+                               class="btn btn-success">
 
-                                </a>
+                                View Details
 
-                            </div>
+                            </a>
 
                         </div>
 
@@ -354,38 +347,44 @@ Welcome back,
 
                 </div>
 
-                {% endfor %}
-
             </div>
 
-        {% else %}
 
-            <div class="empty-orders-card">
+            {% endfor %}
 
-                <h5 class="mb-3">
+        </div>
 
-                    No orders yet.
 
-                </h5>
+    {% else %}
 
-                <p class="mb-3">
 
-                    Looks like you haven't placed any orders.
+        <div class="empty-orders-card">
 
-                </p>
+            <h5 class="mb-3">
+                No orders yet.
+            </h5>
 
-                <a href="{{ url_for('student.menu') }}"
-                   class="btn btn-warning">
+            <p class="mb-3">
+                Looks like you haven't placed any orders.
+            </p>
 
-                    🍽 Browse Menu
+            <a href="{{ url_for('student.menu') }}"
+               class="btn btn-warning">
 
-                </a>
+                🍽 Browse Menu
 
-            </div>
+            </a>
 
-        {% endif %}
+        </div>
 
-    </section>
+
+    {% endif %}
+
+
+</section>
+    
+
+  
 
 
 
