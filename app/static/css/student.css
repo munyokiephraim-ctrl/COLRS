@@ -1595,3 +1595,30 @@ img{
     );
 
 }
+
+/* ==========================================================
+   MENU PAGE BACKGROUND
+========================================================== */
+
+.menu-page{
+
+    min-height:100vh;
+
+    background:
+
+        linear-gradient(
+            rgba(248,250,252,.88),
+            rgba(238,245,241,.92)
+        ),
+
+        url("../images/dashboard/promo-banner.jpg");
+
+    background-size:cover;
+
+    background-position:center;
+
+    background-attachment:fixed;
+
+    padding-bottom:60px;
+
+}
