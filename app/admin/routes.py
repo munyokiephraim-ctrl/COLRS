@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, redirect, url_for, flash, request
 from flask_login import login_required, current_user
 
 from app import db
-from app.models import MenuItem, Order
+from app.models import MenuItem, Order, User
 
 admin_bp = Blueprint("admin", __name__)
 
@@ -35,7 +35,18 @@ def dashboard():
 
     return render_template(
         "admin/dashboard.html",
-        orders=orders
+
+        orders=orders,
+
+        recent_orders=orders[:10],
+
+        total_orders=Order.query.count(),
+
+        total_meals=MenuItem.query.count(),
+
+        total_students=User.query.filter_by(role="student").count(),
+
+        pending_orders=Order.query.filter_by(status="Placed").count()
     )
 
 
