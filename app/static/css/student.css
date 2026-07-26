@@ -19,20 +19,14 @@ html{
 }
 
 body{
+
     font-family:"Poppins",sans-serif;
 
-    background:
-        linear-gradient(
-            rgba(248,250,252,.96),
-            rgba(248,250,252,.96)
-        ),
-        url("../images/dashboard/cafeteria.jpg");
-
-    background-size:cover;
-
-    background-attachment:fixed;
-
-    background-position:center;
+    background:linear-gradient(
+        180deg,
+        #f8fafc 0%,
+        #eef5f1 100%
+    );
 
     color:#343a40;
 
@@ -195,21 +189,15 @@ img{
     overflow:hidden;
 
     background:
-
         linear-gradient(
-            rgba(20,83,45,.78),
-            rgba(20,83,45,.78)
+            rgba(20,83,45,.90),
+            rgba(20,83,45,.90)
         ),
-
         url("../images/dashboard/hero-banner.jpg");
 
     background-size:cover;
-
     background-position:center;
-
     background-repeat:no-repeat;
-
-    color:#fff;
 }
 
 .hero-overlay{
@@ -742,8 +730,8 @@ img{
     background:
 
         linear-gradient(
-            rgba(20,83,45,.78),
-            rgba(20,83,45,.78)
+            rgba(20,83,45,.90),
+            rgba(20,83,45,.90)
         ),
 
         url("../images/dashboard/cafeteria.jpg");
@@ -753,8 +741,6 @@ img{
     background-position:center;
 
     background-repeat:no-repeat;
-
-    color:#fff;
 }
 
 .menu-hero .hero-overlay{
