@@ -1183,7 +1183,8 @@ backdrop-filter:blur(10px);
 
     gap:25px;
 
-    background:#fff;
+    background:rgba(255,255,255,.94);
+    backdrop-filter:blur(10px);
 
     padding:25px;
 
@@ -1255,7 +1256,8 @@ backdrop-filter:blur(10px);
 
     top:110px;
 
-    background:#fff;
+    background:rgba(255,255,255,.94);
+    backdrop-filter:blur(10px);
 
     padding:30px;
 
@@ -1289,7 +1291,8 @@ backdrop-filter:blur(10px);
 
 .empty-cart{
 
-    background:#fff;
+    background:rgba(255,255,255,.94);
+    backdrop-filter:blur(10px);
 
     padding:70px 35px;
 
@@ -1620,5 +1623,32 @@ img{
     background-attachment:fixed;
 
     padding-bottom:60px;
+
+}
+
+/* ==========================================================
+   CART PAGE BACKGROUND
+========================================================== */
+
+.cart-page{
+
+    min-height:100vh;
+
+    background:
+
+        linear-gradient(
+            rgba(248,250,252,.88),
+            rgba(238,245,241,.92)
+        ),
+
+        url("../images/cart-empty.jpg");
+
+    background-size:cover;
+
+    background-position:center;
+
+    background-attachment:fixed;
+
+    padding:40px 35px 70px;
 
 }
