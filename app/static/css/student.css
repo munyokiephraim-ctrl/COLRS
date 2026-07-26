@@ -22,15 +22,19 @@ body{
 
     font-family:"Poppins",sans-serif;
 
-    background:linear-gradient(
-        180deg,
-        #f8fafc 0%,
-        #eef5f1 100%
-    );
+    background:
 
-    color:#343a40;
+        radial-gradient(
+            circle at top left,
+            rgba(46,125,50,.08),
+            transparent 35%
+        ),
 
-    padding-top:90px;
+        linear-gradient(
+            180deg,
+            #f8fafc 0%,
+            #eef5f1 100%
+        );
 }
 
 .container,
@@ -38,13 +42,26 @@ body{
 
     width:100%;
 
-    max-width:1280px;
+    margin:auto;
+
+    padding-left:25px;
+
+    padding-right:25px;
+}
+
+
+.dashboard-container{
+
+    width:100%;
+
+    max-width:1500px;
 
     margin:auto;
 
-    padding-left:15px;
+    padding-left:35px;
 
-    padding-right:15px;
+    padding-right:35px;
+
 }
 
 img{
@@ -180,7 +197,7 @@ img{
 
     min-height:380px;
 
-    padding:60px;
+    padding:50px;
 
     margin-bottom:45px;
 
@@ -190,14 +207,15 @@ img{
 
     background:
         linear-gradient(
-            rgba(20,83,45,.90),
-            rgba(20,83,45,.90)
+            90deg,
+            rgba(20,83,45,.92),
+            rgba(20,83,45,.65)
         ),
         url("../images/dashboard/hero-banner.jpg");
 
     background-size:cover;
     background-position:center;
-    background-repeat:no-repeat;
+
 }
 
 .hero-overlay{
@@ -242,7 +260,9 @@ img{
 
     border-radius:20px;
 
-    padding:35px;
+    padding:30px;
+
+    min-height:250px;
 
     text-align:center;
 
@@ -451,9 +471,9 @@ img{
 
 .feature-image{
 
-    flex:0 0 40%;
+    flex:0 0 45%;
 
-    min-width:320px;
+    min-width:350px;
 
     height:360px;
 
@@ -535,9 +555,14 @@ img{
 
 .dashboard-section{
 
-    background:#fff;
+    background:rgba(255,255,255,.9);
+
+    backdrop-filter:blur(10px);
 
     border-radius:24px;
+
+    padding:40px;
+
 
     padding:35px;
 
@@ -1238,7 +1263,7 @@ img{
 
 .checkout-hero{
 
-    padding:60px;
+    padding:50px;
 
     border-radius:24px;
 
@@ -1403,11 +1428,13 @@ img{
         font-size:2rem;
     }
 
-    .btn{
+    .hero-banner .btn,
+.promo-banner .btn,
+.empty-orders-card .btn{
 
-        width:100%;
-    }
+    width:100%;
 
+}
 }
 
 
@@ -1445,10 +1472,10 @@ img{
    FINAL UTILITIES
 ========================================================== */
 
-.container,
-.container-fluid{
+.dashboard-container{
 
-    overflow-x:hidden;
+    overflow:hidden;
+
 }
 
 .row{
@@ -1481,4 +1508,39 @@ img{
     max-width:100%;
 
     display:block;
+}
+
+.success-icon{
+
+    background:
+    linear-gradient(
+        135deg,
+        #2E7D32,
+        #66BB6A
+    );
+
+}
+
+
+.warning-icon{
+
+    background:
+    linear-gradient(
+        135deg,
+        #FB8C00,
+        #FFB300
+    );
+
+}
+
+
+.primary-icon{
+
+    background:
+    linear-gradient(
+        135deg,
+        #1565C0,
+        #42A5F5
+    );
+
 }
