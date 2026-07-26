@@ -3,6 +3,7 @@
    PART 1 - GLOBAL, NAVBAR, HERO & DASHBOARD
 ===================================================== */
 
+
 /* ===========================
    GLOBAL
 =========================== */
@@ -22,21 +23,18 @@ body{
 
 .container,
 .container-fluid{
+    width:100%;
     max-width:1280px;
     margin:auto;
 }
 
-img{
-    max-width:100%;
-    display:block;
-}
 
 /* ===========================
    NAVBAR
 =========================== */
 
 .navbar{
-    box-shadow:0 4px 18px rgba(0,0,0,.12);
+    box-shadow:0 6px 18px rgba(0,0,0,.12);
 }
 
 .navbar-brand{
@@ -48,7 +46,7 @@ img{
 .navbar-dark .navbar-nav .nav-link{
     color:#ffffff !important;
     font-weight:600;
-    margin-left:12px;
+    margin-left:10px;
     transition:.3s;
 }
 
@@ -56,37 +54,33 @@ img{
     color:#FFD54F !important;
 }
 
+
 /* ===========================
    HERO
 =========================== */
 
 .hero-banner{
-
     background:
-    linear-gradient(rgba(20,80,40,.75),
-    rgba(20,80,40,.75)),
-    url("../images/dashboard/hero-banner.jpg");
+        linear-gradient(rgba(22,85,45,.72),rgba(22,85,45,.72)),
+        url("../images/dashboard/hero-banner.jpg");
 
     background-size:cover;
     background-position:center;
 
-    border-radius:22px;
+    border-radius:24px;
 
     min-height:360px;
 
     display:flex;
     align-items:center;
 
-    padding:70px;
-
-    color:white;
-
-    overflow:hidden;
+    padding:60px;
 
     margin-bottom:45px;
 
-    box-shadow:0 15px 35px rgba(0,0,0,.18);
+    color:#fff;
 
+    overflow:hidden;
 }
 
 .hero-overlay{
@@ -94,30 +88,22 @@ img{
 }
 
 .hero-content{
-    max-width:700px;
+    max-width:650px;
 }
 
 .hero-content h1{
-
-    font-size:3.3rem;
-
+    font-size:3.1rem;
     font-weight:700;
-
     margin-bottom:18px;
-
 }
 
 .hero-content p{
-
-    font-size:1.18rem;
-
+    font-size:1.15rem;
     line-height:1.8;
-
-    color:#f8f9fa;
-
-    margin-bottom:30px;
-
+    color:#f3f3f3;
+    margin-bottom:25px;
 }
+
 
 /* ===========================
    BUTTONS
@@ -129,13 +115,9 @@ img{
 .btn-light{
 
     border-radius:12px;
-
     padding:12px 28px;
-
     font-weight:600;
-
-    transition:.25s;
-
+    transition:.3s;
 }
 
 .btn-success:hover,
@@ -144,26 +126,8 @@ img{
 .btn-light:hover{
 
     transform:translateY(-2px);
-
 }
 
-/* ===========================
-   SECTION TITLES
-=========================== */
-
-.section-title{
-
-    margin-bottom:28px;
-
-}
-
-.section-title h3{
-
-    color:#1B5E20;
-
-    font-weight:700;
-
-}
 
 /* ===========================
    DASHBOARD CARDS
@@ -171,7 +135,7 @@ img{
 
 .dashboard-card{
 
-    background:white;
+    background:#fff;
 
     border-radius:20px;
 
@@ -179,91 +143,63 @@ img{
 
     text-align:center;
 
+    height:100%;
+
     box-shadow:0 10px 25px rgba(0,0,0,.08);
 
     transition:.3s;
-
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:center;
-
-    align-items:center;
-
-    min-height:270px;
-
-    height:100%;
-
 }
 
 .dashboard-card:hover{
 
-    transform:translateY(-8px);
+    transform:translateY(-6px);
 
+    box-shadow:0 18px 35px rgba(0,0,0,.12);
 }
-
-.dashboard-card h2{
-
-    font-size:3rem;
-
-    font-weight:700;
-
-    margin:10px 0;
-
-}
-
-.dashboard-card h6{
-
-    color:#555;
-
-    font-weight:600;
-
-    margin-top:10px;
-
-}
-
-.dashboard-card p{
-
-    color:#777;
-
-    margin-top:10px;
-
-}
-
-.points{
-
-    color:#FF9800;
-
-}
-
-/* ===========================
-   ICONS
-=========================== */
 
 .icon-circle{
 
     width:72px;
-
     height:72px;
 
     border-radius:50%;
 
     display:flex;
-
     justify-content:center;
-
     align-items:center;
 
-    color:white;
+    margin:0 auto 20px;
+
+    color:#fff;
 
     font-size:30px;
 
-    margin-bottom:20px;
-
-    box-shadow:0 8px 20px rgba(0,0,0,.18);
-
+    box-shadow:0 10px 20px rgba(0,0,0,.18);
 }
+
+.dashboard-card h6{
+
+    color:#666;
+    font-weight:600;
+}
+
+.dashboard-card h2{
+
+    font-size:2.7rem;
+    font-weight:700;
+    margin:10px 0;
+}
+
+.points{
+
+    color:#FF9800;
+}
+
+.dashboard-card p{
+
+    color:#777;
+}
+
 
 /* ===========================
    STUDENT PROFILE CARD
@@ -271,306 +207,84 @@ img{
 
 .student-card{
 
-    min-height:270px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
 
+    min-height:250px;
 }
 
 .student-name{
 
-    color:#1B5E20;
+    font-size:1.2rem;
 
     font-weight:700;
 
+    color:#1B5E20;
+
     margin-top:10px;
-
-    margin-bottom:12px;
-
 }
 
 .student-email{
 
     color:#666;
 
-    font-size:.95rem;
-
     word-break:break-word;
 
+    margin-top:10px;
 }
 
+
 /* ===========================
-   DASHBOARD SECTION
+   TITLES
 =========================== */
 
-.dashboard-section{
+.section-title{
 
-    background:white;
+    margin-bottom:30px;
+}
 
-    border-radius:20px;
+.section-title h3{
 
-    padding:35px;
+    color:#1B5E20;
 
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
-
+    font-weight:700;
 }
 
 /* =====================================================
    COLRS STUDENT STYLESHEET
-   PART 2 - MENU, FEATURED, RECENT ORDERS & PROMOTION
+   PART 2 - FEATURES, ORDERS & PROMOTION
 ===================================================== */
 
+
 /* ===========================
-   MENU HERO
+   FEATURE SECTION
 =========================== */
 
-.menu-hero{
+.feature-card{
 
-    height:320px;
+    background:#fff;
 
     border-radius:22px;
 
     overflow:hidden;
 
-    background:
-    linear-gradient(rgba(20,80,40,.72),
-    rgba(20,80,40,.72)),
-    url("../images/dashboard/cafeteria.jpg");
-
-    background-size:cover;
-    background-position:center;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    margin-bottom:45px;
-
-    box-shadow:0 15px 35px rgba(0,0,0,.15);
-
-}
-
-.hero-overlay{
-
-    text-align:center;
-
-    color:white;
-
-}
-
-.hero-overlay h1{
-
-    font-size:3rem;
-
-    font-weight:700;
-
-    margin-bottom:15px;
-
-}
-
-.hero-overlay p{
-
-    font-size:1.15rem;
-
-    max-width:650px;
-
-    margin:auto;
-
-}
-
-/* ===========================
-   LOYALTY POINTS CARD
-=========================== */
-
-.points-card{
-
-    background:#1B5E20;
-
-    color:white;
-
-    border-radius:18px;
-
-    padding:20px;
-
-    text-align:center;
-
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
-
-}
-
-.points-card h2{
-
-    font-size:2.2rem;
-
-    margin:10px 0;
-
-    font-weight:700;
-
-}
-
-.points-card small{
-
-    opacity:.9;
-
-}
-
-/* ===========================
-   CATEGORY BUTTONS
-=========================== */
-
-.category-buttons{
-
     display:flex;
 
-    flex-wrap:wrap;
+    align-items:stretch;
 
-    gap:12px;
-
-    margin-bottom:35px;
-
-}
-
-.category-btn{
-
-    padding:11px 24px;
-
-    border-radius:50px;
-
-    border:2px solid #198754;
-
-    text-decoration:none;
-
-    color:#198754;
-
-    font-weight:600;
-
-    transition:.3s;
-
-}
-
-.category-btn:hover,
-.category-btn.active{
-
-    background:#198754;
-
-    color:white;
-
-}
-
-/* ===========================
-   MEAL CARDS
-=========================== */
-
-.meal-card{
-
-    background:white;
-
-    border:none;
-
-    border-radius:20px;
-
-    overflow:hidden;
-
-    display:flex;
-
-    flex-direction:column;
-
-    height:100%;
-
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
-
-    transition:.3s;
-
-}
-
-.meal-card:hover{
-
-    transform:translateY(-8px);
-
-    box-shadow:0 20px 40px rgba(0,0,0,.15);
-
-}
-
-.meal-image{
+    min-height:360px;
 
     width:100%;
 
-    height:240px;
-
-    object-fit:cover;
-
-}
-
-.meal-card .card-body{
-
-    display:flex;
-
-    flex-direction:column;
-
-    padding:25px;
-
-    flex:1;
-
-}
-
-.meal-card h4{
-
-    color:#1B5E20;
-
-    font-weight:700;
-
-    margin-bottom:12px;
-
-}
-
-.meal-card p{
-
-    color:#666;
-
-    flex:1;
-
-    line-height:1.7;
-
-}
-
-.price{
-
-    color:#198754;
-
-    font-size:1.4rem;
-
-    font-weight:700;
-
-}
-
-/* ===========================
-   FEATURED RECOMMENDATION
-=========================== */
-
-.feature-card{
-
-    background:white;
-
-    border-radius:20px;
-
-    display:flex;
-
-    align-items:center;
-
-    overflow:hidden;
-
-    min-height:350px;
-
-    box-shadow:0 12px 30px rgba(0,0,0,.08);
-
+    box-shadow:0 10px 28px rgba(0,0,0,.08);
 }
 
 .feature-text{
 
     flex:1;
 
-    min-width:0;
-
     padding:45px;
-
 }
 
 .feature-text h2{
@@ -582,7 +296,6 @@ img{
     font-weight:700;
 
     margin-bottom:18px;
-
 }
 
 .feature-text p{
@@ -591,18 +304,16 @@ img{
 
     line-height:1.8;
 
-    margin-bottom:25px;
-
+    margin-bottom:28px;
 }
 
 .feature-image{
 
     flex:0 0 40%;
 
-    max-width:40%;
+    min-width:320px;
 
-    height:350px;
-
+    overflow:hidden;
 }
 
 .feature-image img{
@@ -613,32 +324,32 @@ img{
 
     object-fit:cover;
 
+    display:block;
 }
 
+
 /* ===========================
-   MINI FEATURE CARD
+   MINI CARD
 =========================== */
 
 .mini-card{
 
-    background:white;
+    background:#fff;
 
-    border-radius:20px;
+    border-radius:22px;
 
     overflow:hidden;
 
     height:100%;
 
-    box-shadow:0 12px 30px rgba(0,0,0,.08);
+    box-shadow:0 10px 28px rgba(0,0,0,.08);
 
     transition:.3s;
-
 }
 
 .mini-card:hover{
 
-    transform:translateY(-8px);
-
+    transform:translateY(-6px);
 }
 
 .mini-card img{
@@ -649,12 +360,12 @@ img{
 
     object-fit:cover;
 
+    display:block;
 }
 
 .mini-content{
 
     padding:25px;
-
 }
 
 .mini-content h4{
@@ -663,70 +374,86 @@ img{
 
     font-weight:700;
 
-    margin-bottom:10px;
-
+    margin-bottom:12px;
 }
 
 .mini-content p{
 
     color:#666;
 
+    line-height:1.7;
+
+    margin:0;
 }
+
 
 /* ===========================
    RECENT ORDERS
 =========================== */
+
+.dashboard-section{
+
+    background:#fff;
+
+    border-radius:22px;
+
+    padding:35px;
+
+    margin-top:45px;
+
+    box-shadow:0 10px 28px rgba(0,0,0,.08);
+}
 
 .order-card{
 
     display:grid;
 
     grid-template-columns:
-    minmax(240px,2fr)
-    1fr
-    1fr
-    auto;
-
-    gap:20px;
+        minmax(220px,2fr)
+        140px
+        150px
+        180px;
 
     align-items:center;
 
-    background:white;
+    gap:20px;
 
     padding:22px;
 
-    border-radius:18px;
-
     margin-bottom:18px;
 
-    box-shadow:0 8px 20px rgba(0,0,0,.08);
+    border-radius:18px;
+
+    background:#fff;
+
+    border:1px solid #edf0f2;
 
     transition:.3s;
-
 }
 
 .order-card:hover{
 
-    transform:translateY(-5px);
+    transform:translateY(-3px);
 
+    box-shadow:0 8px 22px rgba(0,0,0,.08);
 }
 
 .order-card h5{
 
-    font-weight:700;
-
     margin-bottom:6px;
 
+    font-weight:700;
+
+    color:#1B5E20;
 }
 
 .order-card small{
 
     display:block;
 
-    color:#666;
+    color:#777;
 
     line-height:1.6;
-
 }
 
 .order-card .badge{
@@ -734,8 +461,8 @@ img{
     font-size:.9rem;
 
     padding:8px 14px;
-
 }
+
 
 /* ===========================
    PROMOTION
@@ -743,27 +470,25 @@ img{
 
 .promo-banner{
 
+    margin-top:45px;
+
     background:
-    linear-gradient(rgba(255,140,0,.82),
-    rgba(255,140,0,.82)),
-    url("../images/dashboard/promo-banner.jpg");
+        linear-gradient(rgba(255,140,0,.78),rgba(255,140,0,.78)),
+        url("../images/dashboard/promo-banner.jpg");
 
     background-size:cover;
 
     background-position:center;
 
-    border-radius:22px;
-
-    padding:65px;
-
-    text-align:center;
-
-    color:white;
+    border-radius:24px;
 
     overflow:hidden;
 
-    box-shadow:0 15px 35px rgba(0,0,0,.15);
+    padding:70px 50px;
 
+    color:#fff;
+
+    text-align:center;
 }
 
 .promo-overlay{
@@ -771,535 +496,704 @@ img{
     max-width:700px;
 
     margin:auto;
-
 }
 
 .promo-overlay h2{
 
-    font-size:2.7rem;
+    font-size:2.6rem;
 
     font-weight:700;
 
-    margin-bottom:20px;
-
+    margin-bottom:18px;
 }
 
 .promo-overlay p{
 
-    font-size:1.2rem;
+    font-size:1.15rem;
 
     line-height:1.8;
 
     margin-bottom:30px;
+}
 
+
+/* ===========================
+   ALERT
+=========================== */
+
+.alert{
+
+    border:none;
+
+    border-radius:14px;
+}
+
+
+/* ===========================
+   PREVENT OVERFLOW
+=========================== */
+
+.row{
+
+    margin-left:0;
+
+    margin-right:0;
+}
+
+img{
+
+    max-width:100%;
+}
+
+.card{
+
+    max-width:100%;
+}
+
+.dashboard-section,
+.feature-card,
+.mini-card,
+.dashboard-card{
+
+    width:100%;
 }
 
 /* =====================================================
    COLRS STUDENT STYLESHEET
-   PART 3 - CART, CHECKOUT & RESPONSIVE
+   PART 3 - MENU PAGE & FEATURE CARDS
 ===================================================== */
 
+/* ===========================
+   MENU HERO
+=========================== */
+
+.menu-hero{
+    min-height:320px;
+    border-radius:20px;
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+
+    background:
+        linear-gradient(rgba(25,80,40,.72), rgba(25,80,40,.72)),
+        url("../images/dashboard/cafeteria.jpg");
+
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+
+    color:#fff;
+    margin-bottom:40px;
+}
+
+.menu-hero h1{
+    font-size:3rem;
+    font-weight:700;
+    margin-bottom:15px;
+}
+
+.menu-hero p{
+    font-size:1.15rem;
+    max-width:650px;
+    margin:auto;
+}
+
+/* ===========================
+   POINTS CARD
+=========================== */
+
+.points-card{
+    background:#198754;
+    color:#fff;
+    border-radius:18px;
+    padding:18px;
+    text-align:center;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.points-card h2{
+    font-size:2rem;
+    font-weight:700;
+}
+
+.points-card small{
+    display:block;
+    opacity:.9;
+    margin-top:6px;
+}
+
+/* ===========================
+   CATEGORY BUTTONS
+=========================== */
+
+.category-buttons{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-bottom:35px;
+}
+
+.category-btn{
+    display:inline-block;
+    padding:10px 22px;
+    border-radius:50px;
+    text-decoration:none;
+    border:2px solid #198754;
+    color:#198754;
+    font-weight:600;
+    transition:.3s;
+}
+
+.category-btn:hover,
+.category-btn.active{
+    background:#198754;
+    color:#fff;
+}
+
+/* ===========================
+   MENU GRID
+=========================== */
+
+.menu-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:25px;
+}
+
+/* ===========================
+   MEAL CARD
+=========================== */
+
+.meal-card{
+    background:#fff;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+    transition:.3s;
+
+    display:flex;
+    flex-direction:column;
+
+    width:100%;
+    height:100%;
+}
+
+.meal-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 18px 35px rgba(0,0,0,.15);
+}
+
+.meal-image{
+    width:100%;
+    height:240px;
+    object-fit:cover;
+}
+
+.meal-card .card-body{
+    padding:25px;
+
+    display:flex;
+    flex-direction:column;
+    flex:1;
+}
+
+.meal-card h4{
+    font-size:1.35rem;
+    font-weight:700;
+    margin-bottom:10px;
+}
+
+.meal-card p{
+    color:#666;
+    flex-grow:1;
+    line-height:1.6;
+}
+
+.price{
+    font-size:1.4rem;
+    color:#198754;
+    font-weight:700;
+}
+
+/* ===========================
+   FEATURE CARD
+=========================== */
+
+.feature-card{
+    background:#fff;
+    border-radius:20px;
+    overflow:hidden;
+
+    display:flex;
+    align-items:center;
+
+    width:100%;
+    min-height:350px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.feature-text{
+    flex:1;
+    padding:45px;
+}
+
+.feature-text h2{
+    color:#1b5e20;
+    font-weight:700;
+    margin-bottom:20px;
+}
+
+.feature-text p{
+    color:#666;
+    line-height:1.8;
+    margin-bottom:25px;
+}
+
+.feature-image{
+    width:40%;
+    height:350px;
+}
+
+.feature-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+/* ===========================
+   MINI CARD
+=========================== */
+
+.mini-card{
+    background:#fff;
+    border-radius:20px;
+    overflow:hidden;
+    height:100%;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+    transition:.3s;
+}
+
+.mini-card:hover{
+    transform:translateY(-6px);
+}
+
+.mini-card img{
+    width:100%;
+    height:230px;
+    object-fit:cover;
+}
+
+.mini-content{
+    padding:25px;
+}
+
+.mini-content h4{
+    color:#1b5e20;
+    font-weight:700;
+    margin-bottom:10px;
+}
+
+.mini-content p{
+    color:#666;
+}
+
+/* ===========================
+   PROMOTION
+=========================== */
+
+.promo-banner{
+    border-radius:20px;
+    overflow:hidden;
+    padding:60px;
+
+    text-align:center;
+    color:#fff;
+
+    background:
+        linear-gradient(rgba(255,140,0,.82), rgba(255,140,0,.82)),
+        url("../images/dashboard/promo-banner.jpg");
+
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+}
+
+.promo-banner h2{
+    font-size:2.5rem;
+    font-weight:700;
+}
+
+.promo-banner p{
+    font-size:1.2rem;
+    margin:20px auto 30px;
+    max-width:700px;
+}
+
+/* =====================================================
+   COLRS STUDENT STYLESHEET
+   PART 4 - ORDERS, CART, CHECKOUT & RESPONSIVE
+===================================================== */
+
+/* ===========================
+   RECENT ORDERS
+=========================== */
+
+.dashboard-section{
+    background:#fff;
+    border-radius:20px;
+    padding:35px;
+    margin-bottom:40px;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.section-title h3{
+    color:#1b5e20;
+    font-weight:700;
+    margin-bottom:25px;
+}
+
+.order-card{
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr auto;
+    align-items:center;
+    gap:20px;
+
+    background:#fff;
+
+    padding:22px;
+
+    margin-bottom:18px;
+
+    border-radius:16px;
+
+    border:1px solid #ececec;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.05);
+
+    transition:.3s;
+}
+
+.order-card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 12px 25px rgba(0,0,0,.08);
+}
+
+.order-card h5{
+    margin-bottom:6px;
+    font-weight:700;
+}
+
+.order-card small{
+    display:block;
+    color:#666;
+    line-height:1.5;
+}
 
 /* ===========================
    CART HERO
 =========================== */
 
 .cart-hero{
+    min-height:220px;
 
-    height:240px;
-
-    border-radius:22px;
-
-    background:
-    linear-gradient(rgba(20,80,40,.75),
-    rgba(20,80,40,.75)),
-    url("../images/dashboard/cafeteria.jpg");
-
-    background-size:cover;
-    background-position:center;
+    border-radius:20px;
 
     display:flex;
     justify-content:center;
     align-items:center;
 
-    margin-bottom:40px;
-
-    overflow:hidden;
-
-    box-shadow:0 15px 35px rgba(0,0,0,.15);
-
-}
-
-.cart-hero-overlay{
-
-    color:white;
-
     text-align:center;
 
+    color:#fff;
+
+    margin-bottom:40px;
+
+    background:
+        linear-gradient(rgba(20,80,35,.72), rgba(20,80,35,.72)),
+        url("../images/dashboard/cafeteria.jpg");
+
+    background-size:cover;
+    background-position:center;
 }
 
-.cart-hero-overlay h1{
-
+.cart-hero h1{
     font-size:3rem;
-
     font-weight:700;
-
 }
-
-.cart-hero-overlay p{
-
-    margin-top:12px;
-
-    font-size:1.1rem;
-
-}
-
 
 /* ===========================
    CART ITEMS
 =========================== */
 
 .cart-item{
-
     display:flex;
-
-    align-items:center;
-
     gap:25px;
 
-    background:white;
+    background:#fff;
 
     padding:22px;
 
-    border-radius:18px;
-
     margin-bottom:20px;
 
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
-
-}
-
-.cart-item img{
-
-    width:140px;
-
-    height:140px;
-
-    object-fit:cover;
-
-    border-radius:16px;
-
-}
-
-.cart-details{
-
-    flex:1;
-
-}
-
-.cart-details h4{
-
-    color:#1B5E20;
-
-    font-weight:700;
-
-    margin-bottom:10px;
-
-}
-
-.cart-details p{
-
-    color:#666;
-
-    margin-bottom:12px;
-
-}
-
-.quantity-box{
-
-    display:flex;
+    border-radius:18px;
 
     align-items:center;
 
-    gap:15px;
-
+    box-shadow:0 10px 20px rgba(0,0,0,.08);
 }
 
+.cart-item img{
+    width:140px;
+    height:140px;
+    object-fit:cover;
+    border-radius:15px;
+}
+
+.cart-details{
+    flex:1;
+}
+
+.cart-details h4{
+    font-weight:700;
+    margin-bottom:10px;
+}
+
+.cart-details p{
+    color:#666;
+}
+
+.quantity-box{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    margin-top:15px;
+}
 
 /* ===========================
-   ORDER SUMMARY
+   SUMMARY CARD
 =========================== */
 
 .summary-card{
-
-    background:white;
+    background:#fff;
 
     padding:30px;
 
     border-radius:20px;
 
-    box-shadow:0 12px 30px rgba(0,0,0,.08);
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
 
     position:sticky;
-
-    top:110px;
-
-}
-
-.summary-card h3{
-
-    color:#1B5E20;
-
-    font-weight:700;
-
-    margin-bottom:25px;
-
+    top:100px;
 }
 
 .summary-row{
-
     display:flex;
-
     justify-content:space-between;
-
-    margin:16px 0;
-
-    color:#555;
-
+    margin:18px 0;
 }
 
 .total{
-
-    font-size:1.35rem;
-
+    font-size:1.5rem;
     font-weight:700;
-
-    color:#1B5E20;
-
 }
-
 
 /* ===========================
    EMPTY CART
 =========================== */
 
 .empty-cart{
+    background:#fff;
 
-    background:white;
-
-    border-radius:20px;
-
-    padding:70px 40px;
+    padding:70px 30px;
 
     text-align:center;
 
-    box-shadow:0 12px 30px rgba(0,0,0,.08);
+    border-radius:20px;
 
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
 }
 
 .empty-cart img{
-
     width:220px;
-
-    margin:0 auto 30px;
-
-}
-
-.empty-cart h3{
-
-    color:#1B5E20;
-
-    font-weight:700;
-
-    margin-bottom:15px;
-
-}
-
-.empty-cart p{
-
-    color:#666;
-
+    max-width:100%;
     margin-bottom:25px;
-
 }
-
 
 /* ===========================
    CHECKOUT
 =========================== */
 
 .checkout-hero{
-
-    background:
-    linear-gradient(rgba(20,80,40,.75),
-    rgba(20,80,40,.75)),
-    url("../images/dashboard/cafeteria.jpg");
-
-    background-size:cover;
-
-    background-position:center;
-
     border-radius:20px;
 
+    padding:60px;
+
+    color:#fff;
+
+    background:
+        linear-gradient(rgba(20,80,35,.72), rgba(20,80,35,.72)),
+        url("../images/dashboard/cafeteria.jpg");
+
+    background-size:cover;
+    background-position:center;
 }
 
 .payment-option{
+    background:#fff;
 
-    border:2px solid #e6e6e6;
+    border:2px solid #ddd;
 
-    background:white;
+    border-radius:15px;
 
     padding:18px;
-
-    border-radius:14px;
 
     margin-bottom:15px;
 
     cursor:pointer;
 
     transition:.3s;
-
-    font-weight:600;
-
 }
 
 .payment-option:hover{
-
     border-color:#198754;
-
-    background:#f8fff9;
-
+    background:#f8fff8;
 }
 
 .payment-option input{
-
     margin-right:12px;
-
 }
-
-.sticky-top{
-
-    top:110px;
-
-}
-
 
 /* ===========================
-   BADGES
+   GENERAL UTILITIES
 =========================== */
 
-.badge{
-
-    border-radius:30px;
-
-    font-weight:600;
-
+img{
+    max-width:100%;
+    display:block;
 }
 
-
-/* ===========================
-   ALERTS
-=========================== */
-
-.alert{
-
-    border-radius:15px;
-
-    border:none;
-
+.table-responsive{
+    overflow-x:auto;
 }
 
+.row{
+    margin-left:0;
+    margin-right:0;
+}
 
 /* ===========================
    RESPONSIVE
 =========================== */
 
-@media (max-width:1200px){
-
-    .feature-image{
-
-        flex:0 0 45%;
-
-        max-width:45%;
-
-    }
-
-}
-
-
 @media (max-width:992px){
 
     .hero-banner{
-
         padding:35px;
-
-        min-height:300px;
-
+        text-align:center;
     }
 
     .hero-content h1{
-
-        font-size:2.3rem;
-
+        font-size:2.4rem;
     }
 
     .feature-card{
-
         flex-direction:column;
-
     }
 
     .feature-image{
-
         width:100%;
-
-        max-width:100%;
-
-        flex:0 0 auto;
-
         height:260px;
-
     }
 
     .feature-text{
-
         padding:30px;
-
+        text-align:center;
     }
 
     .order-card{
-
         grid-template-columns:1fr;
-
         text-align:center;
-
     }
 
     .cart-item{
-
         flex-direction:column;
-
         text-align:center;
-
     }
 
     .summary-card{
-
         position:static;
-
         margin-top:30px;
-
-    }
-
-}
-
-
-@media (max-width:768px){
-
-    .hero-content h1{
-
-        font-size:2rem;
-
-    }
-
-    .hero-banner{
-
-        padding:25px;
-
-    }
-
-    .menu-hero,
-
-    .cart-hero{
-
-        height:220px;
-
     }
 
     .promo-banner{
-
         padding:40px 25px;
-
     }
 
-    .promo-overlay h2{
-
+    .promo-banner h2{
         font-size:2rem;
+    }
+}
 
+@media (max-width:768px){
+
+    body{
+        padding-top:80px;
+    }
+
+    .hero-banner,
+    .menu-hero,
+    .cart-hero,
+    .checkout-hero{
+        padding:30px 20px;
+        min-height:auto;
     }
 
     .dashboard-card{
-
-        min-height:auto;
-
-    }
-
-}
-
-
-@media (max-width:576px){
-
-    .hero-content h1{
-
-        font-size:1.7rem;
-
-    }
-
-    .hero-content p{
-
-        font-size:1rem;
-
+        padding:25px;
     }
 
     .meal-image{
-
         height:220px;
-
     }
 
     .cart-item img{
-
         width:120px;
-
         height:120px;
-
     }
 
-    .summary-card{
-
-        padding:22px;
-
+    .btn{
+        width:100%;
     }
-
 }
 
-
 /* ===========================
-   ANIMATIONS
+   FINAL SAFETY FIXES
 =========================== */
 
+.container,
+.container-fluid{
+    overflow-x:hidden;
+}
+
+.feature-card,
+.dashboard-section,
 .dashboard-card,
 .meal-card,
-.mini-card,
-.feature-card,
-.order-card,
-.cart-item{
-
-    transition:all .3s ease;
-
+.promo-banner,
+.summary-card{
+    width:100%;
 }
 
-.dashboard-card:hover,
-.meal-card:hover,
-.mini-card:hover,
-.feature-card:hover,
-.order-card:hover{
-
-    transform:translateY(-6px);
-
+.order-card > *{
+    min-width:0;
 }
 
-
-/* ===========================
-   END OF STYLESHEET
-=========================== */
+.student-email{
+    word-break:break-word;
+    overflow-wrap:anywhere;
+}
