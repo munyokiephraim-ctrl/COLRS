@@ -342,19 +342,19 @@
 
                             <td>
 
-                                {{ order.student.username }}
+                                User #{{ order.user_id }}
 
                             </td>
 
                             <td>
 
-                                {{ order.meal.name }}
+                                —
 
                             </td>
 
                             <td>
 
-                                KES {{ "%.2f"|format(order.total_price) }}
+                                KES {{ "%.2f"|format(order.total_amount) }}
 
                             </td>
 
