@@ -1,0 +1,275 @@
+/* ==========================================
+   ADMIN PANEL
+========================================== */
+
+body{
+    background:#f5f7fa;
+}
+
+/* ==========================================
+   HERO
+========================================== */
+
+.admin-hero{
+    background:linear-gradient(135deg,#198754,#146c43);
+    color:#fff;
+    padding:50px;
+    border-radius:20px;
+    box-shadow:0 15px 35px rgba(0,0,0,.15);
+}
+
+.admin-hero h1{
+    font-size:2.8rem;
+    font-weight:700;
+    margin-bottom:15px;
+}
+
+.admin-hero p{
+    font-size:1.1rem;
+    color:#eef7f0;
+    margin-bottom:25px;
+    max-width:650px;
+}
+
+/* ==========================================
+   SEARCH
+========================================== */
+
+#menuSearch{
+    border-radius:12px;
+    border:1px solid #d8d8d8;
+    padding:14px 18px;
+    transition:.3s;
+}
+
+#menuSearch:focus{
+    border-color:#198754;
+    box-shadow:0 0 0 .2rem rgba(25,135,84,.15);
+}
+
+/* ==========================================
+   CARD
+========================================== */
+
+.meal-admin-card{
+    border-radius:18px;
+    overflow:hidden;
+    transition:.3s;
+    background:#fff;
+}
+
+.meal-admin-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 20px 40px rgba(0,0,0,.12) !important;
+}
+
+/* ==========================================
+   IMAGE
+========================================== */
+
+.admin-meal-img{
+    width:100%;
+    height:190px;
+    object-fit:cover;
+    display:block;
+}
+
+/* ==========================================
+   CARD BODY
+========================================== */
+
+.meal-admin-card .card-body{
+    display:flex;
+    flex-direction:column;
+    padding:25px;
+}
+
+.meal-admin-card h4{
+    font-size:1.35rem;
+    font-weight:700;
+    color:#222;
+    margin-bottom:10px;
+}
+
+.meal-description{
+    color:#666;
+    line-height:1.6;
+    min-height:65px;
+    margin-bottom:20px;
+    flex-grow:1;
+}
+
+/* ==========================================
+   PRICE
+========================================== */
+
+.meal-admin-card .text-success{
+    font-size:1.5rem;
+    font-weight:700;
+}
+
+/* ==========================================
+   BADGES
+========================================== */
+
+.badge{
+    border-radius:50px;
+    padding:8px 14px;
+    font-weight:600;
+}
+
+/* ==========================================
+   BUTTONS
+========================================== */
+
+.meal-admin-card .btn{
+    border-radius:10px;
+    padding:11px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.meal-admin-card .btn-warning:hover{
+    transform:translateY(-2px);
+}
+
+.meal-admin-card .btn-danger:hover{
+    transform:translateY(-2px);
+}
+
+/* ==========================================
+   EMPTY STATE
+========================================== */
+
+.empty-state{
+    text-align:center;
+    padding:70px 40px;
+}
+
+.empty-state img{
+    width:180px;
+    margin-bottom:25px;
+}
+
+.empty-state h3{
+    font-weight:700;
+    color:#222;
+}
+
+.empty-state p{
+    color:#666;
+}
+
+/* ==========================================
+   TABLES
+========================================== */
+
+.table{
+    background:#fff;
+    border-radius:15px;
+    overflow:hidden;
+}
+
+.table thead{
+    background:#198754;
+    color:#fff;
+}
+
+.table th{
+    font-weight:600;
+}
+
+.table td{
+    vertical-align:middle;
+}
+
+/* ==========================================
+   FORMS
+========================================== */
+
+.form-control,
+.form-select{
+    border-radius:12px;
+    padding:12px 15px;
+}
+
+.form-control:focus,
+.form-select:focus{
+    border-color:#198754;
+    box-shadow:0 0 0 .2rem rgba(25,135,84,.15);
+}
+
+/* ==========================================
+   ADMIN DASHBOARD CARDS
+========================================== */
+
+.admin-stat-card{
+    background:#fff;
+    border-radius:18px;
+    padding:30px;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+    transition:.3s;
+    text-align:center;
+}
+
+.admin-stat-card:hover{
+    transform:translateY(-6px);
+}
+
+.admin-stat-card i{
+    font-size:2.5rem;
+    color:#198754;
+    margin-bottom:15px;
+}
+
+.admin-stat-card h2{
+    font-size:2.4rem;
+    font-weight:700;
+    margin-bottom:5px;
+}
+
+.admin-stat-card p{
+    color:#666;
+    margin:0;
+}
+
+/* ==========================================
+   CARDS
+========================================== */
+
+.card{
+    border-radius:18px;
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media(max-width:992px){
+
+    .admin-hero{
+        padding:35px;
+        text-align:center;
+    }
+
+    .admin-hero h1{
+        font-size:2.2rem;
+    }
+
+    .admin-meal-img{
+        height:180px;
+    }
+
+}
+
+@media(max-width:768px){
+
+    .admin-meal-img{
+        height:170px;
+    }
+
+    .meal-admin-card .card-body{
+        padding:20px;
+    }
+
+}
