@@ -1,12 +1,12 @@
-/* =====================================================
+/* ==========================================================
    COLRS STUDENT STYLESHEET
-   PART 1 - GLOBAL, NAVBAR, HERO & DASHBOARD
-===================================================== */
+   PART 1
+   Global • Navbar • Hero • Buttons • Dashboard
+========================================================== */
 
-
-/* ===========================
+/* ==========================================================
    GLOBAL
-=========================== */
+========================================================== */
 
 *{
     margin:0;
@@ -14,124 +14,233 @@
     box-sizing:border-box;
 }
 
+html{
+    scroll-behavior:smooth;
+}
+
 body{
+
+    font-family:"Poppins",sans-serif;
+
+    background:#f4f7fb;
+
+    color:#343a40;
+
     padding-top:90px;
-    background:#f5f7fa;
-    font-family:'Poppins',sans-serif;
+
     overflow-x:hidden;
+
+    line-height:1.6;
 }
 
 .container,
 .container-fluid{
+
     width:100%;
+
     max-width:1280px;
+
     margin:auto;
+
+    padding-left:15px;
+
+    padding-right:15px;
 }
 
+img{
 
-/* ===========================
+    max-width:100%;
+
+    display:block;
+}
+
+/* ==========================================================
    NAVBAR
-=========================== */
+========================================================== */
 
 .navbar{
-    box-shadow:0 6px 18px rgba(0,0,0,.12);
-}
 
-.navbar-brand{
-    font-size:1.5rem;
-    font-weight:700;
-    color:#fff !important;
-}
+    background:#14532d !important;
 
-.navbar-dark .navbar-nav .nav-link{
-    color:#ffffff !important;
-    font-weight:600;
-    margin-left:10px;
+    box-shadow:0 6px 20px rgba(0,0,0,.12);
+
     transition:.3s;
 }
 
-.navbar-dark .navbar-nav .nav-link:hover{
-    color:#FFD54F !important;
+.navbar-brand{
+
+    font-size:1.6rem;
+
+    font-weight:700;
+
+    letter-spacing:.4px;
+
+    color:#fff !important;
 }
 
+.navbar-brand:hover{
 
-/* ===========================
-   HERO
-=========================== */
+    color:#ffd54f !important;
+}
+
+.navbar-dark .navbar-nav .nav-link{
+
+    color:#fff !important;
+
+    font-weight:600;
+
+    margin-left:12px;
+
+    transition:.25s ease;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover{
+
+    color:#ffd54f !important;
+
+    transform:translateY(-2px);
+}
+
+/* ==========================================================
+   BUTTONS
+========================================================== */
+
+.btn{
+
+    border-radius:14px;
+
+    font-weight:600;
+
+    transition:.3s ease;
+
+    padding:12px 28px;
+}
+
+.btn-success{
+
+    background:#198754;
+
+    border:none;
+}
+
+.btn-success:hover{
+
+    background:#157347;
+
+    transform:translateY(-3px);
+
+    box-shadow:0 12px 25px rgba(25,135,84,.25);
+}
+
+.btn-warning{
+
+    background:#ffc107;
+
+    border:none;
+
+    color:#222;
+}
+
+.btn-warning:hover{
+
+    background:#ffca2c;
+
+    transform:translateY(-3px);
+
+    box-shadow:0 12px 25px rgba(255,193,7,.30);
+}
+
+.btn-outline-success{
+
+    border:2px solid #198754;
+
+    color:#198754;
+}
+
+.btn-outline-success:hover{
+
+    background:#198754;
+
+    color:#fff;
+
+    transform:translateY(-3px);
+}
+
+/* ==========================================================
+   HERO SECTION
+========================================================== */
 
 .hero-banner{
-    background:
-        linear-gradient(rgba(22,85,45,.72),rgba(22,85,45,.72)),
-        url("../images/dashboard/hero-banner.jpg");
 
-    background-size:cover;
-    background-position:center;
-
-    border-radius:24px;
-
-    min-height:360px;
+    position:relative;
 
     display:flex;
+
     align-items:center;
+
+    min-height:380px;
 
     padding:60px;
 
     margin-bottom:45px;
 
-    color:#fff;
+    border-radius:24px;
 
     overflow:hidden;
+
+    background:
+
+        linear-gradient(
+            rgba(20,83,45,.78),
+            rgba(20,83,45,.78)
+        ),
+
+        url("../images/dashboard/hero-banner.jpg");
+
+    background-size:cover;
+
+    background-position:center;
+
+    background-repeat:no-repeat;
+
+    color:#fff;
 }
 
 .hero-overlay{
+
     width:100%;
 }
 
 .hero-content{
+
     max-width:650px;
 }
 
 .hero-content h1{
-    font-size:3.1rem;
+
+    font-size:3rem;
+
     font-weight:700;
-    margin-bottom:18px;
+
+    margin-bottom:20px;
+
+    line-height:1.2;
 }
 
 .hero-content p{
+
     font-size:1.15rem;
+
+    color:#f5f5f5;
+
+    margin-bottom:30px;
+
     line-height:1.8;
-    color:#f3f3f3;
-    margin-bottom:25px;
 }
 
-
-/* ===========================
-   BUTTONS
-=========================== */
-
-.btn-success,
-.btn-warning,
-.btn-outline-success,
-.btn-light{
-
-    border-radius:12px;
-    padding:12px 28px;
-    font-weight:600;
-    transition:.3s;
-}
-
-.btn-success:hover,
-.btn-warning:hover,
-.btn-outline-success:hover,
-.btn-light:hover{
-
-    transform:translateY(-2px);
-}
-
-
-/* ===========================
+/* ==========================================================
    DASHBOARD CARDS
-=========================== */
+========================================================== */
 
 .dashboard-card{
 
@@ -145,27 +254,32 @@ body{
 
     height:100%;
 
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
+    box-shadow:0 12px 28px rgba(0,0,0,.08);
 
-    transition:.3s;
+    transition:.3s ease;
+
+    border:1px solid rgba(0,0,0,.04);
 }
 
 .dashboard-card:hover{
 
-    transform:translateY(-6px);
+    transform:translateY(-8px);
 
-    box-shadow:0 18px 35px rgba(0,0,0,.12);
+    box-shadow:0 20px 40px rgba(0,0,0,.12);
 }
 
 .icon-circle{
 
     width:72px;
+
     height:72px;
 
     border-radius:50%;
 
     display:flex;
+
     justify-content:center;
+
     align-items:center;
 
     margin:0 auto 20px;
@@ -174,70 +288,83 @@ body{
 
     font-size:30px;
 
-    box-shadow:0 10px 20px rgba(0,0,0,.18);
+    box-shadow:0 10px 22px rgba(0,0,0,.18);
 }
 
 .dashboard-card h6{
 
-    color:#666;
+    color:#6c757d;
+
     font-weight:600;
+
+    margin-bottom:10px;
 }
 
 .dashboard-card h2{
 
-    font-size:2.7rem;
+    font-size:2.6rem;
+
     font-weight:700;
-    margin:10px 0;
-}
 
-.points{
-
-    color:#FF9800;
+    margin-bottom:10px;
 }
 
 .dashboard-card p{
 
-    color:#777;
+    color:#6c757d;
+
+    margin-bottom:0;
 }
 
+.points{
 
-/* ===========================
+    color:#ff9800;
+}
+
+/* ==========================================================
    STUDENT PROFILE CARD
-=========================== */
+========================================================== */
 
 .student-card{
 
     display:flex;
+
     flex-direction:column;
+
     justify-content:center;
+
+    align-items:center;
 
     min-height:250px;
 }
 
 .student-name{
 
-    font-size:1.2rem;
+    font-size:1.25rem;
 
     font-weight:700;
 
-    color:#1B5E20;
+    color:#14532d;
 
     margin-top:10px;
 }
 
 .student-email{
 
-    color:#666;
+    color:#6c757d;
+
+    margin-top:8px;
+
+    text-align:center;
 
     word-break:break-word;
 
-    margin-top:10px;
+    overflow-wrap:anywhere;
 }
 
-
-/* ===========================
+/* ==========================================================
    TITLES
-=========================== */
+========================================================== */
 
 .section-title{
 
@@ -246,38 +373,52 @@ body{
 
 .section-title h3{
 
-    color:#1B5E20;
-
     font-weight:700;
+
+    color:#14532d;
+
+    margin:0;
 }
 
-/* =====================================================
+/* ==========================================================
    COLRS STUDENT STYLESHEET
-   PART 2 - FEATURES, ORDERS & PROMOTION
-===================================================== */
+   PART 2
+   Dashboard Features • Orders • Promotion
+========================================================== */
 
 
-/* ===========================
+/* ==========================================================
    FEATURE SECTION
-=========================== */
+========================================================== */
 
 .feature-card{
 
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:40px;
+
     background:#fff;
 
-    border-radius:22px;
+    border-radius:24px;
 
     overflow:hidden;
 
-    display:flex;
-
-    align-items:stretch;
-
     min-height:360px;
 
-    width:100%;
+    box-shadow:0 12px 30px rgba(0,0,0,.08);
 
-    box-shadow:0 10px 28px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.feature-card:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:0 18px 38px rgba(0,0,0,.12);
 }
 
 .feature-text{
@@ -287,20 +428,27 @@ body{
     padding:45px;
 }
 
-.feature-text h2{
+.feature-text .badge{
 
-    color:#1B5E20;
+    margin-bottom:18px;
+
+    font-size:.9rem;
+}
+
+.feature-text h2{
 
     font-size:2rem;
 
     font-weight:700;
+
+    color:#14532d;
 
     margin-bottom:18px;
 }
 
 .feature-text p{
 
-    color:#666;
+    color:#6c757d;
 
     line-height:1.8;
 
@@ -313,6 +461,8 @@ body{
 
     min-width:320px;
 
+    height:360px;
+
     overflow:hidden;
 }
 
@@ -323,26 +473,24 @@ body{
     height:100%;
 
     object-fit:cover;
-
-    display:block;
 }
 
 
-/* ===========================
-   MINI CARD
-=========================== */
+/* ==========================================================
+   MINI FEATURE CARD
+========================================================== */
 
 .mini-card{
 
     background:#fff;
 
-    border-radius:22px;
+    border-radius:24px;
 
     overflow:hidden;
 
     height:100%;
 
-    box-shadow:0 10px 28px rgba(0,0,0,.08);
+    box-shadow:0 12px 30px rgba(0,0,0,.08);
 
     transition:.3s;
 }
@@ -350,6 +498,8 @@ body{
 .mini-card:hover{
 
     transform:translateY(-6px);
+
+    box-shadow:0 18px 35px rgba(0,0,0,.12);
 }
 
 .mini-card img{
@@ -359,8 +509,6 @@ body{
     height:240px;
 
     object-fit:cover;
-
-    display:block;
 }
 
 .mini-content{
@@ -370,125 +518,123 @@ body{
 
 .mini-content h4{
 
-    color:#1B5E20;
+    color:#14532d;
 
     font-weight:700;
 
-    margin-bottom:12px;
+    margin-bottom:10px;
 }
 
 .mini-content p{
 
-    color:#666;
-
-    line-height:1.7;
+    color:#6c757d;
 
     margin:0;
+
+    line-height:1.7;
 }
 
 
-/* ===========================
-   RECENT ORDERS
-=========================== */
+/* ==========================================================
+   DASHBOARD SECTION
+========================================================== */
 
 .dashboard-section{
 
     background:#fff;
 
-    border-radius:22px;
+    border-radius:24px;
 
     padding:35px;
 
     margin-top:45px;
 
-    box-shadow:0 10px 28px rgba(0,0,0,.08);
+    box-shadow:0 12px 30px rgba(0,0,0,.08);
 }
+
+
+/* ==========================================================
+   RECENT ORDERS
+========================================================== */
 
 .order-card{
 
-    display:grid;
+    background:#fff;
 
-    grid-template-columns:
-        minmax(220px,2fr)
-        140px
-        150px
-        180px;
+    border:1px solid #ececec;
 
-    align-items:center;
-
-    gap:20px;
+    border-radius:18px;
 
     padding:22px;
 
     margin-bottom:18px;
 
-    border-radius:18px;
-
-    background:#fff;
-
-    border:1px solid #edf0f2;
-
     transition:.3s;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.04);
 }
 
 .order-card:hover{
 
-    transform:translateY(-3px);
+    transform:translateY(-4px);
 
-    box-shadow:0 8px 22px rgba(0,0,0,.08);
+    box-shadow:0 14px 28px rgba(0,0,0,.10);
 }
 
 .order-card h5{
 
-    margin-bottom:6px;
+    color:#14532d;
 
     font-weight:700;
 
-    color:#1B5E20;
+    margin-bottom:6px;
 }
 
 .order-card small{
 
+    color:#6c757d;
+
     display:block;
-
-    color:#777;
-
-    line-height:1.6;
 }
 
 .order-card .badge{
 
+    padding:8px 16px;
+
     font-size:.9rem;
 
-    padding:8px 14px;
+    border-radius:50px;
 }
 
 
-/* ===========================
+/* ==========================================================
    PROMOTION
-=========================== */
+========================================================== */
 
 .promo-banner{
 
-    margin-top:45px;
+    margin-top:50px;
+
+    border-radius:24px;
+
+    overflow:hidden;
 
     background:
-        linear-gradient(rgba(255,140,0,.78),rgba(255,140,0,.78)),
+
+        linear-gradient(
+            rgba(255,140,0,.82),
+            rgba(255,140,0,.82)
+        ),
+
         url("../images/dashboard/promo-banner.jpg");
 
     background-size:cover;
 
     background-position:center;
 
-    border-radius:24px;
-
-    overflow:hidden;
-
-    padding:70px 50px;
+    background-repeat:no-repeat;
 
     color:#fff;
-
-    text-align:center;
 }
 
 .promo-overlay{
@@ -496,15 +642,26 @@ body{
     max-width:700px;
 
     margin:auto;
+
+    text-align:center;
+
+    padding:70px 40px;
+}
+
+.promo-overlay .badge{
+
+    font-size:.9rem;
+
+    margin-bottom:18px;
 }
 
 .promo-overlay h2{
 
-    font-size:2.6rem;
+    font-size:2.5rem;
 
     font-weight:700;
 
-    margin-bottom:18px;
+    margin-bottom:20px;
 }
 
 .promo-overlay p{
@@ -517,538 +674,605 @@ body{
 }
 
 
-/* ===========================
-   ALERT
-=========================== */
+/* ==========================================================
+   ALERTS
+========================================================== */
 
 .alert{
 
     border:none;
 
-    border-radius:14px;
+    border-radius:16px;
+
+    padding:20px;
+
+    box-shadow:0 8px 18px rgba(0,0,0,.05);
 }
 
 
-/* ===========================
-   PREVENT OVERFLOW
-=========================== */
+/* ==========================================================
+   UTILITIES
+========================================================== */
 
-.row{
-
-    margin-left:0;
-
-    margin-right:0;
-}
-
-img{
-
-    max-width:100%;
-}
-
-.card{
-
-    max-width:100%;
-}
-
-.dashboard-section,
+.dashboard-card,
 .feature-card,
 .mini-card,
-.dashboard-card{
+.dashboard-section,
+.order-card,
+.promo-banner{
 
     width:100%;
 }
 
-/* =====================================================
+/* ==========================================================
    COLRS STUDENT STYLESHEET
-   PART 3 - MENU PAGE & FEATURE CARDS
-===================================================== */
+   PART 3
+   Menu Page
+========================================================== */
 
-/* ===========================
+
+/* ==========================================================
    MENU HERO
-=========================== */
+========================================================== */
 
 .menu-hero{
-    min-height:320px;
-    border-radius:20px;
-    overflow:hidden;
+
+    min-height:340px;
+
     display:flex;
+
     align-items:center;
+
     justify-content:center;
+
     text-align:center;
 
+    border-radius:24px;
+
+    overflow:hidden;
+
+    margin-bottom:45px;
+
     background:
-        linear-gradient(rgba(25,80,40,.72), rgba(25,80,40,.72)),
+
+        linear-gradient(
+            rgba(20,83,45,.78),
+            rgba(20,83,45,.78)
+        ),
+
         url("../images/dashboard/cafeteria.jpg");
 
     background-size:cover;
+
     background-position:center;
+
     background-repeat:no-repeat;
 
     color:#fff;
-    margin-bottom:40px;
+}
+
+.menu-hero .hero-overlay{
+
+    width:100%;
+
+    max-width:850px;
+
+    padding:50px;
 }
 
 .menu-hero h1{
+
     font-size:3rem;
+
     font-weight:700;
-    margin-bottom:15px;
+
+    margin-bottom:18px;
 }
 
 .menu-hero p{
+
     font-size:1.15rem;
-    max-width:650px;
-    margin:auto;
-}
 
-/* ===========================
-   POINTS CARD
-=========================== */
+    color:#f5f5f5;
 
-.points-card{
-    background:#198754;
-    color:#fff;
-    border-radius:18px;
-    padding:18px;
-    text-align:center;
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
-}
-
-.points-card h2{
-    font-size:2rem;
-    font-weight:700;
-}
-
-.points-card small{
-    display:block;
-    opacity:.9;
-    margin-top:6px;
-}
-
-/* ===========================
-   CATEGORY BUTTONS
-=========================== */
-
-.category-buttons{
-    display:flex;
-    flex-wrap:wrap;
-    gap:12px;
-    margin-bottom:35px;
-}
-
-.category-btn{
-    display:inline-block;
-    padding:10px 22px;
-    border-radius:50px;
-    text-decoration:none;
-    border:2px solid #198754;
-    color:#198754;
-    font-weight:600;
-    transition:.3s;
-}
-
-.category-btn:hover,
-.category-btn.active{
-    background:#198754;
-    color:#fff;
-}
-
-/* ===========================
-   MENU GRID
-=========================== */
-
-.menu-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-    gap:25px;
-}
-
-/* ===========================
-   MEAL CARD
-=========================== */
-
-.meal-card{
-    background:#fff;
-    border-radius:20px;
-    overflow:hidden;
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
-    transition:.3s;
-
-    display:flex;
-    flex-direction:column;
-
-    width:100%;
-    height:100%;
-}
-
-.meal-card:hover{
-    transform:translateY(-8px);
-    box-shadow:0 18px 35px rgba(0,0,0,.15);
-}
-
-.meal-image{
-    width:100%;
-    height:240px;
-    object-fit:cover;
-}
-
-.meal-card .card-body{
-    padding:25px;
-
-    display:flex;
-    flex-direction:column;
-    flex:1;
-}
-
-.meal-card h4{
-    font-size:1.35rem;
-    font-weight:700;
-    margin-bottom:10px;
-}
-
-.meal-card p{
-    color:#666;
-    flex-grow:1;
-    line-height:1.6;
-}
-
-.price{
-    font-size:1.4rem;
-    color:#198754;
-    font-weight:700;
-}
-
-/* ===========================
-   FEATURE CARD
-=========================== */
-
-.feature-card{
-    background:#fff;
-    border-radius:20px;
-    overflow:hidden;
-
-    display:flex;
-    align-items:center;
-
-    width:100%;
-    min-height:350px;
-
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
-}
-
-.feature-text{
-    flex:1;
-    padding:45px;
-}
-
-.feature-text h2{
-    color:#1b5e20;
-    font-weight:700;
-    margin-bottom:20px;
-}
-
-.feature-text p{
-    color:#666;
     line-height:1.8;
-    margin-bottom:25px;
+
+    margin-bottom:30px;
 }
 
-.feature-image{
-    width:40%;
-    height:350px;
-}
 
-.feature-image img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-}
+/* ==========================================================
+   SEARCH BAR
+========================================================== */
 
-/* ===========================
-   MINI CARD
-=========================== */
+#menuSearch{
 
-.mini-card{
-    background:#fff;
-    border-radius:20px;
-    overflow:hidden;
-    height:100%;
-
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
-
-    transition:.3s;
-}
-
-.mini-card:hover{
-    transform:translateY(-6px);
-}
-
-.mini-card img{
-    width:100%;
-    height:230px;
-    object-fit:cover;
-}
-
-.mini-content{
-    padding:25px;
-}
-
-.mini-content h4{
-    color:#1b5e20;
-    font-weight:700;
-    margin-bottom:10px;
-}
-
-.mini-content p{
-    color:#666;
-}
-
-/* ===========================
-   PROMOTION
-=========================== */
-
-.promo-banner{
-    border-radius:20px;
-    overflow:hidden;
-    padding:60px;
-
-    text-align:center;
-    color:#fff;
-
-    background:
-        linear-gradient(rgba(255,140,0,.82), rgba(255,140,0,.82)),
-        url("../images/dashboard/promo-banner.jpg");
-
-    background-size:cover;
-    background-position:center;
-    background-repeat:no-repeat;
-}
-
-.promo-banner h2{
-    font-size:2.5rem;
-    font-weight:700;
-}
-
-.promo-banner p{
-    font-size:1.2rem;
-    margin:20px auto 30px;
-    max-width:700px;
-}
-
-/* =====================================================
-   COLRS STUDENT STYLESHEET
-   PART 4 - ORDERS, CART, CHECKOUT & RESPONSIVE
-===================================================== */
-
-/* ===========================
-   RECENT ORDERS
-=========================== */
-
-.dashboard-section{
-    background:#fff;
-    border-radius:20px;
-    padding:35px;
-    margin-bottom:40px;
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
-}
-
-.section-title h3{
-    color:#1b5e20;
-    font-weight:700;
-    margin-bottom:25px;
-}
-
-.order-card{
-    display:grid;
-    grid-template-columns:2fr 1fr 1fr auto;
-    align-items:center;
-    gap:20px;
-
-    background:#fff;
-
-    padding:22px;
-
-    margin-bottom:18px;
+    height:58px;
 
     border-radius:16px;
 
-    border:1px solid #ececec;
+    border:2px solid #dee2e6;
 
-    box-shadow:0 5px 15px rgba(0,0,0,.05);
+    padding:0 22px;
+
+    font-size:1rem;
 
     transition:.3s;
 }
 
-.order-card:hover{
-    transform:translateY(-4px);
-    box-shadow:0 12px 25px rgba(0,0,0,.08);
+#menuSearch:focus{
+
+    border-color:#198754;
+
+    box-shadow:0 0 0 .25rem rgba(25,135,84,.15);
 }
 
-.order-card h5{
-    margin-bottom:6px;
-    font-weight:700;
-}
 
-.order-card small{
-    display:block;
-    color:#666;
-    line-height:1.5;
-}
+/* ==========================================================
+   LOYALTY CARD
+========================================================== */
 
-/* ===========================
-   CART HERO
-=========================== */
+.points-card{
 
-.cart-hero{
-    min-height:220px;
+    background:linear-gradient(135deg,#198754,#146c43);
+
+    color:#fff;
 
     border-radius:20px;
 
+    padding:22px;
+
+    text-align:center;
+
+    box-shadow:0 12px 28px rgba(0,0,0,.10);
+
+    transition:.3s;
+}
+
+.points-card:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:0 18px 35px rgba(0,0,0,.15);
+}
+
+.points-card h4{
+
+    font-size:2rem;
+
+    font-weight:700;
+
+    margin-bottom:6px;
+}
+
+.points-card small{
+
+    font-size:.9rem;
+
+    opacity:.9;
+}
+
+
+/* ==========================================================
+   CATEGORY BUTTONS
+========================================================== */
+
+.category-buttons{
+
     display:flex;
+
+    flex-wrap:wrap;
+
+    gap:12px;
+
     justify-content:center;
+
+    margin-bottom:40px;
+}
+
+.category-btn{
+
+    text-decoration:none;
+
+    padding:11px 24px;
+
+    border-radius:50px;
+
+    border:2px solid #198754;
+
+    color:#198754;
+
+    background:#fff;
+
+    font-weight:600;
+
+    transition:.3s;
+}
+
+.category-btn:hover{
+
+    background:#198754;
+
+    color:#fff;
+
+    transform:translateY(-3px);
+}
+
+.category-btn.active{
+
+    background:#198754;
+
+    color:#fff;
+
+    box-shadow:0 10px 20px rgba(25,135,84,.25);
+}
+
+
+/* ==========================================================
+   MEAL CARDS
+========================================================== */
+
+.meal-card{
+
+    display:flex;
+
+    flex-direction:column;
+
+    height:100%;
+
+    background:#fff;
+
+    border-radius:22px;
+
+    overflow:hidden;
+
+    box-shadow:0 12px 28px rgba(0,0,0,.08);
+
+    transition:.3s;
+
+    border:1px solid rgba(0,0,0,.04);
+}
+
+.meal-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:0 20px 40px rgba(0,0,0,.14);
+}
+
+.meal-image{
+
+    width:100%;
+
+    height:240px;
+
+    object-fit:cover;
+
+    transition:.35s;
+}
+
+.meal-card:hover .meal-image{
+
+    transform:scale(1.05);
+}
+
+.meal-card .card-body{
+
+    display:flex;
+
+    flex-direction:column;
+
+    flex:1;
+
+    padding:24px;
+}
+
+.meal-card .badge{
+
+    border-radius:50px;
+
+    padding:7px 14px;
+
+    font-size:.8rem;
+}
+
+.meal-card h4{
+
+    color:#14532d;
+
+    font-weight:700;
+
+    margin:14px 0 10px;
+}
+
+.meal-card p{
+
+    color:#6c757d;
+
+    flex-grow:1;
+
+    line-height:1.7;
+}
+
+.price{
+
+    color:#198754;
+
+    font-size:1.45rem;
+
+    font-weight:700;
+}
+
+.meal-card form{
+
+    margin-left:15px;
+}
+
+.meal-card .btn{
+
+    border-radius:12px;
+
+    padding:10px 22px;
+}
+
+
+/* ==========================================================
+   EMPTY MENU
+========================================================== */
+
+.alert-info{
+
+    border:none;
+
+    border-radius:18px;
+
+    background:#e9f7ef;
+
+    color:#14532d;
+
+    padding:25px;
+}
+
+
+/* ==========================================================
+   MENU UTILITIES
+========================================================== */
+
+.meal-item{
+
+    display:block;
+}
+
+.meal-card,
+.points-card,
+.menu-hero{
+
+    width:100%;
+}
+
+/* ==========================================================
+   COLRS STUDENT STYLESHEET
+   PART 4
+   Cart • Checkout • Responsive • Utilities
+========================================================== */
+
+
+/* ==========================================================
+   CART HERO
+========================================================== */
+
+.cart-hero{
+
+    min-height:240px;
+
+    display:flex;
+
+    justify-content:center;
+
     align-items:center;
 
     text-align:center;
 
+    border-radius:24px;
+
+    margin-bottom:45px;
+
     color:#fff;
 
-    margin-bottom:40px;
-
     background:
-        linear-gradient(rgba(20,80,35,.72), rgba(20,80,35,.72)),
+
+        linear-gradient(
+            rgba(20,83,45,.78),
+            rgba(20,83,45,.78)
+        ),
+
         url("../images/dashboard/cafeteria.jpg");
 
     background-size:cover;
+
     background-position:center;
+
+    background-repeat:no-repeat;
 }
 
 .cart-hero h1{
+
     font-size:3rem;
+
     font-weight:700;
 }
 
-/* ===========================
-   CART ITEMS
-=========================== */
+
+/* ==========================================================
+   CART ITEM
+========================================================== */
 
 .cart-item{
+
     display:flex;
+
+    align-items:center;
+
     gap:25px;
 
     background:#fff;
 
-    padding:22px;
+    padding:25px;
 
     margin-bottom:20px;
 
-    border-radius:18px;
+    border-radius:20px;
 
-    align-items:center;
+    box-shadow:0 12px 28px rgba(0,0,0,.08);
 
-    box-shadow:0 10px 20px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.cart-item:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:0 18px 35px rgba(0,0,0,.12);
 }
 
 .cart-item img{
+
     width:140px;
+
     height:140px;
+
+    border-radius:16px;
+
     object-fit:cover;
-    border-radius:15px;
 }
 
 .cart-details{
+
     flex:1;
 }
 
 .cart-details h4{
+
+    color:#14532d;
+
     font-weight:700;
+
     margin-bottom:10px;
 }
 
 .cart-details p{
-    color:#666;
+
+    color:#6c757d;
 }
 
 .quantity-box{
+
     display:flex;
+
     align-items:center;
+
     gap:15px;
+
     margin-top:15px;
 }
 
-/* ===========================
+
+/* ==========================================================
    SUMMARY CARD
-=========================== */
+========================================================== */
 
 .summary-card{
+
+    position:sticky;
+
+    top:110px;
+
     background:#fff;
 
     padding:30px;
 
     border-radius:20px;
 
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
-
-    position:sticky;
-    top:100px;
+    box-shadow:0 12px 28px rgba(0,0,0,.08);
 }
 
 .summary-row{
+
     display:flex;
+
     justify-content:space-between;
+
     margin:18px 0;
 }
 
 .total{
+
     font-size:1.5rem;
+
     font-weight:700;
+
+    color:#14532d;
 }
 
-/* ===========================
+
+/* ==========================================================
    EMPTY CART
-=========================== */
+========================================================== */
 
 .empty-cart{
+
     background:#fff;
 
-    padding:70px 30px;
+    padding:70px 35px;
 
     text-align:center;
 
     border-radius:20px;
 
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
+    box-shadow:0 12px 28px rgba(0,0,0,.08);
 }
 
 .empty-cart img{
+
     width:220px;
-    max-width:100%;
-    margin-bottom:25px;
+
+    margin:0 auto 25px;
 }
 
-/* ===========================
+
+/* ==========================================================
    CHECKOUT
-=========================== */
+========================================================== */
 
 .checkout-hero{
-    border-radius:20px;
 
     padding:60px;
+
+    border-radius:24px;
 
     color:#fff;
 
     background:
-        linear-gradient(rgba(20,80,35,.72), rgba(20,80,35,.72)),
+
+        linear-gradient(
+            rgba(20,83,45,.78),
+            rgba(20,83,45,.78)
+        ),
+
         url("../images/dashboard/cafeteria.jpg");
 
     background-size:cover;
+
     background-position:center;
 }
 
 .payment-option{
+
     background:#fff;
 
-    border:2px solid #ddd;
+    border:2px solid #dee2e6;
 
-    border-radius:15px;
+    border-radius:16px;
 
     padding:18px;
 
@@ -1060,140 +1284,209 @@ img{
 }
 
 .payment-option:hover{
+
     border-color:#198754;
-    background:#f8fff8;
+
+    background:#f5fff8;
+
+    transform:translateY(-2px);
 }
 
 .payment-option input{
+
     margin-right:12px;
 }
 
-/* ===========================
-   GENERAL UTILITIES
-=========================== */
 
-img{
-    max-width:100%;
-    display:block;
-}
+/* ==========================================================
+   TABLES
+========================================================== */
 
 .table-responsive{
+
     overflow-x:auto;
 }
 
-.row{
-    margin-left:0;
-    margin-right:0;
-}
 
-/* ===========================
+/* ==========================================================
    RESPONSIVE
-=========================== */
+========================================================== */
 
 @media (max-width:992px){
-
-    .hero-banner{
-        padding:35px;
-        text-align:center;
-    }
-
-    .hero-content h1{
-        font-size:2.4rem;
-    }
-
-    .feature-card{
-        flex-direction:column;
-    }
-
-    .feature-image{
-        width:100%;
-        height:260px;
-    }
-
-    .feature-text{
-        padding:30px;
-        text-align:center;
-    }
-
-    .order-card{
-        grid-template-columns:1fr;
-        text-align:center;
-    }
-
-    .cart-item{
-        flex-direction:column;
-        text-align:center;
-    }
-
-    .summary-card{
-        position:static;
-        margin-top:30px;
-    }
-
-    .promo-banner{
-        padding:40px 25px;
-    }
-
-    .promo-banner h2{
-        font-size:2rem;
-    }
-}
-
-@media (max-width:768px){
-
-    body{
-        padding-top:80px;
-    }
 
     .hero-banner,
     .menu-hero,
     .cart-hero,
     .checkout-hero{
-        padding:30px 20px;
-        min-height:auto;
+
+        padding:40px 25px;
+
+        text-align:center;
+    }
+
+    .hero-content{
+
+        margin:auto;
+    }
+
+    .hero-content h1{
+
+        font-size:2.3rem;
+    }
+
+    .feature-card{
+
+        flex-direction:column;
+    }
+
+    .feature-image{
+
+        width:100%;
+
+        min-width:100%;
+
+        height:260px;
+    }
+
+    .feature-text{
+
+        padding:30px;
+
+        text-align:center;
+    }
+
+    .cart-item{
+
+        flex-direction:column;
+
+        text-align:center;
+    }
+
+    .summary-card{
+
+        position:static;
+
+        margin-top:30px;
+    }
+
+    .order-card{
+
+        text-align:center;
+    }
+
+}
+
+
+@media (max-width:768px){
+
+    body{
+
+        padding-top:80px;
     }
 
     .dashboard-card{
+
         padding:25px;
     }
 
     .meal-image{
+
         height:220px;
     }
 
     .cart-item img{
+
         width:120px;
+
         height:120px;
     }
 
+    .promo-overlay{
+
+        padding:40px 20px;
+    }
+
+    .promo-overlay h2{
+
+        font-size:2rem;
+    }
+
     .btn{
+
         width:100%;
     }
+
 }
 
-/* ===========================
-   FINAL SAFETY FIXES
-=========================== */
+
+@media (max-width:576px){
+
+    .hero-content h1,
+    .menu-hero h1,
+    .cart-hero h1{
+
+        font-size:2rem;
+    }
+
+    .hero-content p,
+    .menu-hero p{
+
+        font-size:1rem;
+    }
+
+    .category-buttons{
+
+        justify-content:center;
+    }
+
+    .category-btn{
+
+        width:100%;
+
+        text-align:center;
+    }
+
+}
+
+
+/* ==========================================================
+   FINAL UTILITIES
+========================================================== */
 
 .container,
 .container-fluid{
+
     overflow-x:hidden;
 }
 
-.feature-card,
-.dashboard-section,
+.row{
+
+    margin-left:0;
+
+    margin-right:0;
+}
+
 .dashboard-card,
+.feature-card,
+.mini-card,
+.dashboard-section,
 .meal-card,
-.promo-banner,
-.summary-card{
+.summary-card,
+.promo-banner{
+
     width:100%;
 }
 
-.order-card > *{
-    min-width:0;
+.student-email{
+
+    word-break:break-word;
+
+    overflow-wrap:anywhere;
 }
 
-.student-email{
-    word-break:break-word;
-    overflow-wrap:anywhere;
+img{
+
+    max-width:100%;
+
+    display:block;
 }
