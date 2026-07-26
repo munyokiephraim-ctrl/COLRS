@@ -4,207 +4,174 @@
 
 <div class="container-fluid py-4">
 
-<!-- HERO -->
-
-<div class="admin-hero mb-5">
-
-    <h1>
-
-        🍽 Menu Management
-
-    </h1>
-
-    <p>
-
-        Add, update and manage meals available for students every day.
-
-    </p>
-
-    <a href="{{ url_for('admin.add_menu_item') }}"
-       class="btn btn-warning btn-lg fw-bold">
-
-        ➕ Add New Meal
-
-    </a>
-
-</div>
-
-<!-- SEARCH -->
-
-<div class="row mb-4">
-
-    <div class="col-lg-8">
-
-        <input
-            class="form-control form-control-lg"
-            placeholder="Search meals...">
-
-    </div>
-
-    <div class="col-lg-4 text-end">
-
-        <span class="badge bg-success fs-6 p-3">
-
-            {{ items|length }} Meals Available
-
-        </span>
-
-    </div>
-
-</div>
-
-{% if items %}
-
-<div class="row g-4">
-
-{% for item in items %}
-
-<div class="col-lg-4">
-
-<div class="card border-0 shadow meal-admin-card">
-
-    <div class="position-relative">
-
-        {% if item.category=="Meals" %}
-
-        <img src="{{ url_for('static', filename='images/meals/burger.jpg') }}"
-             class="admin-meal-img">
-
-        {% elif item.category=="Beverages" %}
-
-        <img src="{{ url_for('static', filename='images/meals/coffee.jpg') }}"
-             class="admin-meal-img">
-
-        {% elif item.category=="Desserts" %}
-
-        <img src="{{ url_for('static', filename='images/meals/brownie.jpg') }}"
-             class="admin-meal-img">
-
-        {% else %}
-
-        <img src="{{ url_for('static', filename='images/meals/default.jpg') }}"
-             class="admin-meal-img">
-
-        {% endif %}
-                <span class="badge bg-success position-absolute top-0 end-0 m-3">
-
-            {{ item.category }}
-
-        </span>
-
-    </div>
-
-    <div class="card-body">
-
-        <h4 class="fw-bold">
-
-            {{ item.name }}
-
-        </h4>
-
-        <p class="text-muted">
-
-            {{ item.description }}
-
-        </p>
-
-        <div class="d-flex justify-content-between align-items-center mb-3">
-
-            <h4 class="text-success fw-bold mb-0">
-
-                KSh {{ "%.2f"|format(item.price) }}
-
-            </h4>
-
-            {% if item.is_available %}
-
-                <span class="badge bg-success">
-
-                    Available
-
-                </span>
-
-            {% else %}
-
-                <span class="badge bg-danger">
-
-                    Unavailable
-
-                </span>
-
-            {% endif %}
-
-        </div>
-
-        <div class="d-grid gap-2">
-
-            <a href="{{ url_for('admin.edit_menu_item', item_id=item.id) }}"
-               class="btn btn-warning">
-
-                ✏ Edit Meal
-
-            </a>
-
-            <form action="{{ url_for('admin.delete_menu_item', item_id=item.id) }}"
-                  method="POST"
-                  onsubmit="return confirm('Delete this menu item?');">
-
-                <button
-                    type="submit"
-                    class="btn btn-danger w-100">
-
-                    🗑 Delete Meal
-
-                </button>
-
-            </form>
-
-        </div>
-
-    </div>
-
-</div>
-
-</div>
-
-{% endfor %}
-
-</div>
-
-{% else %}
-
-<div class="card border-0 shadow">
-
-    <div class="card-body text-center py-5">
-
-        <img src="{{ url_for('static', filename='images/empty-menu.png') }}"
-             style="width:180px;"
-             class="mb-4">
-
-        <h3>
-
-            No Meals Found
-
-        </h3>
-
-        <p class="meal-description">
-
-            Your menu is currently empty. Add your first meal to get started.
-
+    <!-- HERO -->
+    <div class="admin-hero mb-5">
+        <h1>🍽 Menu Management</h1>
+        <p>
+            Add, update and manage meals available for students every day.
         </p>
 
         <a href="{{ url_for('admin.add_menu_item') }}"
-           class="btn btn-success btn-lg">
-
-            ➕ Add First Meal
-
+           class="btn btn-warning btn-lg fw-bold">
+            ➕ Add New Meal
         </a>
+    </div>
+
+    <!-- SEARCH -->
+    <div class="row mb-4">
+        <div class="col-lg-8">
+            <input
+                id="menuSearch"
+                type="text"
+                class="form-control form-control-lg"
+                placeholder="🔍 Search meals...">
+        </div>
+
+        <div class="col-lg-4 text-end">
+            <span class="badge bg-success fs-6 p-3">
+                {{ items|length }} Meals Available
+            </span>
+        </div>
+    </div>
+
+    {% if items %}
+
+    <div class="row g-4">
+
+        {% for item in items %}
+
+        <div class="col-lg-4">
+
+            <div class="card border-0 shadow meal-admin-card h-100">
+
+                <div class="position-relative">
+
+                    {% set meal = item.name|lower %}
+
+                    {% if "burger" in meal %}
+                        <img src="{{ url_for('static', filename='images/meals/burger.jpg') }}"
+                             class="admin-meal-img">
+
+                    {% elif "coffee" in meal or "espresso" in meal %}
+                        <img src="{{ url_for('static', filename='images/meals/coffee.jpg') }}"
+                             class="admin-meal-img">
+
+                    {% elif "water" in meal %}
+                        <img src="{{ url_for('static', filename='images/meals/water.jpg') }}"
+                             class="admin-meal-img">
+
+                    {% elif "brownie" in meal %}
+                        <img src="{{ url_for('static', filename='images/meals/brownie.jpg') }}"
+                             class="admin-meal-img">
+
+                    {% elif "samosa" in meal %}
+                        <img src="{{ url_for('static', filename='images/meals/samosa.jpg') }}"
+                             class="admin-meal-img">
+
+                    {% else %}
+                        <img src="{{ url_for('static', filename='images/meals/burger.jpg') }}"
+                             class="admin-meal-img">
+                    {% endif %}
+
+                    <span class="badge bg-success position-absolute top-0 end-0 m-3">
+                        {{ item.category }}
+                    </span>
+
+                </div>
+
+                <div class="card-body">
+
+                    <h4 class="fw-bold">
+                        {{ item.name }}
+                    </h4>
+
+                    <p class="meal-description">
+                        {{ item.description }}
+                    </p>
+
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+
+                        <h4 class="text-success fw-bold mb-0">
+                            KSh {{ "%.2f"|format(item.price) }}
+                        </h4>
+
+                        {% if item.is_available %}
+
+                            <span class="badge bg-success">
+                                Available
+                            </span>
+
+                        {% else %}
+
+                            <span class="badge bg-danger">
+                                Unavailable
+                            </span>
+
+                        {% endif %}
+
+                    </div>
+
+                    <div class="d-grid gap-2">
+
+                        <a href="{{ url_for('admin.edit_menu_item', item_id=item.id) }}"
+                           class="btn btn-warning">
+                            ✏ Edit Meal
+                        </a>
+
+                        <form action="{{ url_for('admin.delete_menu_item', item_id=item.id) }}"
+                              method="POST"
+                              onsubmit="return confirm('Delete this menu item?');">
+
+                            <button
+                                type="submit"
+                                class="btn btn-danger w-100">
+
+                                🗑 Delete Meal
+
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
 
     </div>
 
-</div>
+    {% else %}
 
-{% endif %}
+    <div class="card border-0 shadow">
+
+        <div class="card-body text-center py-5">
+
+            <img src="{{ url_for('static', filename='images/empty-menu.png') }}"
+                 style="width:180px;"
+                 class="mb-4">
+
+            <h3>No Meals Found</h3>
+
+            <p class="meal-description">
+                Your menu is currently empty. Add your first meal to get started.
+            </p>
+
+            <a href="{{ url_for('admin.add_menu_item') }}"
+               class="btn btn-success btn-lg">
+
+                ➕ Add First Meal
+
+            </a>
+
+        </div>
+
+    </div>
+
+    {% endif %}
 
 </div>
 
