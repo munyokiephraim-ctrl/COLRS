@@ -14,7 +14,7 @@ def index():
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        if current_user.role == 'admin':
+        if current_user.role.lower() == 'admin':
             return redirect(url_for('admin.dashboard'))
         return redirect(url_for('student.menu'))
 
@@ -59,7 +59,7 @@ def login():
 
                 flash("Logged in successfully!", "success")
 
-                if user.role == "admin":
+                if user.role.lower() == "admin":
                     return redirect(url_for("admin.dashboard"))
 
                 return redirect(url_for("student.menu"))
