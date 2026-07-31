@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<div class="admin-page"></div>
+<div class="admin-page">
 
 <div class="container py-4">
 
@@ -22,15 +22,11 @@
 
                 <h1 class="display-5 fw-bold text-white">
                     Welcome back,
-                    {{ current_user.username }}
+                    {{ current_user.full_name }}
                 </h1>
 
                 <p class="lead text-white-50 mt-3">
-
-                    Monitor orders, manage meals,
-                    update loyalty rewards and keep
-                    the COLRS cafeteria running smoothly.
-
+                    Monitor orders, manage meals, update loyalty rewards and keep the COLRS cafeteria running smoothly.
                 </p>
 
             </div>
@@ -40,9 +36,7 @@
                 <a href="{{ url_for('admin.manage_menu') }}"
                    class="btn btn-warning btn-lg">
 
-                    <i class="bi bi-plus-circle"></i>
-
-                    Add Meal
+                    ➕ Add Meal
 
                 </a>
 
@@ -69,17 +63,9 @@
 
                 </div>
 
-                <h2>
+                <h2>{{ total_orders }}</h2>
 
-                    {{ total_orders }}
-
-                </h2>
-
-                <p>
-
-                    Total Orders
-
-                </p>
+                <p>Total Orders</p>
 
             </div>
 
@@ -96,17 +82,9 @@
 
                 </div>
 
-                <h2>
+                <h2>{{ total_meals }}</h2>
 
-                    {{ total_meals }}
-
-                </h2>
-
-                <p>
-
-                    Meals Available
-
-                </p>
+                <p>Meals Available</p>
 
             </div>
 
@@ -123,17 +101,9 @@
 
                 </div>
 
-                <h2>
+                <h2>{{ total_students }}</h2>
 
-                    {{ total_students }}
-
-                </h2>
-
-                <p>
-
-                    Students
-
-                </p>
+                <p>Students</p>
 
             </div>
 
@@ -150,17 +120,9 @@
 
                 </div>
 
-                <h2>
+                <h2>{{ pending_orders }}</h2>
 
-                    {{ pending_orders }}
-
-                </h2>
-
-                <p>
-
-                    Pending Orders
-
-                </p>
+                <p>Placed Orders</p>
 
             </div>
 
@@ -191,17 +153,11 @@
 
                 </div>
 
-                <h4>
-
-                    Add New Meal
-
-                </h4>
+                <h4>Add New Meal</h4>
 
                 <p>
 
-                    Create breakfast,
-                    lunch, snacks and drinks
-                    available for students.
+                    Create breakfast, lunch, snacks and drinks available for students.
 
                 </p>
 
@@ -227,26 +183,20 @@
 
                 </div>
 
-                <h4>
-
-                    Manage Orders
-
-                </h4>
+                <h4>Manage Orders</h4>
 
                 <p>
 
-                    View student orders,
-                    update status and monitor
-                    deliveries in real time.
+                    View student orders and process them through every stage.
 
                 </p>
 
                 <a href="{{ url_for('admin.orders') }}"
                    class="btn btn-primary">
 
-    View Orders
+                    View Orders
 
-</a>
+                </a>
 
             </div>
 
@@ -263,21 +213,15 @@
 
                 </div>
 
-                <h4>
-
-                    Loyalty Rewards
-
-                </h4>
+                <h4>Loyalty Rewards</h4>
 
                 <p>
 
-                    Configure reward points
-                    and manage student
-                    redemption options.
+                    Monitor student reward balances and loyalty points.
 
                 </p>
 
-                <a href="{{ url_for('admin.manage_menu') }}"
+                <a href="{{ url_for('admin.rewards') }}"
                    class="btn btn-warning">
 
                     Rewards
@@ -297,223 +241,209 @@
 
     <div class="table-card">
 
-        <div class="d-flex justify-content-between align-items-center mb-4">
+        <h3 class="mb-4">
 
-            <h3 class="mb-0">
+            Recent Orders
 
-                Recent Orders
+        </h3>
 
-            </h3>
+        {% if recent_orders %}
 
-        </div>
+        <div class="table-responsive">
 
-                        {% if recent_orders %}
+            <table class="table align-middle">
 
-            <div class="table-responsive">
+                <thead>
 
-                <table class="table align-middle">
+                    <tr>
 
-                    <thead>
+                        <th>Order #</th>
+                        <th>Student</th>
+                        <th>Items</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                        <th>Date</th>
+                        <th>Action</th>
 
-                        <tr>
+                    </tr>
 
-                            <th>Order #</th>
-                            <th>Student</th>
-                            <th>Meal</th>
-                            <th>Amount</th>
-                            <th>Status</th>
-                            <th>Date</th>
-                            <th>Action</th>
+                </thead>
 
-                        </tr>
+                <tbody>
 
-                    </thead>
+                {% for order in recent_orders %}
 
-                    <tbody>
+                    <tr>
 
-                        {% for order in recent_orders %}
                         <td>
 
-<form method="POST"
-      action="{{ url_for('admin.update_order_status', order_id=order.id) }}">
+                            <strong>
 
+                                #{{ order.id }}
 
-{% if order.status == "Placed" %}
+                            </strong>
 
-<button 
-name="status"
-value="Preparing"
-class="btn btn-primary btn-sm">
+                        </td>
 
-👨‍🍳 Prepare
+                        <td>
 
-</button>
+                            {{ order.user.full_name }}
 
+                        </td>
 
-{% elif order.status == "Preparing" %}
+                        <td>
 
-<button
-name="status"
-value="Ready"
-class="btn btn-info btn-sm">
+                            {% for item in order.items %}
 
-✅ Mark Ready
+                                <span class="badge bg-light text-dark">
 
-</button>
+                                    {{ item.item.name }} × {{ item.quantity }}
 
+                                </span>
 
-{% elif order.status == "Ready" %}
+                                <br>
 
-<button
-name="status"
-value="Completed"
-class="btn btn-success btn-sm">
+                            {% endfor %}
 
-✔ Complete
+                        </td>
 
-</button>
+                        <td>
 
+                            KES {{ "%.2f"|format(order.total_amount) }}
 
-{% else %}
+                        </td>
 
-<span class="text-muted">
+                        <td>
 
-Completed
+                            {% if order.status == "Placed" %}
 
-</span>
+                                <span class="badge bg-warning text-dark">
 
-{% endif %}
+                                    Placed
 
+                                </span>
 
-</form>
+                            {% elif order.status == "Preparing" %}
 
-</td>
+                                <span class="badge bg-primary">
 
-                        <tr>
+                                    Preparing
 
-                            <td>
+                                </span>
 
-                                <strong>
+                            {% elif order.status == "Ready" %}
 
-                                    #{{ order.id }}
+                                <span class="badge bg-info">
 
-                                </strong>
+                                    Ready
 
-                            </td>
+                                </span>
 
-                            <td>
+                            {% else %}
 
-                                {{ order.user.full_name }}
+                                <span class="badge bg-success">
 
-                            </td>
+                                    Completed
 
-                            <td>
+                                </span>
 
-{% for item in order.items %}
+                            {% endif %}
 
-    <span class="badge bg-light text-dark mb-1">
+                        </td>
 
-        {{ item.item.name }} x{{ item.quantity }}
+                        <td>
 
-    </span>
+                            {{ order.created_at.strftime("%d %b %Y") }}
 
-    <br>
+                        </td>
 
-{% endfor %}
+                        <td>
 
-</td>
+                            <form method="POST"
+                                  action="{{ url_for('admin.update_order_status', order_id=order.id) }}">
 
-                            <td>
+                                {% if order.status == "Placed" %}
 
-                                KES {{ "%.2f"|format(order.total_amount) }}
+                                    <button
+                                        class="btn btn-warning btn-sm"
+                                        name="status"
+                                        value="Preparing">
 
-                            </td>
+                                        👨‍🍳 Prepare
 
-                            <td>
-
-                                {% if order.status == "Pending" %}
-
-                                    <span class="badge bg-warning text-dark">
-
-                                        Pending
-
-                                    </span>
+                                    </button>
 
                                 {% elif order.status == "Preparing" %}
 
-                                    <span class="badge bg-primary">
+                                    <button
+                                        class="btn btn-primary btn-sm"
+                                        name="status"
+                                        value="Ready">
 
-                                        Preparing
+                                        ✅ Ready
 
-                                    </span>
+                                    </button>
 
                                 {% elif order.status == "Ready" %}
 
-                                    <span class="badge bg-info">
+                                    <button
+                                        class="btn btn-success btn-sm"
+                                        name="status"
+                                        value="Completed">
 
-                                        Ready
+                                        ✔ Complete
 
-                                    </span>
-
-                                {% elif order.status == "Completed" %}
-
-                                    <span class="badge bg-success">
-
-                                        Completed
-
-                                    </span>
+                                    </button>
 
                                 {% else %}
 
-                                    <span class="badge bg-secondary">
+                                    <span class="badge bg-success">
 
-                                        {{ order.status }}
+                                        ✓ Completed
 
                                     </span>
 
                                 {% endif %}
 
-                            </td>
+                            </form>
 
-                            <td>
+                        </td>
 
-                                {{ order.created_at.strftime("%d %b %Y") }}
+                    </tr>
 
-                            </td>
+                {% endfor %}
 
-                        </tr>
+                </tbody>
 
-                        {% endfor %}
-
-                    </tbody>
-
-                </table>
-
-            </div>
-
-            {% else %}
-
-            <div class="text-center py-5">
-
-                <i class="bi bi-inbox display-1 text-secondary"></i>
-
-                <h3 class="mt-4">
-
-                    No Orders Yet
-
-                </h3>
-
-                <p class="text-muted">
-
-                    Student orders will appear here once they start placing them.
-
-                </p>
-
-            </div>
-
-            {% endif %}
+            </table>
 
         </div>
+
+        {% else %}
+
+        <div class="empty-state">
+
+            <i class="bi bi-inbox display-1"></i>
+
+            <h3>
+
+                No Orders Yet
+
+            </h3>
+
+            <p>
+
+                Student orders will appear here once they begin placing them.
+
+            </p>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
 
 </div>
 

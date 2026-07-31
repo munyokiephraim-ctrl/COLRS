@@ -1233,22 +1233,46 @@ img{
 
 .admin-page{
 
+    min-height:100vh;
+
     background:
+
         linear-gradient(
-            rgba(245,247,251,.92),
-            rgba(245,247,251,.92)
+            rgba(255,255,255,.88),
+            rgba(255,255,255,.88)
         ),
+
         url("../images/backgrounds/admin-hero.jpg");
 
     background-size:cover;
 
     background-position:center;
 
-    background-repeat:no-repeat;
-
     background-attachment:fixed;
 
-    min-height:100vh;
+    padding-bottom:60px;
 
-    padding:40px 0;
 }
+
+.order-management-card{
+
+    background:#fff;
+
+    border-radius:20px;
+
+    padding:30px;
+
+    box-shadow:0 12px 30px rgba(0,0,0,.08);
+
+    border-left:6px solid #198754;
+
+    transition:.3s;
+}
+
+.order-management-card:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:0 20px 40px rgba(0,0,0,.15);
+}
+

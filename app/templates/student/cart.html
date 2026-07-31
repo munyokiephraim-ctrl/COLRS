@@ -68,15 +68,48 @@
 
                 </p>
 
-                <div class="quantity-box">
+                <div class="quantity-box d-flex align-items-center gap-2">
 
-                    <button class="btn btn-outline-secondary btn-sm">−</button>
+    <form action="{{ url_for('student.decrease_cart', item_id=item_data.item.id) }}"
+          method="POST">
 
-                    <span>{{ item_data.quantity }}</span>
+        <button class="btn btn-outline-secondary btn-sm">
 
-                    <button class="btn btn-outline-secondary btn-sm">+</button>
+            −
 
-                </div>
+        </button>
+
+    </form>
+
+    if request.form.get("remove"):
+
+    cart.pop(key, None)
+
+else:
+
+    cart[key] -= 1
+
+    if cart[key] <= 0:
+        cart.pop(key)
+
+    <span class="fw-bold">
+
+        {{ item_data.quantity }}
+
+    </span>
+
+    <form action="{{ url_for('student.increase_cart', item_id=item_data.item.id) }}"
+          method="POST">
+
+        <button class="btn btn-outline-success btn-sm">
+
+            +
+
+        </button>
+
+    </form>
+
+</div>
 
             </div>
 
@@ -146,15 +179,39 @@
 
             <div class="alert alert-success mt-4">
 
-                ⭐ You'll earn approximately
+                <div class="alert alert-success mt-4">
 
-                <strong>
+    <h6 class="fw-bold mb-3">
+        ⭐ Loyalty Rewards
+    </h6>
 
-                    {{ (subtotal * 0.1)|int }}
+    <div class="d-flex justify-content-between">
 
-                </strong>
+        <span>Order Total</span>
 
-                loyalty points.
+        <strong>KSh {{ "%.2f"|format(subtotal) }}</strong>
+
+    </div>
+
+    <div class="d-flex justify-content-between">
+
+        <span>Reward Rate</span>
+
+        <strong>10%</strong>
+
+    </div>
+
+    <hr>
+
+    <div class="d-flex justify-content-between">
+
+        <span>Points You'll Earn</span>
+
+        <strong>{{ (subtotal * 0.10)|int }} ⭐</strong>
+
+    </div>
+
+</div>
 
             </div>
 

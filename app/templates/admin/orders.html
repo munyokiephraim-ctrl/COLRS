@@ -36,29 +36,55 @@ Order #{{ order.id }}
 
 
 <p>
-Student ID: {{ order.user_id }}
+<strong>Student:</strong>
+{{ order.user.full_name }}
+</p>
+
+<p class="text-muted mb-0">
+{{ order.user.email }}
+</p>
+
+<p class="text-muted mt-2">
+
+<i class="bi bi-calendar-event"></i>
+
+{{ order.created_at.strftime("%d %b %Y • %I:%M %p") }}
+
 </p>
 
 
 <hr>
 
 
-<h6>
-Items:
+<h6 class="fw-bold">
+
+🍽 Ordered Items
+
 </h6>
 
+<ul class="list-group mb-3">
 
 {% for item in order.items %}
 
-<p class="mb-1">
+<li class="list-group-item d-flex justify-content-between">
+
+<span>
 
 {{ item.item.name }}
 
-x{{ item.quantity }}
+</span>
 
-</p>
+<span>
+
+×{{ item.quantity }}
+
+</span>
+
+</li>
 
 {% endfor %}
+
+</ul>
 
 
 <h5 class="text-success mt-3">
@@ -79,6 +105,44 @@ action="{{ url_for('admin.update_order_status', order_id=order.id) }}">
 <input type="hidden"
 name="status"
 value="Preparing">
+
+<div class="mb-3">
+
+{% if order.status == "Placed" %}
+
+<span class="badge bg-warning text-dark">
+
+🟡 Placed
+
+</span>
+
+{% elif order.status == "Preparing" %}
+
+<span class="badge bg-primary">
+
+🔵 Preparing
+
+</span>
+
+{% elif order.status == "Ready" %}
+
+<span class="badge bg-info">
+
+🟢 Ready
+
+</span>
+
+{% else %}
+
+<span class="badge bg-success">
+
+✅ Completed
+
+</span>
+
+{% endif %}
+
+</div>
 
 <button class="btn btn-warning w-100">
 
@@ -127,11 +191,11 @@ value="Completed">
 
 {% else %}
 
-<button class="btn btn-secondary w-100" disabled>
+<div class="alert alert-success text-center mb-0">
 
-Completed
+✔ Order Completed
 
-</button>
+</div>
 
 
 {% endif %}

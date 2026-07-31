@@ -6,176 +6,229 @@
 
 <div class="container py-4">
 
-    <div class="card shadow border-0">
+    <!-- HERO -->
 
-        <div class="card-header bg-warning">
+    <section class="admin-hero mb-5">
 
-            <h2 class="mb-0">
+        <div class="row align-items-center">
 
-                ✏ Edit Menu Item
+            <div class="col-lg-8">
 
-            </h2>
+                <h1 class="fw-bold text-white">
+
+                    ✏ Edit Menu Item
+
+                </h1>
+
+                <p class="text-white">
+
+                    Update meal information, pricing, category and availability.
+
+                </p>
+
+            </div>
+
+            <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
+
+                <a href="{{ url_for('admin.manage_menu') }}"
+                   class="btn btn-warning btn-lg">
+
+                    ← Back to Menu
+
+                </a>
+
+            </div>
 
         </div>
 
-        <div class="card-body p-4">
+    </section>
 
-            <form method="POST">
 
-                <div class="mb-3">
+    <div class="content-card">
 
-                    <label class="form-label">
+        <form method="POST">
 
-                        Meal Name
+            <div class="row">
 
-                    </label>
+                <div class="col-lg-8">
 
-                    <input
-                        type="text"
-                        name="name"
-                        class="form-control"
-                        value="{{ item.name }}"
-                        required>
+                    <div class="mb-4">
 
-                </div>
+                        <label class="form-label">
 
-                <div class="mb-3">
+                            Meal Name
 
-                    <label class="form-label">
+                        </label>
 
-                        Description
-
-                    </label>
-
-                    <textarea
-                        name="description"
-                        rows="4"
-                        class="form-control"
-                        required>{{ item.description }}</textarea>
-
-                </div>
-
-                <div class="row">
-
-                    <div class="col-md-6">
-
-                        <div class="mb-3">
-
-                            <label class="form-label">
-
-                                Price (KSh)
-
-                            </label>
-
-                            <input
-                                type="number"
-                                step="0.01"
-                                name="price"
-                                class="form-control"
-                                value="{{ item.price }}"
-                                required>
-
-                        </div>
+                        <input
+                            type="text"
+                            name="name"
+                            class="form-control"
+                            value="{{ item.name }}"
+                            required>
 
                     </div>
 
-                    <div class="col-md-6">
 
-                        <div class="mb-3">
+                    <div class="mb-4">
 
-                            <label class="form-label">
+                        <label class="form-label">
 
-                                Category
+                            Description
 
-                            </label>
+                        </label>
 
-                            <select
-                                name="category"
-                                class="form-select">
-
-                                <option value="Meals"
-                                {% if item.category=="Meals" %}selected{% endif %}>
-
-                                    Meals
-
-                                </option>
-
-                                <option value="Beverages"
-                                {% if item.category=="Beverages" %}selected{% endif %}>
-
-                                    Beverages
-
-                                </option>
-
-                                <option value="Desserts"
-                                {% if item.category=="Desserts" %}selected{% endif %}>
-
-                                    Desserts
-
-                                </option>
-
-                                <option value="Snacks"
-                                {% if item.category=="Snacks" %}selected{% endif %}>
-
-                                    Snacks
-
-                                </option>
-
-                            </select>
-
-                        </div>
+                        <textarea
+                            name="description"
+                            rows="5"
+                            class="form-control"
+                            required>{{ item.description }}</textarea>
 
                     </div>
 
                 </div>
 
-                <div class="form-check form-switch mb-4">
 
-                    <input
-                        class="form-check-input"
-                        type="checkbox"
-                        name="is_available"
-                        id="available"
+                <div class="col-lg-4">
 
-                        {% if item.is_available %}
-                        checked
-                        {% endif %}>
+                    {% set meal = item.name|lower %}
 
-                    <label
-                        class="form-check-label"
-                        for="available">
+                    {% if "burger" in meal %}
+                        <img src="{{ url_for('static', filename='images/meals/burger.jpg') }}" class="img-fluid rounded shadow mb-4">
 
-                        Available for students
+                    {% elif "coffee" in meal or "espresso" in meal %}
+                        <img src="{{ url_for('static', filename='images/meals/coffee.jpg') }}" class="img-fluid rounded shadow mb-4">
 
-                    </label>
+                    {% elif "water" in meal %}
+                        <img src="{{ url_for('static', filename='images/meals/water.jpg') }}" class="img-fluid rounded shadow mb-4">
 
-                </div>
+                    {% elif "brownie" in meal %}
+                        <img src="{{ url_for('static', filename='images/meals/brownie.jpg') }}" class="img-fluid rounded shadow mb-4">
 
-                <div class="d-flex justify-content-between">
+                    {% elif "samosa" in meal %}
+                        <img src="{{ url_for('static', filename='images/meals/samosa.jpg') }}" class="img-fluid rounded shadow mb-4">
 
-                    <a
-                        href="{{ url_for('admin.manage_menu') }}"
-                        class="btn btn-secondary">
-
-                        ← Cancel
-
-                    </a>
-
-                    <button
-                        type="submit"
-                        class="btn btn-warning">
-
-                        💾 Save Changes
-
-                    </button>
+                    {% else %}
+                        <img src="{{ url_for('static', filename='images/meals/default-food.jpg') }}" class="img-fluid rounded shadow mb-4">
+                    {% endif %}
 
                 </div>
 
-            </form>
+            </div>
 
-        </div>
+
+            <div class="row">
+
+                <div class="col-md-6">
+
+                    <div class="mb-4">
+
+                        <label class="form-label">
+
+                            Price (KSh)
+
+                        </label>
+
+                        <input
+                            type="number"
+                            step="0.01"
+                            name="price"
+                            class="form-control"
+                            value="{{ item.price }}"
+                            required>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-6">
+
+                    <div class="mb-4">
+
+                        <label class="form-label">
+
+                            Category
+
+                        </label>
+
+                        <select
+                            name="category"
+                            class="form-select">
+
+                            <option value="Meals"
+                            {% if item.category=="Meals" %}selected{% endif %}>
+                                Meals
+                            </option>
+
+                            <option value="Beverages"
+                            {% if item.category=="Beverages" %}selected{% endif %}>
+                                Beverages
+                            </option>
+
+                            <option value="Desserts"
+                            {% if item.category=="Desserts" %}selected{% endif %}>
+                                Desserts
+                            </option>
+
+                            <option value="Snacks"
+                            {% if item.category=="Snacks" %}selected{% endif %}>
+                                Snacks
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="form-check form-switch mb-5">
+
+                <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="available"
+                    name="is_available"
+                    {% if item.is_available %}checked{% endif %}>
+
+                <label
+                    class="form-check-label ms-2"
+                    for="available">
+
+                    Available for students
+
+                </label>
+
+            </div>
+
+
+            <div class="d-flex justify-content-between">
+
+                <a href="{{ url_for('admin.manage_menu') }}"
+                   class="btn btn-secondary">
+
+                    Cancel
+
+                </a>
+
+                <button
+                    type="submit"
+                    class="btn btn-warning">
+
+                    💾 Save Changes
+
+                </button>
+
+            </div>
+
+        </form>
 
     </div>
+
+</div>
 
 </div>
 

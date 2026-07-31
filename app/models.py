@@ -79,3 +79,4 @@ class LoyaltyTransaction(db.Model):
     transaction_type = db.Column(db.String(10), nullable=False)
     points = db.Column(db.Integer, nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
+

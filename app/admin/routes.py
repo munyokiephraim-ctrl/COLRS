@@ -56,10 +56,21 @@ def dashboard():
 @admin_bp.route("/orders")
 def orders():
 
-    orders = (
-        Order.query
-        .order_by(Order.created_at.desc())
-        .all()
+    status_order = {
+        "Placed": 0,
+        "Preparing": 1,
+        "Ready": 2,
+        "Completed": 3
+    }
+
+    orders = Order.query.all()
+
+    orders = sorted(
+        orders,
+        key=lambda o: (
+            status_order.get(o.status, 99),
+            -o.created_at.timestamp()
+        )
     )
 
     return render_template(
@@ -94,8 +105,26 @@ def update_order_status(order_id):
             "success"
         )
 
-    return redirect(url_for("admin.dashboard"))
+    return redirect(url_for("admin.orders"))
 
+# ==================================================
+# LOYALTY REWARDS
+# ==================================================
+
+@admin_bp.route("/rewards")
+def rewards():
+
+    students = (
+        User.query
+        .filter_by(role="student")
+        .order_by(User.points_balance.desc())
+        .all()
+    )
+
+    return render_template(
+        "admin/rewards.html",
+        students=students
+    )
 
 # ==================================================
 # MENU MANAGER

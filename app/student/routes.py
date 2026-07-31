@@ -96,6 +96,49 @@ def add_to_cart(item_id):
 
     return redirect(url_for("student.view_cart"))
 
+# ==========================
+# Increase Cart Quantity
+# ==========================
+
+@student_bp.route("/cart/increase/<int:item_id>", methods=["POST"])
+def increase_cart(item_id):
+
+    cart = session.get("cart", {})
+
+    key = str(item_id)
+
+    if key in cart:
+        cart[key] += 1
+
+    session["cart"] = cart
+    session.modified = True
+
+    return redirect(url_for("student.view_cart"))
+
+
+# ==========================
+# Decrease Cart Quantity
+# ==========================
+
+@student_bp.route("/cart/decrease/<int:item_id>", methods=["POST"])
+def decrease_cart(item_id):
+
+    cart = session.get("cart", {})
+
+    key = str(item_id)
+
+    if key in cart:
+
+        cart[key] -= 1
+
+        if cart[key] <= 0:
+            cart.pop(key)
+
+    session["cart"] = cart
+    session.modified = True
+
+    return redirect(url_for("student.view_cart"))
+
 
 # ==========================
 # View Cart
@@ -206,12 +249,20 @@ def checkout():
 
     order.total_amount = subtotal
 
-    earned_points = int(subtotal * 0.10)
+      
+
+         # =========================================
+         # Loyalty Points Calculation
+         # =========================================
+
+    LOYALTY_RATE = 0.10  # 10% reward
+
+    earned_points = int(subtotal * LOYALTY_RATE)
 
     current_user.points_balance += earned_points
 
     db.session.add(
-        LoyaltyTransaction(
+            LoyaltyTransaction(
             user_id=current_user.id,
             order_id=order.id,
             transaction_type="Credit",

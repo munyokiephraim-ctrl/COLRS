@@ -1,0 +1,253 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="admin-page">
+
+<div class="container py-4">
+
+    <!-- HERO -->
+
+    <section class="admin-hero mb-5">
+
+        <div class="row align-items-center">
+
+            <div class="col-lg-8">
+
+                <h1 class="fw-bold text-white">
+
+                    ⭐ Loyalty Rewards
+
+                </h1>
+
+                <p class="text-white">
+
+                    Monitor student loyalty balances and reward activity across the cafeteria.
+
+                </p>
+
+            </div>
+
+            <div class="col-lg-4 text-lg-end">
+
+                <div class="badge bg-warning text-dark fs-6 p-3">
+
+                    {{ students|length }} Students
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- STATISTICS -->
+
+    <div class="row g-4 mb-5">
+
+        <div class="col-md-4">
+
+            <div class="admin-stat">
+
+                <h2>
+
+                    {{ students|length }}
+
+                </h2>
+
+                <p>
+
+                    Registered Students
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="admin-stat">
+
+                <h2>
+
+                    {{ students|sum(attribute='points_balance') }}
+
+                </h2>
+
+                <p>
+
+                    Total Loyalty Points
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="admin-stat">
+
+                <h2>
+
+                    {% if students %}
+                        {{ (students|sum(attribute='points_balance') / students|length)|round(0)|int }}
+                    {% else %}
+                        0
+                    {% endif %}
+
+                </h2>
+
+                <p>
+
+                    Average Points
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- TABLE -->
+
+    <div class="table-card">
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+
+            <h3>
+
+                Student Reward Balances
+
+            </h3>
+
+        </div>
+
+        {% if students %}
+
+        <div class="table-responsive">
+
+            <table class="table align-middle">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Student</th>
+
+                        <th>Email</th>
+
+                        <th>Points</th>
+
+                        <th>Status</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                {% for student in students %}
+
+                    <tr>
+
+                        <td>
+
+                            <strong>
+
+                                {{ student.full_name }}
+
+                            </strong>
+
+                        </td>
+
+                        <td>
+
+                            {{ student.email }}
+
+                        </td>
+
+                        <td>
+
+                            <span class="badge bg-warning text-dark">
+
+                                ⭐ {{ student.points_balance }}
+
+                            </span>
+
+                        </td>
+
+                        <td>
+
+                            {% if student.points_balance >= 100 %}
+
+                                <span class="badge bg-success">
+
+                                    Gold Member
+
+                                </span>
+
+                            {% elif student.points_balance >= 50 %}
+
+                                <span class="badge bg-primary">
+
+                                    Silver Member
+
+                                </span>
+
+                            {% else %}
+
+                                <span class="badge bg-secondary">
+
+                                    Bronze Member
+
+                                </span>
+
+                            {% endif %}
+
+                        </td>
+
+                    </tr>
+
+                {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        {% else %}
+
+        <div class="empty-state">
+
+            <i class="bi bi-gift"></i>
+
+            <h3>
+
+                No Loyalty Data Yet
+
+            </h3>
+
+            <p>
+
+                Students will appear here once they begin placing orders and earning reward points.
+
+            </p>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+</div>
+
+{% endblock %}
