@@ -22,9 +22,7 @@
 
         <div class="auth-body">
 
-            <h2>
-                Welcome Back 👋
-            </h2>
+            <h2>Welcome Back</h2>
 
             <p class="auth-subtitle">
                 Sign in to continue ordering your favourite meals.
@@ -67,7 +65,7 @@
                         type="email"
                         name="email"
                         class="form-control"
-                        placeholder="student@usiu.ac.ke"
+                        placeholder="Enter your USIU email"
                         required>
 
                 </div>
@@ -89,10 +87,10 @@
 
                 <div class="d-flex justify-content-end mb-3">
 
-                    <a href="#"
+                    <a href="#" class="disabled-link">
                        class="small text-decoration-none text-success">
 
-                        Forgot Password?
+                        Forgot Password (Coming Soon)
 
                     </a>
 
@@ -112,12 +110,12 @@
 
             <p class="text-center mb-0">
 
-                New here?
+                Don't have an account?
 
                 <a href="{{ url_for('auth.register') }}"
                    class="fw-bold text-success text-decoration-none">
 
-                    Create an Account
+                    Create one
 
                 </a>
 

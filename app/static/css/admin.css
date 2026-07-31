@@ -1230,3 +1230,25 @@ img{
 
     margin-right:0;
 }
+
+.admin-page{
+
+    background:
+        linear-gradient(
+            rgba(245,247,251,.92),
+            rgba(245,247,251,.92)
+        ),
+        url("../images/backgrounds/admin-hero.jpg");
+
+    background-size:cover;
+
+    background-position:center;
+
+    background-repeat:no-repeat;
+
+    background-attachment:fixed;
+
+    min-height:100vh;
+
+    padding:40px 0;
+}

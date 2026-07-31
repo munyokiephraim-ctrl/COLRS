@@ -25,8 +25,8 @@ body{
 
     background:
         linear-gradient(
-            rgba(15,35,20,.75),
-            rgba(15,35,20,.80)
+            rgba(15,35,20,.82),
+            rgba(15,35,20,.86)
         ),
         url("../images/backgrounds/login-bg.jpg");
 
@@ -57,7 +57,7 @@ body{
 
 .auth-card{
 
-    width:440px;
+    width:470px;
     max-width:100%;
 
     background:rgba(255,255,255,.95);
@@ -71,8 +71,8 @@ body{
     overflow:hidden;
 
     box-shadow:
-        0 25px 80px rgba(0,0,0,.22),
-        0 10px 30px rgba(0,0,0,.08);
+        0 25px 80px rgba(0,0,0,.28),
+        0 10px 30px rgba(0,0,0,.10);
 
     transition:
         transform .35s ease,
@@ -82,7 +82,7 @@ body{
 
 .auth-card:hover{
 
-    transform:translateY(-8px);
+    transform:translateY(-6px) scale(1.01);
 
     box-shadow:
         0 35px 90px rgba(0,0,0,.28),
@@ -108,7 +108,7 @@ body{
 
     text-align:center;
 
-    padding:55px 35px;
+    padding:45px 35px;
 
     position:relative;
 
@@ -116,9 +116,9 @@ body{
 
 .logo-circle{
 
-    width:90px;
+    width:80px;
 
-    height:90px;
+    height:80px;
 
     background:#FFA726;
 
@@ -130,7 +130,7 @@ body{
 
     align-items:center;
 
-    font-size:42px;
+    font-size:30px;
 
     color:white;
 
@@ -177,7 +177,7 @@ body{
 
     margin-bottom:8px;
 
-    font-weight:600;
+    font-weight:700;
 
 }
 
@@ -199,7 +199,7 @@ body{
 
 .form-label{
 
-    font-weight:600;
+    font-weight:700;
 
     color:#2c3e50;
 
@@ -213,7 +213,7 @@ body{
 
 .form-control{
 
-    height:56px;
+    height:58px;
 
     border-radius:14px;
 
@@ -239,7 +239,7 @@ body{
     border-color:#2E7D32;
 
     box-shadow:
-        0 0 0 4px rgba(46,125,50,.12);
+        0 0 0 4px rgba(46,125,50,.16);
 
 }
 
@@ -249,7 +249,7 @@ body{
 
 .btn-success{
 
-    height:58px;
+    height:60px;
 
     border:none;
 
@@ -264,9 +264,9 @@ body{
 
     color:white;
 
-    font-size:16px;
+    font-size:17px;
 
-    font-weight:600;
+    font-weight:700;
 
     letter-spacing:.3px;
 
@@ -288,7 +288,7 @@ body{
     transform:translateY(-3px);
 
     box-shadow:
-        0 12px 25px rgba(251,140,0,.28);
+        0 15px 35px rgba(251,140,0,.32);
 
 }
 
@@ -302,7 +302,7 @@ a{
 
     color:#2E7D32;
 
-    font-weight:600;
+    font-weight:700;
 
 }
 
@@ -396,9 +396,9 @@ a:hover{
 
 hr{
 
-    margin:28px 0;
+    margin:32px 0;
 
-    opacity:.15;
+    opacity:.12;
 
 }
 
@@ -451,6 +451,14 @@ hr{
 
 .auth-card{
 
-    animation:fadeUp .8s ease;
+    animation:fadeUp .55s ease;
+
+}
+
+.disabled-link{
+
+    opacity:.6;
+
+    pointer-events:none;
 
 }
