@@ -17,7 +17,7 @@ def require_admin():
 
     if current_user.role.lower() != "admin":
         flash("Access denied. Admin privileges required.", "danger")
-        return redirect(url_for("student.menu"))
+        return redirect(url_for("student.dashboard"))
 
 
 # ==================================================

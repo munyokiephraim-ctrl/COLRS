@@ -14,7 +14,7 @@ student_bp = Blueprint("student", __name__)
 @student_bp.before_request
 @login_required
 def require_student():
-    if current_user.role != "student":
+    if current_user.role.lower() != "student":
         return redirect(url_for("admin.dashboard"))
 
 
