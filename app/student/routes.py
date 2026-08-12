@@ -6,6 +6,9 @@ from app.models import MenuItem, Order, OrderItem, LoyaltyTransaction
 
 student_bp = Blueprint("student", __name__)
 
+POINTS_REDEMPTION_RATE = 1   # 1 point = KSh 1 off
+MIN_REDEEM_POINTS = 50
+
 
 # ==========================
 # Student Protection
@@ -213,12 +216,15 @@ def checkout():
     # -----------------------
 
     if request.method == "GET":
-
+        max_redeemable = min(current_user.points_balance, int(subtotal))
         return render_template(
             "student/checkout.html",
             cart_items=cart_items,
-            subtotal=subtotal
-        )
+            subtotal=subtotal,
+            points_balance=current_user.points_balance,
+            min_redeem_points=MIN_REDEEM_POINTS,
+            max_redeemable=max_redeemable
+    )
 
     # -----------------------
     # Complete Order
@@ -226,18 +232,22 @@ def checkout():
 
     payment_method = request.form.get("payment_method")
     phone = request.form.get("phone")
+    redeem_points = request.form.get("redeem_points") == "on"
+
+    points_to_debit = 0
+    if redeem_points and current_user.points_balance >= MIN_REDEEM_POINTS:
+        points_to_debit = min(current_user.points_balance, int(subtotal))
 
     order = Order(
         user_id=current_user.id,
         total_amount=0,
+        points_redeemed=points_to_debit,
         status="Placed"
     )
-
     db.session.add(order)
     db.session.commit()
 
     for item in cart_items:
-
         db.session.add(
             OrderItem(
                 order_id=order.id,
@@ -247,22 +257,14 @@ def checkout():
             )
         )
 
-    order.total_amount = subtotal
+    final_total = subtotal - points_to_debit
+    order.total_amount = final_total
 
-      
-
-         # =========================================
-         # Loyalty Points Calculation
-         # =========================================
-
-    LOYALTY_RATE = 0.10  # 10% reward
-
-    earned_points = int(subtotal * LOYALTY_RATE)
-
+    earned_points = int(final_total * 0.10)
     current_user.points_balance += earned_points
 
     db.session.add(
-            LoyaltyTransaction(
+        LoyaltyTransaction(
             user_id=current_user.id,
             order_id=order.id,
             transaction_type="Credit",
@@ -270,18 +272,27 @@ def checkout():
         )
     )
 
-    db.session.commit()
+    if points_to_debit > 0:
+        current_user.points_balance -= points_to_debit
+        db.session.add(
+            LoyaltyTransaction(
+                user_id=current_user.id,
+                order_id=order.id,
+                transaction_type="Debit",
+                points=points_to_debit
+            )
+        )
 
+    db.session.commit()
     session.pop("cart", None)
 
     flash(
-        f"Order placed successfully via {payment_method}! "
-        f"You earned {earned_points} loyalty points.",
+        f"Order placed via {payment_method}! Earned {earned_points} pts"
+        + (f", redeemed {points_to_debit} pts (KSh {points_to_debit} off)." if points_to_debit else "."),
         "success"
     )
 
     return redirect(url_for("student.dashboard"))
-
 
 # ==========================
 # Order Details

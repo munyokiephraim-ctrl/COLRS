@@ -177,6 +177,20 @@
 
                     </div>
 
+                    <div class="mt-4 p-3 border rounded bg-light">
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="redeem_points" id="redeemPoints"
+            {% if points_balance < min_redeem_points %}disabled{% endif %}>
+        <label class="form-check-label" for="redeemPoints">
+            ⭐ Redeem {{ max_redeemable }} points for KSh {{ max_redeemable }} off
+            (Balance: {{ points_balance }} pts)
+        </label>
+    </div>
+    {% if points_balance < min_redeem_points %}
+    <small class="text-muted">Minimum {{ min_redeem_points }} points required to redeem.</small>
+    {% endif %}
+</div>
+
                     <button
                         class="btn btn-warning btn-lg fw-bold mt-4 w-100">
 
