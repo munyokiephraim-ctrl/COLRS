@@ -12,6 +12,7 @@ permissions:
 
 jobs:
   build-test:
+    name: Python syntax check
     runs-on: ubuntu-latest
 
     steps:
