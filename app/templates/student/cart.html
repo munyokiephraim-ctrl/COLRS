@@ -34,27 +34,27 @@
 
             {% if item_data.item.name == "Chicken Burger" %}
 
-                <img src="{{ url_for('static', filename='images/meals/burger.jpg') }}">
+                <img src="{{ url_for('static', filename='images/meals/burger.jpg') }}" alt="{{ item_data.item.name }}">
 
             {% elif item_data.item.name == "Espresso Coffee" %}
 
-                <img src="{{ url_for('static', filename='images/meals/coffee.jpg') }}">
+                <img src="{{ url_for('static', filename='images/meals/coffee.jpg') }}" alt="{{ item_data.item.name }}">
 
             {% elif item_data.item.name == "Chocolate Brownie" %}
 
-                <img src="{{ url_for('static', filename='images/meals/brownie.jpg') }}">
+                <img src="{{ url_for('static', filename='images/meals/brownie.jpg') }}" alt="{{ item_data.item.name }}">
 
             {% elif item_data.item.name == "Bottled Water" %}
 
-                <img src="{{ url_for('static', filename='images/meals/water.jpg') }}">
+                <img src="{{ url_for('static', filename='images/meals/water.jpg') }}" alt="{{ item_data.item.name }}">
 
             {% elif item_data.item.name == "Samosa (2 pcs)" %}
 
-                <img src="{{ url_for('static', filename='images/meals/samosa.jpg') }}">
+                <img src="{{ url_for('static', filename='images/meals/samosa.jpg') }}" alt="{{ item_data.item.name }}">
 
             {% else %}
 
-                <img src="{{ url_for('static', filename='images/meals/default-food.jpg') }}">
+                <img src="{{ url_for('static', filename='images/meals/default-food.jpg') }}" alt="{{ item_data.item.name }}">
 
             {% endif %}
 
@@ -254,7 +254,7 @@ else:
 
 <div class="empty-cart">
 
-    <img src="{{ url_for('static', filename='images/cart-empty.png') }}">
+    <img src="{{ url_for('static', filename='images/cart-empty.png') }}" alt="An illustration of an empty shopping cart">
 
     <h2>
 
